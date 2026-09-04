@@ -137,8 +137,10 @@ class WorkerSubagent(BaseAgentWithTools):
                 except Exception as e:
                     # Add error message to conversation state (consistent with single_agent.py)
                     error_msg = {
-                        "role": "user",
-                        "content": f"ERROR: Tool **{tool_name}** failed with error: {str(e)}. Please check the tool call.",
+                        "role": "tool",
+                        "tool_call_id": tool_call["id"],
+                        "name": tool_call["name"],
+                        "content": f"ERROR: Tool **{tool_call['name']}** failed with error: {str(e)}. Please check the tool call.",
                     }
                     messages.append(error_msg)  # type: ignore
                     self.conv_history.add_internal_message(

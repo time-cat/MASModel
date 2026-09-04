@@ -89,8 +89,10 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
                     action = ""
                     messages.append(
                         {
-                            "role": "user",
-                            "content": f"ERROR: Tool **{tool_name}** failed with error: {str(e)}. Please check the tool call.",
+                            "role": "tool",
+                            "tool_call_id": tool_call["id"],
+                            "name": tool_call["name"],
+                            "content": f"ERROR: Tool **{tool_call['name']}** failed with error: {str(e)}. Please check the tool call.",
                         }
                     )
                     logger.warning(
