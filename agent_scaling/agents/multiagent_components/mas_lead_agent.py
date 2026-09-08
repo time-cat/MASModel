@@ -17,6 +17,7 @@ from .conversation import (
 from .mas_subagent import WorkerSubagent
 from .memory import EnhancedMemory
 from .plan import OrchestrationPlan, Subtask
+from agent_scaling.budget import per_round_cap
 
 
 class LeadAgent(BaseAgentWithTools):
@@ -29,10 +30,11 @@ class LeadAgent(BaseAgentWithTools):
         *args,
         memory: EnhancedMemory,
         min_iterations_per_agent: int = 3,
-        max_iterations_per_agent: int = 25,
+        max_iterations_per_agent: int | None = None,
         num_base_agents: int = 3,
-        max_rounds: int = 10,
+        max_rounds: int | None = 10,
         max_execution_time: int = 600,
+        decision_budget_per_agent: int | None = None,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -42,6 +44,10 @@ class LeadAgent(BaseAgentWithTools):
         self.num_base_agents = num_base_agents
         self.max_rounds = max_rounds
         self.max_execution_time = max_execution_time
+        self.decision_budget_per_agent = decision_budget_per_agent
+        self.decision_budget_per_round = per_round_cap(
+            decision_budget_per_agent, max_rounds
+        )
         self.subagents: Dict[str, WorkerSubagent] = {}
         self.subagent_kwargs = kwargs
         self.conv_history = AgentConversationHistory(agent_id="lead_agent")
@@ -124,6 +130,28 @@ class LeadAgent(BaseAgentWithTools):
     ):
         """Create subagents based on the plan with proper LLM instance isolation"""
         self.subagents = {}
+        # Keep the configured team size authoritative.  A malformed planning
+        # response must not silently create more workers than the B/n budget
+        # was allocated for (or fewer workers due to duplicate agent IDs).
+        normalized_subtasks = []
+        for i in range(self.num_base_agents):
+            source = plan.subtasks[i] if i < len(plan.subtasks) else None
+            normalized_subtasks.append(
+                Subtask(
+                    agent_id=f"agent_{i + 1}",
+                    objective=(
+                        source.objective
+                        if source is not None
+                        else f"Work on aspect {i + 1} of the main task"
+                    ),
+                    focus=(
+                        source.focus
+                        if source is not None and source.focus
+                        else f"Aspect {i + 1}"
+                    ),
+                )
+            )
+        plan.subtasks = normalized_subtasks
         # Filter out conflicting parameters from subagent_kwargs
         filtered_subagent_kwargs = {
             k: v
@@ -137,6 +165,13 @@ class LeadAgent(BaseAgentWithTools):
                 "prompts",
                 "env_prompts",
                 "tools",
+                # Budget and loop controls are owned by the system/lead so
+                # that a duplicated legacy field cannot override B or the
+                # derived per-round quota at worker construction time.
+                "decision_budget",
+                "decision_budget_per_round",
+                "max_iterations_per_agent",
+                "min_iterations_per_agent",
             ]
         }
 
@@ -156,6 +191,8 @@ class LeadAgent(BaseAgentWithTools):
                 task_instance=task_instance,
                 min_iterations_per_agent=self.min_iterations_per_agent,
                 max_iterations_per_agent=self.max_iterations_per_agent,
+                decision_budget=self.decision_budget_per_agent,
+                decision_budget_per_round=self.decision_budget_per_round,
                 **filtered_subagent_kwargs,
             )
             self.subagents[subtask.agent_id] = subagent
@@ -194,7 +231,7 @@ class LeadAgent(BaseAgentWithTools):
         max_execution_time = self.max_execution_time
 
         round_results = None
-        while round_num < max_rounds:
+        while max_rounds is None or round_num < max_rounds:
             # Check timeout
             if time.time() - start_time > max_execution_time:
                 logger.warning("Execution timeout reached, stopping early")
@@ -484,7 +521,9 @@ class LeadAgent(BaseAgentWithTools):
                 )
 
         # If no findings yet, continue (up to round 3)
-        if not all_agent_findings and round_num <= 3:
+        if not all_agent_findings and (
+            self.max_rounds is None or round_num <= 3
+        ):
             return False
 
         stopping_template = self.prompts["lead_agent"].get_template("stopping_decision")

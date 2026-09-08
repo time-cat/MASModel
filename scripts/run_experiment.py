@@ -16,6 +16,12 @@ from agent_scaling.exp_runner import ExperimentRunner
 from agent_scaling.logger import add_sink, logger
 from agent_scaling.utils import get_run_conf_dir, write_yaml
 
+import litellm
+import logging
+litellm.suppress_debug_info = True
+litellm.set_verbose = False
+logging.getLogger("LiteLLM").setLevel(logging.ERROR)
+
 load_dotenv(override=True)
 
 

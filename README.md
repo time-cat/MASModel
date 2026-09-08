@@ -1,6 +1,6 @@
 # Agent Scaling
 
-A framework for studying scaling behaviors of LLM-based single-agent and multi-agent systems on complex reasoning tasks.
+A framework for studying scaling behaviors of LLM-based single-agent and multi-agent systems on complex reasoning tasks. Code release accompanying the Nature Machine Intelligence manuscript *"Beyond more agents: quantifying when multi-agent collaboration benefits large language model agents"* (the arXiv preprint at arXiv:2512.08296 retains the earlier title *"Towards a science of scaling agent systems"*).
 
 ## Quick Start
 
@@ -12,9 +12,10 @@ A framework for studying scaling behaviors of LLM-based single-agent and multi-a
 ### Installation
 
 ```bash
-# Clone the repository
+# Clone the repository and check out the release used for the manuscript
 git clone https://github.com/ybkim95/agent-scaling.git
 cd agent-scaling
+git checkout v2.1.3   # release tag cited in the Code Availability section of the manuscript
 
 # Install dependencies
 uv sync --prerelease=allow
@@ -69,8 +70,9 @@ python scripts/run_experiment.py agent=single-agent dataset=plancraft-test
 # Run multi-agent centralized system
 python scripts/run_experiment.py agent=multi-agent-centralized dataset=plancraft-test
 
-# Run with different LLM
-python scripts/run_experiment.py llm.model=gpt-4o-mini
+# Run with different LLM (use any model from the paper pool: gpt-5, gpt-5-mini, gpt-5-nano,
+# gemini/gemini-2.0-flash, gemini/gemini-2.5-pro, anthropic/claude-sonnet-4-5, etc.)
+python scripts/run_experiment.py llm.model=openai/gpt-5-mini
 
 # Run with parallel workers
 python scripts/run_experiment.py num_workers=4
@@ -277,14 +279,41 @@ max_instances: 3                    # Max instances to process
 
 ```yaml
 name: multi-agent-centralized
+total_decision_budget: 32             # Lifetime worker decision budget B
 n_base_agents: 3                    # Number of agents
-min_iterations_per_agent: 3         # Min iterations per agent
-max_iterations_per_agent: 25        # Max iterations per agent (release ceiling)
-max_rounds: 10                      # Max orchestration / debate rounds (release ceiling)
+min_iterations_per_agent: 0         # No artificial minimum in budget-controlled runs
+max_rounds: 10                       # Fixed communication horizon (not the worker budget)
 consensus_threshold: 0.7            # Decentralized only: agreement fraction for consensus
 communication:
   strategy: orchestrated            # Communication strategy
 ```
+
+### Lifetime decision budgets
+
+Each agent configuration exposes `total_decision_budget` (default `32`). This
+is a per-instance lifetime budget for worker decision calls: a single-agent
+run receives `B` decisions, while an `n_base_agents` multi-agent run gives each
+worker `floor(B / n_base_agents)` decisions across all rounds. Planning,
+coordination, debate-summary, and synthesis calls are auxiliary calls and do
+not consume the worker decision budget. `max_steps` and
+`max_iterations_per_agent` are optional legacy safety caps and are omitted from
+the canonical budget-controlled configurations. Multi-round protocols retain a
+fixed `max_rounds: 10` communication horizon; it controls when agents exchange
+information, while each worker's per-round quota is derived as
+`ceil((B / n) / max_rounds)` and the lifetime ledger remains authoritative.
+`min_iterations_per_agent` is capped by the worker's allocated lifetime budget.
+The ledger also records prompt/completion tokens and auxiliary-call counts for
+reporting compute separately from the decision-call budget.
+
+For example, with `B=32`, `n=3`, and `max_rounds=10`, each worker receives
+`floor(32/3)=10` lifetime decisions and at most one decision per communication
+round; the budget is never reset between rounds.
+
+Wall-clock safeguards are implementation-level controls, not experimental
+variables: dataset-specific `time_limit` values (or the internal 600-second
+fallback) stop a run if it hangs. The old configuration fields
+`worker_timeout` and `max_findings` are not part of the active orchestration
+path and are intentionally omitted from the canonical YAML files.
 
 ## Citation
 

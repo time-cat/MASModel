@@ -8,6 +8,7 @@ from langchain_core.messages.utils import convert_to_openai_messages
 from agent_scaling.agents.base import BaseAgentWithTools
 from agent_scaling.datasets import DatasetInstance
 from agent_scaling.logger import logger
+from agent_scaling.budget import BudgetLedger
 
 from .conversation import SubAgentConversationHistory, SubAgentRoundResult
 
@@ -25,7 +26,9 @@ class WorkerSubagent(BaseAgentWithTools):
         strategy: str,
         task_instance: DatasetInstance,
         min_iterations_per_agent: int = 3,
-        max_iterations_per_agent: int = 10,
+        max_iterations_per_agent: int | None = None,
+        decision_budget: int | None = None,
+        decision_budget_per_round: int | None = None,
         **kwargs,
     ):
         super().__init__(
@@ -38,6 +41,15 @@ class WorkerSubagent(BaseAgentWithTools):
         self.strategy = strategy
         self.min_iterations_per_agent = min_iterations_per_agent
         self.max_iterations_per_agent = max_iterations_per_agent
+        self.decision_budget_per_round = decision_budget_per_round
+        self.budget = BudgetLedger(
+            decision_budget if decision_budget is not None else max_iterations_per_agent
+        )
+        if self.budget.max_decision_calls is None:
+            raise ValueError("WorkerSubagent requires a decision budget")
+        self.min_iterations_per_agent = min(
+            min_iterations_per_agent, self.budget.max_decision_calls
+        )
         self.task_instance = task_instance
         self.env, self.llm_w_tools = self.init_environment(task_instance, agent_id)
         self.shared_prompt_templates = self.get_dataset_prompt_templates(self.env)
@@ -59,7 +71,7 @@ class WorkerSubagent(BaseAgentWithTools):
         original_query: str,
         strategy: str,
         min_iterations_per_agent: int = 3,
-        max_iterations_per_agent: int = 10,
+        max_iterations_per_agent: int | None = None,
         **kwargs,
     ):
         return cls(
@@ -105,10 +117,23 @@ class WorkerSubagent(BaseAgentWithTools):
         curr_iteration = 0
         recent_actions: list = []
         recent_observations: list = []
-        for iteration in range(self.max_iterations_per_agent):
+        iteration = 0
+        round_cap = self.decision_budget_per_round
+        if round_cap is None:
+            round_cap = self.max_iterations_per_agent
+        while (
+            round_cap is None
+            or iteration < round_cap
+        ):
+            if not self.budget.try_consume_decision():
+                logger.info(
+                    f"Agent {self.agent_id} lifetime decision budget exhausted"
+                )
+                break
             curr_iteration += 1
+            iteration += 1
             logger.info(
-                f"Agent {self.agent_id} iteration {iteration}/{self.max_iterations_per_agent}"
+                f"Agent {self.agent_id} iteration {iteration}/{round_cap or 'budget'}"
             )
             # Invoke LLM with tools using retry logic
             response: AIMessage = cast(
@@ -119,6 +144,7 @@ class WorkerSubagent(BaseAgentWithTools):
                     **self._get_llm_params_dict(),
                 ),
             )
+            self.budget.record_response(response)
             if response.tool_calls:
                 tool_call = response.tool_calls[0]
                 response.tool_calls = [response.tool_calls[0]]
@@ -215,8 +241,11 @@ class WorkerSubagent(BaseAgentWithTools):
                                 iteration_num=curr_iteration,
                             )
                     # Budget warning for subagents
-                    remaining = self.max_iterations_per_agent - iteration - 1
-                    if remaining == self.max_iterations_per_agent // 4 and remaining > 0:
+                    remaining = self.budget.remaining_decision_calls
+                    warning_threshold = max(
+                        1, (self.budget.max_decision_calls or 1) // 4
+                    )
+                    if remaining is not None and remaining == warning_threshold:
                         budget_warn = {
                             "role": "user",
                             "content": (
@@ -267,7 +296,9 @@ class WorkerSubagent(BaseAgentWithTools):
             iteration_num=curr_iteration,
         )
 
+        self.budget.record_auxiliary_call()
         llm_response = self.llm.invoke(messages)
+        self.budget.record_response(llm_response)
 
         # Update agent's conversation
         self.conv_history.add_internal_message(
@@ -297,6 +328,8 @@ class WorkerSubagent(BaseAgentWithTools):
 
         if self.env.env_done():
             self.conv_history.status = "completed"
+        elif self.budget.remaining_decision_calls == 0:
+            self.conv_history.status = "budget_exhausted"
         elif self.should_stop_due_to_rate_limiting():
             self.conv_history.status = "rate_limited"
 

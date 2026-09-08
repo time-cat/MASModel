@@ -33,8 +33,9 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
         *args,
         n_base_agents: int = 3,
         min_iterations_per_agent: int = 3,
-        max_iterations_per_agent: int = 7,
+        max_iterations_per_agent: int | None = None,
         enable_peer_communication: bool = True,
+        total_decision_budget: int | None = 32,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -43,12 +44,19 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
         self.min_iterations_per_agent = min_iterations_per_agent
         self.max_iterations_per_agent = max_iterations_per_agent
         self.enable_peer_communication = enable_peer_communication
+        self.total_decision_budget = total_decision_budget
+        per_agent_budget = (
+            None
+            if total_decision_budget is None
+            else total_decision_budget // max(1, n_base_agents)
+        )
 
         self.lead_agent = LeadAgent(
             *args,
             memory=self.memory,
             min_iterations_per_agent=min_iterations_per_agent,
             max_iterations_per_agent=max_iterations_per_agent,
+            decision_budget_per_agent=per_agent_budget,
             num_base_agents=n_base_agents,
             max_rounds=kwargs.get("max_rounds", 10),
             max_execution_time=kwargs.get("max_execution_time", 600),
@@ -218,19 +226,30 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
             )
 
         execution_time = time.time() - start_time
-        total_iterations = sum(
-            a.conv_history.total_iterations
+        total_decision_calls = sum(
+            a.budget.snapshot()["used_decision_calls"]
             for a in self.lead_agent.subagents.values()
         )
         logger.info(
             f"Hybrid processing completed in {execution_time:.2f}s "
-            f"with {total_iterations} total iterations across "
+            f"with {total_decision_calls} worker decisions across "
             f"{len(self.lead_agent.subagents)} agents"
         )
 
         if instance_dir is not None:
+            output_data = processing_result.model_dump()
+            output_data["total_decision_budget"] = self.total_decision_budget
+            output_data["total_decision_calls"] = total_decision_calls
+            output_data["max_rounds"] = self.lead_agent.max_rounds
+            output_data["per_round_decision_budget"] = (
+                self.lead_agent.decision_budget_per_round
+            )
+            output_data["per_agent_budgets"] = {
+                aid: agent.budget.snapshot()
+                for aid, agent in self.lead_agent.subagents.items()
+            }
             write_yaml(
-                processing_result.model_dump(),
+                output_data,
                 osp.join(instance_dir, "multi_agent_output.yaml"),
                 use_long_str_representer=True,
                 truncate_floats=False,

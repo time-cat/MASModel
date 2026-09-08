@@ -19,6 +19,7 @@ from agent_scaling.datasets import (
 from agent_scaling.env import AgentEnvironment
 from agent_scaling.logger import logger
 from agent_scaling.utils import write_yaml
+from agent_scaling.budget import BudgetLedger
 
 from .registry import register_agent
 
@@ -31,9 +32,17 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
 
     required_prompts = ["main"]
 
-    def __init__(self, max_steps: int = 100, *args, **kwargs):
+    def __init__(
+        self,
+        max_steps: Optional[int] = None,
+        total_decision_budget: Optional[int] = 32,
+        *args,
+        **kwargs,
+    ):
         super().__init__(*args, **kwargs)
         self.max_steps = max_steps
+        self.total_decision_budget = total_decision_budget
+        self.budget: Optional[BudgetLedger] = None
 
     def run_agent(
         self,
@@ -43,19 +52,14 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
         instance_idx: Optional[int] = None,
     ) -> DatasetInstanceOutputWithTrajectory:
         llm_params_dict = llm_params.model_dump() if llm_params else {}
-        # Scale step budget with task time limit for datasets like TerminalBench
-        # that have varying time limits (600–2400s). Minimum of configured max_steps.
-        time_limit = getattr(instance, "time_limit", None)
-        if time_limit is not None:
-            scaled_steps = max(self.max_steps, time_limit // 5)
-            if scaled_steps != self.max_steps:
-                logger.info(
-                    f"Scaling max_steps from {self.max_steps} to {scaled_steps} "
-                    f"based on task time_limit={time_limit}s"
-                )
-            max_steps = scaled_steps
-        else:
-            max_steps = self.max_steps
+        self.budget = BudgetLedger(self.total_decision_budget)
+        max_steps = self.max_steps
+        if max_steps is None:
+            max_steps = self.budget.remaining_decision_calls
+        if max_steps is None:
+            raise ValueError("Single-agent requires total_decision_budget or max_steps")
+        if self.budget.remaining_decision_calls is not None:
+            max_steps = min(max_steps, self.budget.remaining_decision_calls)
         env, llm_w_tools = self.init_environment(instance)
         shared_prompt_templates = self.get_dataset_prompt_templates(env)
 
@@ -68,7 +72,11 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
         final_env_output = {}
         is_done = False
         for step in range(max_steps):
+            if not self.budget.try_consume_decision():
+                logger.info("Single-agent lifetime decision budget exhausted")
+                break
             response: BaseMessage = llm_w_tools.invoke(messages, **llm_params_dict)  # type: ignore
+            self.budget.record_response(response)
             response = cast(AIMessage, response)
             if response.tool_calls:
                 response.tool_calls = [response.tool_calls[0]]
@@ -201,6 +209,7 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
             out = {
                 "trajectory": [t.model_dump() for t in trajectory],
                 "final_answer": final_answer,
+                "budget": self.budget.snapshot() if self.budget else None,
             }
             write_yaml(
                 out,

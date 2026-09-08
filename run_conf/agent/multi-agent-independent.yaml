@@ -1,10 +1,10 @@
 name: multi-agent-independent
+total_decision_budget: 32
 prompts:
   subagent:
     local_path: prompts/multi-agent/subagent.yaml
 
 # Independent multi-agent parameters (no coordination)
 n_base_agents: 3
-min_iterations_per_agent: 3
-max_iterations_per_agent: 25
+min_iterations_per_agent: 0
 task_blurb: "independent worker"

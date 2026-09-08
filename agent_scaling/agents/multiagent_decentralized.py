@@ -26,6 +26,7 @@ from agent_scaling.config.llm import LLMParams
 from agent_scaling.datasets import DatasetInstance, DatasetInstanceOutputWithTrajectory
 from agent_scaling.logger import logger
 from agent_scaling.utils import write_yaml
+from agent_scaling.budget import per_round_cap
 
 from .multiagent_components.conversation import SubAgentRoundResult
 from .multiagent_components.mas_subagent import WorkerSubagent
@@ -37,19 +38,14 @@ from .registry import register_agent
 class DecentralizedMultiAgentSystem(AgentSystemWithTools):
     """Decentralized multi-agent system with peer debate and consensus voting.
 
-    No orchestrator. N peer agents iterate over `max_rounds` sequential debate
-    rounds, exchanging full prior-round responses. After the last round, a
+    No orchestrator. N peer agents iterate over budget-available sequential
+    debate rounds, exchanging full prior-round responses. After the last round, a
     consensus vote over the agents' final answers selects the system output.
 
-    Constructor defaults vs. canonical configuration. The default values for
-    `max_rounds` (3) and `consensus_threshold` (0.5) below are minimal-config
-    fallbacks intended for ad-hoc tests and notebook usage; they are not the
-    values used for the experiments reported in the accompanying paper. The
-    canonical runs invoke this class through Hydra with the configuration
-    in ``run_conf/agent/multi-agent-decentralized.yaml``, which sets
-    ``max_rounds=10``, ``consensus_threshold=0.7``, and
-    ``max_iterations_per_agent=25``. Downstream users should treat the YAML
-    values as the reference configuration.
+    `max_rounds` is a protocol horizon, not a worker-computation budget. The
+    canonical configuration fixes it to 10 so that the lifetime worker budget
+    is spread across communication rounds; passing ``None`` is supported for
+    an explicitly unbounded protocol horizon.
     """
 
     required_prompts = ["subagent"]
@@ -59,9 +55,10 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         *args,
         n_base_agents: int = 3,
         min_iterations_per_agent: int = 3,
-        max_iterations_per_agent: int = 25,
-        max_rounds: int = 3,
+        max_iterations_per_agent: int | None = None,
+        max_rounds: int | None = 10,
         consensus_threshold: float = 0.5,
+        total_decision_budget: int | None = 32,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -71,6 +68,12 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         self.max_iterations_per_agent = max_iterations_per_agent
         self.max_rounds = max_rounds
         self.consensus_threshold = consensus_threshold
+        self.total_decision_budget = total_decision_budget
+        self.per_agent_decision_budget = (
+            None
+            if total_decision_budget is None
+            else total_decision_budget // max(1, n_base_agents)
+        )
         self.subagents: Dict[str, WorkerSubagent] = {}
         self.consensus = create_communication_strategy(
             "consensus", {"consensus_threshold": consensus_threshold}
@@ -100,6 +103,10 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
                 task_instance=task_instance,
                 min_iterations_per_agent=self.min_iterations_per_agent,
                 max_iterations_per_agent=self.max_iterations_per_agent,
+                decision_budget=self.per_agent_decision_budget,
+                decision_budget_per_round=per_round_cap(
+                    self.per_agent_decision_budget, self.max_rounds
+                ),
             )
             self.subagents[agent_id] = subagent
         logger.info(f"Created {len(self.subagents)} peer agents for debate")
@@ -282,7 +289,9 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         # debate rounds always complete.
         time_limit = getattr(instance, "time_limit", None)
 
-        for round_num in range(1, self.max_rounds + 1):
+        round_num = 0
+        while self.max_rounds is None or round_num < self.max_rounds:
+            round_num += 1
             if time_limit is not None and time_limit > 0 and time.time() - start_time > time_limit:
                 logger.warning(
                     f"Execution timeout reached before round {round_num}"
@@ -304,6 +313,10 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
                 if a.conv_history.status == "active"
                 and not a.should_stop_due_to_rate_limiting()
             ]
+
+            if not active_agents:
+                logger.info("No active agents remain; stopping debate")
+                break
 
             tasks: List[Tuple[str, asyncio.Task]] = []
             for agent_id in active_agents:
@@ -379,12 +392,12 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         final_answer = consensus_answer or submission_response
 
         execution_time = time.time() - start_time
-        total_iterations = sum(
-            a.conv_history.total_iterations for a in self.subagents.values()
+        total_decision_calls = sum(
+            a.budget.snapshot()["used_decision_calls"] for a in self.subagents.values()
         )
         logger.info(
             f"Decentralized debate completed in {execution_time:.2f}s with "
-            f"{total_iterations} total iterations across {len(self.subagents)} agents "
+            f"{total_decision_calls} worker decisions across {len(self.subagents)} agents "
             f"and {len(per_round_answers)} debate rounds; winner={winning_agent}"
         )
 
@@ -394,10 +407,19 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
                 "algorithm": "multi_agent_debate_with_consensus",
                 "n_agents": self.n_base_agents,
                 "max_rounds": self.max_rounds,
+                "per_round_decision_budget": per_round_cap(
+                    self.per_agent_decision_budget, self.max_rounds
+                ),
                 "rounds_executed": len(per_round_answers),
                 "consensus_threshold": self.consensus_threshold,
+                "total_decision_budget": self.total_decision_budget,
+                "total_decision_calls": total_decision_calls,
+                "per_agent_budgets": {
+                    aid: agent.budget.snapshot()
+                    for aid, agent in self.subagents.items()
+                },
                 "winning_agent": winning_agent,
-                "total_iterations": total_iterations,
+                "total_iterations": total_decision_calls,
                 "execution_time": execution_time,
                 "agent_findings": {
                     aid: findings

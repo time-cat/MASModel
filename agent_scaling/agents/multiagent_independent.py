@@ -28,6 +28,7 @@ from agent_scaling.utils import write_yaml
 from .multiagent_components.mas_subagent import WorkerSubagent
 from .multiagent_components.memory import EnhancedMemory
 from .registry import register_agent
+from agent_scaling.budget import per_round_cap
 
 
 @register_agent("multi-agent-independent")
@@ -38,14 +39,8 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
     answer into a single response. No voting, no cross-validation, no
     analytic comparison.
 
-    Constructor defaults vs. canonical configuration. The default value for
-    `max_iterations_per_agent` (10) below is a minimal-config fallback
-    intended for ad-hoc tests and notebook usage; it is not the value used
-    for the experiments reported in the accompanying paper. The canonical
-    runs invoke this class through Hydra with the configuration in
-    ``run_conf/agent/multi-agent-independent.yaml``, which sets
-    ``max_iterations_per_agent=25``. Downstream users should treat the YAML
-    value as the reference configuration.
+    `max_iterations_per_agent` is an optional legacy safety cap. Canonical
+    budget experiments omit it and use the per-worker lifetime budget.
     """
 
     required_prompts = ["subagent"]
@@ -55,7 +50,8 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         *args,
         n_base_agents: int = 3,
         min_iterations_per_agent: int = 3,
-        max_iterations_per_agent: int = 10,
+        max_iterations_per_agent: int | None = None,
+        total_decision_budget: int | None = 32,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -63,6 +59,12 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         self.n_base_agents = n_base_agents
         self.min_iterations_per_agent = min_iterations_per_agent
         self.max_iterations_per_agent = max_iterations_per_agent
+        self.total_decision_budget = total_decision_budget
+        self.per_agent_decision_budget = (
+            None
+            if total_decision_budget is None
+            else total_decision_budget // max(1, n_base_agents)
+        )
         self.subagents: Dict[str, WorkerSubagent] = {}
 
         logger.info(
@@ -84,6 +86,10 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
                 task_instance=task_instance,
                 min_iterations_per_agent=self.min_iterations_per_agent,
                 max_iterations_per_agent=self.max_iterations_per_agent,
+                decision_budget=self.per_agent_decision_budget,
+                decision_budget_per_round=per_round_cap(
+                    self.per_agent_decision_budget, None
+                ),
             )
             self.subagents[agent_id] = subagent
         logger.info(
@@ -242,12 +248,12 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         final_answer = synthesized_answer or submission_response
 
         execution_time = time.time() - start_time
-        total_iterations = sum(
-            a.conv_history.total_iterations for a in self.subagents.values()
+        total_decision_calls = sum(
+            a.budget.snapshot()["used_decision_calls"] for a in self.subagents.values()
         )
         logger.info(
             f"Independent (synthesis_only) processing completed in {execution_time:.2f}s "
-            f"with {total_iterations} total iterations across {len(self.subagents)} agents. "
+            f"with {total_decision_calls} worker decisions across {len(self.subagents)} agents. "
             f"Contributing agents: {contributing_ids}"
         )
 
@@ -257,9 +263,15 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
                 "aggregator": "synthesis_only",
                 "n_agents": self.n_base_agents,
                 "contributing_agents": contributing_ids,
-                "total_iterations": total_iterations,
+                "total_iterations": total_decision_calls,
+                "total_decision_calls": total_decision_calls,
                 "execution_time": execution_time,
                 "synthesized_answer": synthesized_answer,
+                "total_decision_budget": self.total_decision_budget,
+                "per_agent_budgets": {
+                    aid: agent.budget.snapshot()
+                    for aid, agent in self.subagents.items()
+                },
             }
             write_yaml(
                 output_data,
