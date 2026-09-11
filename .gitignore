@@ -66,9 +66,6 @@ colab_analysis/
 latex/
 .omc/
 
-# Exclude licensed dataset files (users should download from originals)
-datasets/*.json
-
 # Allow key documentation files despite *.md exclusion
 !REPRODUCTION.md
 !DATA_AVAILABILITY.md

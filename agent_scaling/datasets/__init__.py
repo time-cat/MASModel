@@ -23,6 +23,7 @@ from .registry import (
     register_dataset_instance,
 )
 from .simpleqa import SimpleQADataset, SimpleQAInstance
+from .synthetic_dag import SyntheticDAGDataset, SyntheticDAGInstance
 from .swebench import SWEBenchDataset, SWEBenchInstance
 from .terminalbench import TerminalBenchDataset, TerminalBenchInstance
 from .workbench import WorkbenchDataset, WorkbenchInstance

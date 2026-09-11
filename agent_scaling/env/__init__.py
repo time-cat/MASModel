@@ -18,6 +18,7 @@ from .registry import (
 )
 from .swebench import SWEBenchEnvironment
 from .terminalbench import TerminalBenchEnvironment
+from .synthetic_dag import SyntheticDAGEnvironment
 try:
     from .web_search import WebSearchEnvironment
 except Exception:  # pragma: no cover

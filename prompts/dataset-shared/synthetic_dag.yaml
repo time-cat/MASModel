@@ -1,0 +1,33 @@
+task_description_template: |-
+  You are solving a partially observable dependency-graph task. Each node has a hidden integer value.
+  You may inspect a node only after inspecting every predecessor. Independent branches can be explored separately.
+  The graph has {{nodes}} and directed edges {{edges}}.
+  Structural metadata: parallelism={{parallelism}}, critical_path={{critical_path}}.
+  Arithmetic difficulty={{difficulty}}. Computation rule: {{computation_rule}}
+  Available actions:
+  {{tools_description}}
+  Nodes are listed in topological order. Do not guess hidden base values from
+  the graph.
+
+task_description_with_tools_template: |-
+  You are solving a partially observable dependency-graph task. Each node has a hidden integer value.
+  Inspect all useful nodes in dependency order, then submit the exact integer score.
+  Nodes: {{nodes}}
+  Directed edges: {{edges}}
+  Structural metadata: parallelism={{parallelism}}, critical_path={{critical_path}}.
+  Arithmetic difficulty={{difficulty}}. Computation rule: {{computation_rule}}
+  Available tools:
+  {{tools_description}}
+  Nodes are listed in topological order. Use the displayed computation rule
+  after all required inspections, then submit the resulting integer.
+
+task_behavior_template: |-
+  Use tools to gather observations. You can inspect independent branches in any order.
+  When you have enough observations, call submit(answer=<integer>). The answer must be an integer.
+
+task_instance_template: |-
+  Task {{task_id}}: compute the hidden dependency-graph score.
+
+task_output_template: |-
+  Finish by calling the submit tool with the integer score. If you also write a
+  textual conclusion, put the exact value on its own line as FINAL_SCORE: <integer>.

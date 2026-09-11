@@ -1,0 +1,9 @@
+dataset_id: synthetic_dag
+from_langfuse: false
+local_path: datasets/synthetic_dag_240.json
+templates_local_path: prompts/dataset-shared/synthetic_dag.yaml
+env:
+  name: synthetic-dag
+  tools:
+    - inspect_node
+    - submit
