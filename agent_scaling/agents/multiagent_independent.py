@@ -52,6 +52,7 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         min_iterations_per_agent: int = 3,
         max_iterations_per_agent: int | None = None,
         total_decision_budget: int | None = 32,
+        use_remaining_budget_for_verification: bool = True,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -60,6 +61,9 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         self.min_iterations_per_agent = min_iterations_per_agent
         self.max_iterations_per_agent = max_iterations_per_agent
         self.total_decision_budget = total_decision_budget
+        self.use_remaining_budget_for_verification = (
+            use_remaining_budget_for_verification
+        )
         self.per_agent_decision_budget = (
             None
             if total_decision_budget is None
@@ -89,6 +93,9 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
                 decision_budget=self.per_agent_decision_budget,
                 decision_budget_per_round=per_round_cap(
                     self.per_agent_decision_budget, None
+                ),
+                use_remaining_budget_for_verification=(
+                    self.use_remaining_budget_for_verification
                 ),
             )
             self.subagents[agent_id] = subagent
@@ -270,6 +277,10 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
                 "total_decision_budget": self.total_decision_budget,
                 "per_agent_budgets": {
                     aid: agent.budget.snapshot()
+                    for aid, agent in self.subagents.items()
+                },
+                "per_agent_verification": {
+                    aid: agent.submission_policy.snapshot()
                     for aid, agent in self.subagents.items()
                 },
             }

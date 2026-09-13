@@ -13,33 +13,33 @@ from typing import Any, Mapping
 
 DIFFICULTY_PROFILES: dict[str, dict[str, Any]] = {
     "easy": {
-        "node_value_max": 79,
+        "node_value_max": 71,
         "node_modulus": 1007,
         "score_modulus": 1009,
         "rule_id": "linear-v1",
         "rule_text": (
             "For every node v, let P_v be the sum of the observed base "
             "values b_u of its immediate predecessors. Compute "
-            "x_v = (b_v^2 + b_v + 2*(P_v+1)^2 + 3*P_v + 2) mod 1007. Root nodes have "
+            "x_v = (2*(b_v+1)^2 + b_v + P_v^2 + 3) mod 1007. Root nodes have "
             "P_v=0. The final score is sum((i+1)*x_v_i) mod 1009, with "
             "nodes indexed from i=0."
         ),
     },
     "medium": {
-        "node_value_max": 93,
+        "node_value_max": 71,
         "node_modulus": 1007,
         "score_modulus": 1009,
         "rule_id": "base-quadratic-v2",
         "rule_text": (
             "For every node v, let P_v be the sum of the observed base "
             "values b_u of its immediate predecessors. Compute "
-            "x_v = (2*b_v^3 + 3*(b_v+2)^2 + b_v + 2*(P_v+1)^2 + 7) mod 1007. Root nodes have "
-            "P_v=0. The final score is sum((i+1)^2*x_v_i) mod 1009, with "
+            "x_v = (2*b_v^3 + b_v^2 + P_v^2 + 7) mod 1007. Root nodes have "
+            "P_v=0. The final score is sum((i+1)*x_v_i) mod 1009, with "
             "nodes indexed from i=0."
         ),
     },
     "hard": {
-        "node_value_max": 93,
+        "node_value_max": 71,
         "node_modulus": 1007,
         "score_modulus": 1009,
         "rule_id": "base-mixed-quadratic-v2",
@@ -47,9 +47,9 @@ DIFFICULTY_PROFILES: dict[str, dict[str, Any]] = {
             "For every node v, let P_v be the sum of the observed base "
             "values b_u of its immediate predecessors and Q_v the sum of "
             "their squares. Compute "
-            "x_v = (b_v^3 + 5*b_v^2 + 4*(b_v+3) + 3*(P_v+2)^2 + 2*(Q_v+2)^2 + Q_v + 2) mod 1007. Root nodes "
+            "x_v = (2*(b_v+1)^3 + 5*b_v^2 + 4*(b_v+3) + 3*(P_v+2)^2 + 2*Q_v + 2) mod 1007. Root nodes "
             "have P_v=0 and Q_v=0. The final score is "
-            "sum((i+1)^3*x_v_i + (i+3)^2*b_v_i) mod 1009, with nodes "
+            "sum((i+1)*x_v_i + (i+3)*b_v_i) mod 1009, with nodes "
             "indexed from i=0."
         ),
     },
@@ -88,17 +88,17 @@ def compute_resolved_values(
         base_parent_sum = sum(base_parent_values)
         if difficulty == "easy":
             base = node_values[node]
-            value = base ** 2 + base + 2 * (base_parent_sum + 1) ** 2 + 3 * base_parent_sum + 2
+            value = 2 * (base + 1) ** 2 + base + base_parent_sum ** 2 + 3
         elif difficulty == "medium":
             base = node_values[node]
-            value = 2 * base ** 3 + 3 * (base + 2) ** 2 + base + 2 * (base_parent_sum + 1) ** 2 + 7
+            value = 2 * base ** 3 + base ** 2 + base_parent_sum ** 2 + 7
         else:
             base_parent_squares = sum(value * value for value in base_parent_values)
             base = node_values[node]
             value = (
-                base ** 3 + 5 * base ** 2 + 4 * (base + 3)
+                2 * (base + 1) ** 3 + 5 * base ** 2 + 4 * (base + 3)
                 + 3 * (base_parent_sum + 2) ** 2
-                + 2 * (base_parent_squares + 2) ** 2 + base_parent_squares + 2
+                + 2 * base_parent_squares + 2
             )
         resolved[node] = value % node_modulus
     return resolved
@@ -117,11 +117,11 @@ def compute_target_score(
     if difficulty == "easy":
         score = sum((index + 1) * resolved[node] for index, node in enumerate(nodes))
     elif difficulty == "medium":
-        score = sum((index + 1) ** 2 * resolved[node] for index, node in enumerate(nodes))
+        score = sum((index + 1) * resolved[node] for index, node in enumerate(nodes))
     else:
         score = sum(
-            (index + 1) ** 3 * resolved[node]
-            + (index + 3) ** 2 * node_values[node]
+            (index + 1) * resolved[node]
+            + (index + 3) * node_values[node]
             for index, node in enumerate(nodes)
         )
     return score % score_modulus

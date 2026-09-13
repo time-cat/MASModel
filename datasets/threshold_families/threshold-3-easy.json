@@ -1,0 +1,6145 @@
+{
+  "dataset_id": "synthetic_dag",
+  "instances": [
+    {
+      "task_id": "dag-0000",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 33,
+        "N1": 18
+      },
+      "target_score": 975,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 0,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0001",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 14,
+        "N1": 30
+      },
+      "target_score": 741,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 1,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0002",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 55,
+        "N1": 43
+      },
+      "target_score": 64,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 2,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0003",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 42,
+        "N1": 39
+      },
+      "target_score": 155,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 3,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0004",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 33,
+        "N1": 33
+      },
+      "target_score": 157,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 4,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0005",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 71,
+        "N1": 62
+      },
+      "target_score": 262,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 5,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0006",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 8,
+        "N1": 4
+      },
+      "target_score": 415,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 6,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0007",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 23,
+        "N1": 59
+      },
+      "target_score": 646,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 7,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0008",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 6,
+        "N1": 55
+      },
+      "target_score": 683,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 8,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0009",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 18,
+        "N1": 66
+      },
+      "target_score": 350,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 9,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0010",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 54,
+        "N1": 59
+      },
+      "target_score": 281,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 10,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0011",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 8,
+        "N1": 42
+      },
+      "target_score": 736,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 11,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0012",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 9,
+        "N1": 6
+      },
+      "target_score": 426,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 12,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0013",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 9,
+        "N1": 49
+      },
+      "target_score": 408,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 13,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0014",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 57,
+        "N1": 37
+      },
+      "target_score": 556,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 14,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0015",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 68,
+        "N1": 20
+      },
+      "target_score": 322,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 15,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0016",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 59,
+        "N1": 4
+      },
+      "target_score": 327,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 16,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0017",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 37,
+        "N1": 5
+      },
+      "target_score": 789,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 17,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0018",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 10,
+        "N1": 55
+      },
+      "target_score": 831,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 18,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0019",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 64,
+        "N1": 54
+      },
+      "target_score": 727,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 19,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0020",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 12,
+        "N1": 19
+      },
+      "target_score": 988,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 20,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0021",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 38,
+        "N1": 58
+      },
+      "target_score": 6,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 21,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0022",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 16,
+        "N1": 23
+      },
+      "target_score": 442,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 22,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0023",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 41,
+        "N1": 60
+      },
+      "target_score": 454,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 23,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0024",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 42,
+        "N1": 63
+      },
+      "target_score": 622,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 24,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0025",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 55,
+        "N1": 58
+      },
+      "target_score": 232,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 25,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0026",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 50,
+        "N1": 32
+      },
+      "target_score": 618,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 26,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0027",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 46,
+        "N1": 62
+      },
+      "target_score": 329,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 27,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0028",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 60,
+        "N1": 9
+      },
+      "target_score": 880,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 28,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0029",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 17,
+        "N1": 23
+      },
+      "target_score": 579,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 29,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0030",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 59,
+        "N1": 39
+      },
+      "target_score": 655,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 30,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0031",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 65,
+        "N1": 57
+      },
+      "target_score": 198,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 31,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0032",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 48,
+        "N1": 68
+      },
+      "target_score": 876,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 32,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0033",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 53,
+        "N1": 6
+      },
+      "target_score": 639,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 33,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0034",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 15,
+        "N1": 35
+      },
+      "target_score": 753,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 34,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0035",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 70,
+        "N1": 10
+      },
+      "target_score": 595,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 35,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0036",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 10,
+        "N1": 70
+      },
+      "target_score": 425,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 36,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0037",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 58,
+        "N1": 69
+      },
+      "target_score": 262,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 37,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0038",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 19,
+        "N1": 51
+      },
+      "target_score": 667,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 38,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0039",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 36,
+        "N1": 53
+      },
+      "target_score": 451,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 39,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0040",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 35,
+        "N1": 16
+      },
+      "target_score": 228,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 40,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0041",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 19,
+        "N1": 61
+      },
+      "target_score": 936,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 41,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0042",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 31,
+        "N1": 39
+      },
+      "target_score": 510,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 42,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0043",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 11,
+        "N1": 1
+      },
+      "target_score": 326,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 43,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0044",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 61,
+        "N1": 20
+      },
+      "target_score": 890,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 44,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0045",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 35,
+        "N1": 44
+      },
+      "target_score": 754,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 45,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0046",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 37,
+        "N1": 67
+      },
+      "target_score": 130,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 46,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0047",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 49,
+        "N1": 31
+      },
+      "target_score": 153,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 47,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0048",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 52,
+        "N1": 60
+      },
+      "target_score": 541,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 48,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0049",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 41,
+        "N1": 49
+      },
+      "target_score": 585,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 49,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0050",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 30,
+        "N1": 32
+      },
+      "target_score": 337,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 50,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0051",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 12,
+        "N1": 17
+      },
+      "target_score": 680,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 51,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0052",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 9,
+        "N1": 60
+      },
+      "target_score": 115,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 52,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0053",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 71,
+        "N1": 38
+      },
+      "target_score": 508,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 53,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0054",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 15,
+        "N1": 12
+      },
+      "target_score": 677,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 54,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0055",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 56,
+        "N1": 22
+      },
+      "target_score": 667,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 55,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0056",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 61,
+        "N1": 66
+      },
+      "target_score": 53,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 56,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0057",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 46,
+        "N1": 7
+      },
+      "target_score": 919,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 57,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0058",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 39,
+        "N1": 14
+      },
+      "target_score": 165,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 58,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0059",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 61,
+        "N1": 25
+      },
+      "target_score": 440,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 59,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0060",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 31,
+        "N1": 26
+      },
+      "target_score": 936,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 60,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0061",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 9,
+        "N1": 35
+      },
+      "target_score": 435,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 61,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0062",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 11,
+        "N1": 21
+      },
+      "target_score": 268,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 62,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0063",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 42,
+        "N1": 50
+      },
+      "target_score": 658,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 63,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0064",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 4,
+        "N1": 63
+      },
+      "target_score": 461,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 64,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0065",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 18,
+        "N1": 41
+      },
+      "target_score": 836,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 65,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0066",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 41,
+        "N1": 1
+      },
+      "target_score": 914,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 66,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0067",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 55,
+        "N1": 15
+      },
+      "target_score": 339,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 67,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0068",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 60,
+        "N1": 37
+      },
+      "target_score": 266,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 68,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0069",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 35,
+        "N1": 51
+      },
+      "target_score": 461,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 69,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0070",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 46,
+        "N1": 34
+      },
+      "target_score": 376,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 70,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0071",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 67,
+        "N1": 8
+      },
+      "target_score": 514,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 71,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0072",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 52,
+        "N1": 44
+      },
+      "target_score": 138,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 72,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0073",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 20,
+        "N1": 60
+      },
+      "target_score": 808,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 73,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0074",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 16,
+        "N1": 59
+      },
+      "target_score": 526,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 74,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0075",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 14,
+        "N1": 19
+      },
+      "target_score": 489,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 75,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0076",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 15,
+        "N1": 27
+      },
+      "target_score": 703,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 76,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0077",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 53,
+        "N1": 65
+      },
+      "target_score": 868,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 77,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0078",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 68,
+        "N1": 63
+      },
+      "target_score": 108,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 78,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0079",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 27,
+        "N1": 48
+      },
+      "target_score": 223,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 79,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0080",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 47,
+        "N1": 45
+      },
+      "target_score": 125,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 80,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0081",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 9,
+        "N1": 39
+      },
+      "target_score": 654,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 81,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0082",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 24,
+        "N1": 10
+      },
+      "target_score": 780,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 82,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0083",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 19,
+        "N1": 28
+      },
+      "target_score": 216,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 83,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0084",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 45,
+        "N1": 14
+      },
+      "target_score": 199,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 84,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0085",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 63,
+        "N1": 70
+      },
+      "target_score": 254,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 85,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0086",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 11,
+        "N1": 64
+      },
+      "target_score": 215,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 86,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0087",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 46,
+        "N1": 68
+      },
+      "target_score": 490,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 87,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0088",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 70,
+        "N1": 22
+      },
+      "target_score": 237,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 88,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0089",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 18,
+        "N1": 56
+      },
+      "target_score": 764,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 89,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0090",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 9,
+        "N1": 43
+      },
+      "target_score": 997,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 90,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0091",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 56,
+        "N1": 34
+      },
+      "target_score": 682,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 91,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0092",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 66,
+        "N1": 10
+      },
+      "target_score": 492,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 92,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0093",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 58,
+        "N1": 63
+      },
+      "target_score": 53,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 93,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0094",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 45,
+        "N1": 36
+      },
+      "target_score": 769,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 94,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0095",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 45,
+        "N1": 54
+      },
+      "target_score": 382,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 95,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0096",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 26,
+        "N1": 61
+      },
+      "target_score": 215,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 96,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0097",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 35,
+        "N1": 45
+      },
+      "target_score": 111,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 97,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0098",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 3,
+        "N1": 13
+      },
+      "target_score": 854,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 98,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0099",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 65,
+        "N1": 9
+      },
+      "target_score": 139,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 99,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0100",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 7,
+        "N1": 60
+      },
+      "target_score": 139,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 100,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0101",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 37,
+        "N1": 50
+      },
+      "target_score": 345,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 101,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0102",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 62,
+        "N1": 48
+      },
+      "target_score": 218,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 102,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0103",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 62,
+        "N1": 38
+      },
+      "target_score": 69,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 103,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0104",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 10,
+        "N1": 29
+      },
+      "target_score": 896,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 104,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0105",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 19,
+        "N1": 31
+      },
+      "target_score": 958,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 105,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0106",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 62,
+        "N1": 28
+      },
+      "target_score": 348,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 106,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0107",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 53,
+        "N1": 2
+      },
+      "target_score": 899,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 107,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0108",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 43,
+        "N1": 65
+      },
+      "target_score": 327,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 108,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0109",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 20,
+        "N1": 57
+      },
+      "target_score": 174,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 109,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0110",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 47,
+        "N1": 45
+      },
+      "target_score": 125,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 110,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0111",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 48,
+        "N1": 61
+      },
+      "target_score": 213,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 111,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0112",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 60,
+        "N1": 11
+      },
+      "target_score": 200,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 112,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0113",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 25,
+        "N1": 22
+      },
+      "target_score": 766,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 113,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0114",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 24,
+        "N1": 24
+      },
+      "target_score": 953,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 114,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0115",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 19,
+        "N1": 12
+      },
+      "target_score": 519,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 115,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0116",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 56,
+        "N1": 58
+      },
+      "target_score": 693,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 116,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0117",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 27,
+        "N1": 4
+      },
+      "target_score": 705,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 117,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0118",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 53,
+        "N1": 44
+      },
+      "target_score": 563,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 118,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0119",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 10,
+        "N1": 7
+      },
+      "target_score": 531,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 119,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0120",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 33,
+        "N1": 68
+      },
+      "target_score": 385,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 120,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0121",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 64,
+        "N1": 52
+      },
+      "target_score": 864,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 121,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0122",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 66,
+        "N1": 14
+      },
+      "target_score": 916,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 122,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0123",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 48,
+        "N1": 43
+      },
+      "target_score": 601,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 123,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0124",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 47,
+        "N1": 56
+      },
+      "target_score": 651,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 124,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0125",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 35,
+        "N1": 5
+      },
+      "target_score": 203,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 125,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0126",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 10,
+        "N1": 7
+      },
+      "target_score": 531,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 126,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0127",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 55,
+        "N1": 3
+      },
+      "target_score": 364,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 127,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0128",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 10,
+        "N1": 64
+      },
+      "target_score": 168,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 128,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0129",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 18,
+        "N1": 2
+      },
+      "target_score": 789,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 129,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0130",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 12,
+        "N1": 50
+      },
+      "target_score": 793,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 130,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0131",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 7,
+        "N1": 46
+      },
+      "target_score": 7,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 131,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0132",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 13,
+        "N1": 15
+      },
+      "target_score": 459,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 132,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0133",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 53,
+        "N1": 11
+      },
+      "target_score": 448,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 133,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0134",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 65,
+        "N1": 28
+      },
+      "target_score": 512,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 134,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0135",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 57,
+        "N1": 52
+      },
+      "target_score": 4,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 135,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0136",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 43,
+        "N1": 68
+      },
+      "target_score": 618,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 136,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0137",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 59,
+        "N1": 66
+      },
+      "target_score": 92,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 137,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0138",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 62,
+        "N1": 19
+      },
+      "target_score": 580,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 138,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0139",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 21,
+        "N1": 54
+      },
+      "target_score": 113,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 139,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0140",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 26,
+        "N1": 6
+      },
+      "target_score": 28,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 140,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0141",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 61,
+        "N1": 17
+      },
+      "target_score": 21,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 141,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0142",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 52,
+        "N1": 34
+      },
+      "target_score": 575,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 142,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0143",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 56,
+        "N1": 68
+      },
+      "target_score": 566,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 143,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0144",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 30,
+        "N1": 55
+      },
+      "target_score": 515,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 144,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0145",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 42,
+        "N1": 28
+      },
+      "target_score": 116,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 145,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0146",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 33,
+        "N1": 33
+      },
+      "target_score": 1002,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 146,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0147",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 12,
+        "N1": 14
+      },
+      "target_score": 566,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 147,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0148",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 46,
+        "N1": 7
+      },
+      "target_score": 715,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 148,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0149",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 7,
+        "N1": 31
+      },
+      "target_score": 274,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 149,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0150",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 43,
+        "N1": 57
+      },
+      "target_score": 371,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 150,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0151",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 22,
+        "N1": 18
+      },
+      "target_score": 553,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 151,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0152",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 11,
+        "N1": 63
+      },
+      "target_score": 706,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 152,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0153",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 1,
+        "N1": 50
+      },
+      "target_score": 454,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 153,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0154",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 38,
+        "N1": 19
+      },
+      "target_score": 566,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 154,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0155",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 29,
+        "N1": 58
+      },
+      "target_score": 769,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 155,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0156",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 63,
+        "N1": 64
+      },
+      "target_score": 115,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 156,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0157",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 41,
+        "N1": 65
+      },
+      "target_score": 324,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 157,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0158",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 39,
+        "N1": 40
+      },
+      "target_score": 1008,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 158,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0159",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 57,
+        "N1": 46
+      },
+      "target_score": 615,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 159,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0160",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 12,
+        "N1": 13
+      },
+      "target_score": 160,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 160,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0161",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 50,
+        "N1": 6
+      },
+      "target_score": 434,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 161,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0162",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 22,
+        "N1": 37
+      },
+      "target_score": 858,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 162,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0163",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 34,
+        "N1": 19
+      },
+      "target_score": 397,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 163,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0164",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 60,
+        "N1": 7
+      },
+      "target_score": 732,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 164,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0165",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 10,
+        "N1": 38
+      },
+      "target_score": 379,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 165,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0166",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 5,
+        "N1": 21
+      },
+      "target_score": 46,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 166,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0167",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 55,
+        "N1": 6
+      },
+      "target_score": 510,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 167,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0168",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 68,
+        "N1": 1
+      },
+      "target_score": 737,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 168,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0169",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 26,
+        "N1": 68
+      },
+      "target_score": 531,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 169,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0170",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 70,
+        "N1": 46
+      },
+      "target_score": 963,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 170,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0171",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 31,
+        "N1": 59
+      },
+      "target_score": 494,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 171,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0172",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 21,
+        "N1": 44
+      },
+      "target_score": 121,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 172,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0173",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 45,
+        "N1": 59
+      },
+      "target_score": 678,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 173,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0174",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 29,
+        "N1": 11
+      },
+      "target_score": 88,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 174,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0175",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 32,
+        "N1": 49
+      },
+      "target_score": 233,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 175,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0176",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 8,
+        "N1": 43
+      },
+      "target_score": 77,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 176,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0177",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 5,
+        "N1": 60
+      },
+      "target_score": 992,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 177,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0178",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 29,
+        "N1": 35
+      },
+      "target_score": 39,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 178,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0179",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 58,
+        "N1": 64
+      },
+      "target_score": 894,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 179,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0180",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 61,
+        "N1": 66
+      },
+      "target_score": 667,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 180,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0181",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 16,
+        "N1": 21
+      },
+      "target_score": 70,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 181,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0182",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 23,
+        "N1": 51
+      },
+      "target_score": 65,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 182,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0183",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 46,
+        "N1": 55
+      },
+      "target_score": 210,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 183,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0184",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 8,
+        "N1": 7
+      },
+      "target_score": 449,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 184,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0185",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 27,
+        "N1": 42
+      },
+      "target_score": 17,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 185,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0186",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 61,
+        "N1": 34
+      },
+      "target_score": 640,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 186,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0187",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 16,
+        "N1": 42
+      },
+      "target_score": 23,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 187,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0188",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 22,
+        "N1": 19
+      },
+      "target_score": 711,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 188,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0189",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 32,
+        "N1": 56
+      },
+      "target_score": 220,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 189,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0190",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 53,
+        "N1": 54
+      },
+      "target_score": 983,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 190,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0191",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 7,
+        "N1": 7
+      },
+      "target_score": 414,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 191,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0192",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 48,
+        "N1": 1
+      },
+      "target_score": 849,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 192,
+        "structure": "wide",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0193",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 62,
+        "N1": 35
+      },
+      "target_score": 168,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 193,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0194",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 13,
+        "N1": 17
+      },
+      "target_score": 735,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 194,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0195",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [
+        [
+          "N0",
+          "N1"
+        ]
+      ],
+      "node_values": {
+        "N0": 13,
+        "N1": 52
+      },
+      "target_score": 4,
+      "parallelism": 0.0,
+      "critical_path": 2,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 195,
+        "structure": "chain",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0196",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 10,
+        "N1": 40
+      },
+      "target_score": 14,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 196,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0197",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 6,
+        "N1": 58
+      },
+      "target_score": 51,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 197,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0198",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 7,
+        "N1": 45
+      },
+      "target_score": 642,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 198,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    },
+    {
+      "task_id": "dag-0199",
+      "nodes": [
+        "N0",
+        "N1"
+      ],
+      "edges": [],
+      "node_values": {
+        "N0": 57,
+        "N1": 41
+      },
+      "target_score": 839,
+      "parallelism": 0.5,
+      "critical_path": 1,
+      "metadata": {
+        "generator": "threshold-3-easy",
+        "difficulty": "easy",
+        "difficulty_rule": "linear-v1",
+        "instance_index": 199,
+        "structure": "balanced",
+        "num_tools": 2,
+        "num_nodes": 2,
+        "theoretical_min_budget": 3,
+        "budget_family": "threshold-3-easy",
+        "budget_distribution": {
+          "3": 1.0
+        }
+      }
+    }
+  ]
+}

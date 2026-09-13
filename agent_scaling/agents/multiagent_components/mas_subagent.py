@@ -2,13 +2,14 @@ import threading
 import traceback
 from typing import cast
 
-from langchain_core.messages import AIMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.messages.utils import convert_to_openai_messages
 
 from agent_scaling.agents.base import BaseAgentWithTools
 from agent_scaling.datasets import DatasetInstance
 from agent_scaling.logger import logger
 from agent_scaling.budget import BudgetLedger
+from agent_scaling.verification import DeferredSubmissionPolicy
 
 from .conversation import SubAgentConversationHistory, SubAgentRoundResult
 
@@ -29,6 +30,7 @@ class WorkerSubagent(BaseAgentWithTools):
         max_iterations_per_agent: int | None = None,
         decision_budget: int | None = None,
         decision_budget_per_round: int | None = None,
+        use_remaining_budget_for_verification: bool = True,
         **kwargs,
     ):
         super().__init__(
@@ -42,6 +44,9 @@ class WorkerSubagent(BaseAgentWithTools):
         self.min_iterations_per_agent = min_iterations_per_agent
         self.max_iterations_per_agent = max_iterations_per_agent
         self.decision_budget_per_round = decision_budget_per_round
+        self.use_remaining_budget_for_verification = (
+            use_remaining_budget_for_verification
+        )
         self.budget = BudgetLedger(
             decision_budget if decision_budget is not None else max_iterations_per_agent
         )
@@ -55,6 +60,10 @@ class WorkerSubagent(BaseAgentWithTools):
         self.shared_prompt_templates = self.get_dataset_prompt_templates(self.env)
         # Conversation management
         self.conv_history = SubAgentConversationHistory(agent_id=agent_id)
+        self.submission_policy = DeferredSubmissionPolicy(
+            enabled=use_remaining_budget_for_verification
+        )
+        self._terminal_action_executed = False
 
         self._execution_lock = threading.Lock()
 
@@ -159,7 +168,21 @@ class WorkerSubagent(BaseAgentWithTools):
                 try:
                     # Execute tool with retry logic
                     tool_name = tool_call["name"]
-                    tool_resp = self.env.execute_tool(tool_call)
+                    remaining = self.budget.remaining_decision_calls
+                    deferred_content = self.submission_policy.defer_if_needed(
+                        tool_call, remaining
+                    )
+                    was_deferred = deferred_content is not None
+                    if deferred_content is not None:
+                        tool_resp = ToolMessage(
+                            content=deferred_content,
+                            tool_call_id=tool_call["id"],
+                            name=tool_name,
+                        )
+                    else:
+                        tool_resp = self.env.execute_tool(tool_call)
+                        if self.submission_policy.is_terminal_tool(tool_name):
+                            self._terminal_action_executed = True
                 except Exception as e:
                     # Add error message to conversation state (consistent with single_agent.py)
                     error_msg = {
@@ -240,29 +263,13 @@ class WorkerSubagent(BaseAgentWithTools):
                                 message=loop_warn,  # type: ignore
                                 iteration_num=curr_iteration,
                             )
-                    # Budget warning for subagents
-                    remaining = self.budget.remaining_decision_calls
-                    warning_threshold = max(
-                        1, (self.budget.max_decision_calls or 1) // 4
-                    )
-                    if remaining is not None and remaining == warning_threshold:
-                        budget_warn = {
-                            "role": "user",
-                            "content": (
-                                f"BUDGET WARNING: You have only {remaining} iterations remaining. "
-                                "If you haven't made code changes yet, do so NOW. "
-                                "Focus on implementation and submission, not further exploration."
-                            ),
-                        }
-                        messages.append(budget_warn)  # type: ignore
-                        self.conv_history.add_internal_message(
-                            message=budget_warn,  # type: ignore
-                            iteration_num=curr_iteration,
-                        )
                     # Check if done
-                    if tool_name == "done":
+                    if (
+                        not was_deferred
+                        and self.submission_policy.is_terminal_tool(tool_name)
+                    ):
                         logger.info(
-                            f"Agent {self.agent_id} decided to finish with 'done' tool"
+                            f"Agent {self.agent_id} executed terminal tool {tool_name}"
                         )
                         break
                     elif self.env.env_done():
@@ -284,6 +291,35 @@ class WorkerSubagent(BaseAgentWithTools):
                 logger.warning(
                     f"Agent {self.agent_id}: No tool calls found in iteration {iteration}"
                 )
+
+        # If the final model call did not terminate, submit the latest verified
+        # candidate rather than discarding it at lifetime budget exhaustion.
+        remaining = self.budget.remaining_decision_calls
+        if (
+            remaining == 0
+            and not self.env.env_done()
+            and not self._terminal_action_executed
+        ):
+            fallback_tool_call = self.submission_policy.latest_tool_call(
+                call_id=f"{self.agent_id}_auto_submit_latest_candidate"
+            )
+            if fallback_tool_call is not None:
+                try:
+                    fallback_msg = self.env.execute_tool(fallback_tool_call)  # type: ignore[arg-type]
+                    self._terminal_action_executed = True
+                    converted_fallback = convert_to_openai_messages(fallback_msg)
+                    messages.append(converted_fallback)  # type: ignore
+                    self.conv_history.add_internal_message(
+                        message=converted_fallback,  # type: ignore
+                        iteration_num=max(1, curr_iteration),
+                    )
+                    logger.info(
+                        f"Agent {self.agent_id} auto-submitted its latest verified candidate"
+                    )
+                except Exception as e:
+                    logger.warning(
+                        f"Agent {self.agent_id} failed to auto-submit its latest candidate: {e}"
+                    )
         curr_iteration += 1
         findings_message = (
             self.prompts["subagent"]
@@ -326,7 +362,7 @@ class WorkerSubagent(BaseAgentWithTools):
         round_result = self._run_one_round(message)
         self.conv_history.add_external_message("subagent", round_result.findings)
 
-        if self.env.env_done():
+        if self.env.env_done() or self._terminal_action_executed:
             self.conv_history.status = "completed"
         elif self.budget.remaining_decision_calls == 0:
             self.conv_history.status = "budget_exhausted"

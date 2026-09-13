@@ -1,5 +1,6 @@
 name: multi-agent-independent
 total_decision_budget: 32
+use_remaining_budget_for_verification: true
 prompts:
   subagent:
     local_path: prompts/multi-agent/subagent.yaml

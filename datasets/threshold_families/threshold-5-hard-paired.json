@@ -29,7 +29,7 @@
         "N2": 58,
         "N3": 21
       },
-      "target_score": 319,
+      "target_score": 582,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -57,12 +57,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 86,
-        "N1": 39,
-        "N2": 47,
-        "N3": 85
+        "N0": 39,
+        "N1": 47,
+        "N2": 66,
+        "N3": 38
       },
-      "target_score": 774,
+      "target_score": 775,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -88,16 +88,21 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
         "N0": 66,
-        "N1": 73,
-        "N2": 38,
-        "N3": 38
+        "N1": 49,
+        "N2": 27,
+        "N3": 57
       },
-      "target_score": 993,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 226,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -136,12 +141,12 @@
         ]
       ],
       "node_values": {
-        "N0": 57,
-        "N1": 71,
-        "N2": 37,
-        "N3": 39
+        "N0": 7,
+        "N1": 58,
+        "N2": 5,
+        "N3": 59
       },
-      "target_score": 431,
+      "target_score": 185,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -167,21 +172,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 5,
-        "N1": 59,
-        "N2": 75,
-        "N3": 45
+        "N0": 45,
+        "N1": 53,
+        "N2": 59,
+        "N3": 20
       },
-      "target_score": 86,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 735,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -209,15 +209,19 @@
         [
           "N2",
           "N3"
+        ],
+        [
+          "N1",
+          "N3"
         ]
       ],
       "node_values": {
-        "N0": 20,
-        "N1": 49,
-        "N2": 93,
-        "N3": 24
+        "N0": 25,
+        "N1": 13,
+        "N2": 70,
+        "N3": 35
       },
-      "target_score": 265,
+      "target_score": 951,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -258,12 +262,12 @@
         ]
       ],
       "node_values": {
-        "N0": 13,
-        "N1": 70,
-        "N2": 35,
-        "N3": 69
+        "N0": 31,
+        "N1": 52,
+        "N2": 63,
+        "N3": 70
       },
-      "target_score": 446,
+      "target_score": 755,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -291,12 +295,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 78,
-        "N1": 51,
-        "N2": 46,
-        "N3": 73
+        "N0": 45,
+        "N1": 61,
+        "N2": 20,
+        "N3": 22
       },
-      "target_score": 537,
+      "target_score": 530,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -324,29 +328,17 @@
       ],
       "edges": [
         [
-          "N0",
-          "N2"
-        ],
-        [
           "N1",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 22,
-        "N1": 55,
-        "N2": 58,
-        "N3": 86
+        "N0": 4,
+        "N1": 17,
+        "N2": 62,
+        "N3": 24
       },
-      "target_score": 580,
+      "target_score": 649,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -387,12 +379,12 @@
         ]
       ],
       "node_values": {
-        "N0": 62,
-        "N1": 24,
-        "N2": 15,
-        "N3": 62
+        "N0": 9,
+        "N1": 8,
+        "N2": 47,
+        "N3": 8
       },
-      "target_score": 494,
+      "target_score": 580,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -418,25 +410,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ],
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 91,
-        "N1": 8,
-        "N2": 78,
-        "N3": 57
+        "N0": 57,
+        "N1": 10,
+        "N2": 32,
+        "N3": 1
       },
-      "target_score": 359,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 718,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -463,14 +446,6 @@
       "edges": [
         [
           "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N2"
-        ],
-        [
-          "N0",
           "N3"
         ],
         [
@@ -480,11 +455,11 @@
       ],
       "node_values": {
         "N0": 12,
-        "N1": 73,
-        "N2": 29,
-        "N3": 9
+        "N1": 29,
+        "N2": 9,
+        "N3": 23
       },
-      "target_score": 734,
+      "target_score": 317,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -525,12 +500,12 @@
         ]
       ],
       "node_values": {
-        "N0": 40,
-        "N1": 18,
-        "N2": 71,
-        "N3": 41
+        "N0": 18,
+        "N1": 71,
+        "N2": 41,
+        "N3": 27
       },
-      "target_score": 510,
+      "target_score": 377,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -556,21 +531,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 17,
-        "N1": 84,
+        "N0": 26,
+        "N1": 17,
         "N2": 44,
-        "N3": 89
+        "N3": 24
       },
-      "target_score": 957,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 751,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -596,25 +566,17 @@
       ],
       "edges": [
         [
-          "N1",
-          "N2"
-        ],
-        [
           "N0",
-          "N2"
-        ],
-        [
-          "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 88,
-        "N1": 34,
-        "N2": 12,
-        "N3": 69
+        "N0": 61,
+        "N1": 38,
+        "N2": 65,
+        "N3": 19
       },
-      "target_score": 396,
+      "target_score": 883,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -655,12 +617,12 @@
         ]
       ],
       "node_values": {
-        "N0": 27,
-        "N1": 82,
-        "N2": 67,
-        "N3": 61
+        "N0": 23,
+        "N1": 5,
+        "N2": 27,
+        "N3": 67
       },
-      "target_score": 25,
+      "target_score": 483,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -689,11 +651,11 @@
       "edges": [],
       "node_values": {
         "N0": 23,
-        "N1": 92,
-        "N2": 56,
-        "N3": 49
+        "N1": 56,
+        "N2": 49,
+        "N3": 61
       },
-      "target_score": 892,
+      "target_score": 917,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -719,21 +681,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 35,
-        "N1": 46,
-        "N2": 26,
-        "N3": 68
+        "N0": 7,
+        "N1": 35,
+        "N2": 46,
+        "N3": 26
       },
-      "target_score": 786,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 734,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -777,7 +734,7 @@
         "N2": 33,
         "N3": 53
       },
-      "target_score": 974,
+      "target_score": 19,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -806,11 +763,11 @@
       "edges": [],
       "node_values": {
         "N0": 33,
-        "N1": 73,
-        "N2": 16,
-        "N3": 7
+        "N1": 16,
+        "N2": 7,
+        "N3": 13
       },
-      "target_score": 103,
+      "target_score": 541,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -836,29 +793,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 1,
-        "N1": 3,
-        "N2": 12,
-        "N3": 82
+        "N0": 24,
+        "N1": 61,
+        "N2": 47,
+        "N3": 59
       },
-      "target_score": 198,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 727,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -897,12 +841,12 @@
         ]
       ],
       "node_values": {
-        "N0": 53,
-        "N1": 37,
-        "N2": 5,
-        "N3": 35
+        "N0": 3,
+        "N1": 12,
+        "N2": 40,
+        "N3": 59
       },
-      "target_score": 868,
+      "target_score": 734,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -928,16 +872,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N1",
+          "N3"
+        ],
+        [
+          "N2",
+          "N3"
+        ]
+      ],
       "node_values": {
         "N0": 57,
         "N1": 67,
         "N2": 45,
         "N3": 27
       },
-      "target_score": 76,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 563,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -968,7 +921,7 @@
         "N2": 18,
         "N3": 50
       },
-      "target_score": 803,
+      "target_score": 915,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -1010,11 +963,11 @@
       ],
       "node_values": {
         "N0": 16,
-        "N1": 86,
-        "N2": 27,
-        "N3": 79
+        "N1": 27,
+        "N2": 31,
+        "N3": 15
       },
-      "target_score": 704,
+      "target_score": 879,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -1040,21 +993,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
         "N0": 51,
         "N1": 6,
         "N2": 35,
         "N3": 43
       },
-      "target_score": 378,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 797,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -1085,7 +1033,7 @@
         "N2": 31,
         "N3": 32
       },
-      "target_score": 28,
+      "target_score": 650,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -1131,7 +1079,7 @@
         "N2": 43,
         "N3": 45
       },
-      "target_score": 823,
+      "target_score": 124,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -1171,9 +1119,9 @@
         "N0": 20,
         "N1": 70,
         "N2": 8,
-        "N3": 83
+        "N3": 6
       },
-      "target_score": 857,
+      "target_score": 879,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -1199,29 +1147,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 59,
-        "N1": 50,
-        "N2": 26,
-        "N3": 62
+        "N0": 26,
+        "N1": 58,
+        "N2": 23,
+        "N3": 32
       },
-      "target_score": 249,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 957,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -1260,12 +1195,12 @@
         ]
       ],
       "node_values": {
-        "N0": 45,
-        "N1": 82,
-        "N2": 29,
-        "N3": 37
+        "N0": 62,
+        "N1": 36,
+        "N2": 51,
+        "N3": 11
       },
-      "target_score": 572,
+      "target_score": 986,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -1291,25 +1226,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ],
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 47,
-        "N1": 87,
-        "N2": 60,
-        "N3": 40
+        "N0": 29,
+        "N1": 37,
+        "N2": 6,
+        "N3": 14
       },
-      "target_score": 399,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 941,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -1335,17 +1261,25 @@
       ],
       "edges": [
         [
+          "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N2"
+        ],
+        [
           "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 56,
-        "N1": 40,
-        "N2": 21,
-        "N3": 21
+        "N0": 35,
+        "N1": 30,
+        "N2": 56,
+        "N3": 40
       },
-      "target_score": 840,
+      "target_score": 195,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -1386,12 +1320,12 @@
         ]
       ],
       "node_values": {
-        "N0": 35,
-        "N1": 61,
-        "N2": 30,
-        "N3": 41
+        "N0": 58,
+        "N1": 23,
+        "N2": 35,
+        "N3": 61
       },
-      "target_score": 874,
+      "target_score": 619,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -1421,15 +1355,19 @@
         [
           "N1",
           "N3"
+        ],
+        [
+          "N0",
+          "N3"
         ]
       ],
       "node_values": {
-        "N0": 5,
-        "N1": 36,
-        "N2": 10,
-        "N3": 55
+        "N0": 36,
+        "N1": 10,
+        "N2": 55,
+        "N3": 5
       },
-      "target_score": 439,
+      "target_score": 121,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -1455,16 +1393,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N3"
+        ],
+        [
+          "N1",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 5,
-        "N1": 46,
-        "N2": 17,
-        "N3": 57
+        "N0": 37,
+        "N1": 68,
+        "N2": 58,
+        "N3": 17
       },
-      "target_score": 804,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 149,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -1503,12 +1450,12 @@
         ]
       ],
       "node_values": {
-        "N0": 68,
-        "N1": 58,
-        "N2": 88,
-        "N3": 17
+        "N0": 29,
+        "N1": 52,
+        "N2": 61,
+        "N3": 34
       },
-      "target_score": 260,
+      "target_score": 891,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -1541,12 +1488,12 @@
         ]
       ],
       "node_values": {
-        "N0": 80,
-        "N1": 29,
-        "N2": 52,
-        "N3": 61
+        "N0": 68,
+        "N1": 65,
+        "N2": 56,
+        "N3": 47
       },
-      "target_score": 606,
+      "target_score": 442,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -1574,21 +1521,17 @@
       ],
       "edges": [
         [
-          "N0",
-          "N3"
-        ],
-        [
-          "N2",
+          "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 47,
-        "N1": 63,
-        "N2": 56,
-        "N3": 24
+        "N0": 24,
+        "N1": 46,
+        "N2": 9,
+        "N3": 39
       },
-      "target_score": 139,
+      "target_score": 309,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -1629,12 +1572,12 @@
         ]
       ],
       "node_values": {
-        "N0": 1,
-        "N1": 72,
-        "N2": 31,
-        "N3": 61
+        "N0": 32,
+        "N1": 67,
+        "N2": 47,
+        "N3": 23
       },
-      "target_score": 912,
+      "target_score": 62,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -1660,21 +1603,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 47,
-        "N1": 23,
-        "N2": 51,
-        "N3": 42
+        "N0": 42,
+        "N1": 62,
+        "N2": 38,
+        "N3": 65
       },
-      "target_score": 31,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 260,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -1700,12 +1638,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 62,
-        "N1": 38,
-        "N2": 65,
-        "N3": 84
+        "N0": 27,
+        "N1": 40,
+        "N2": 21,
+        "N3": 27
       },
-      "target_score": 106,
+      "target_score": 627,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -1746,12 +1684,12 @@
         ]
       ],
       "node_values": {
-        "N0": 77,
-        "N1": 79,
-        "N2": 27,
-        "N3": 89
+        "N0": 17,
+        "N1": 47,
+        "N2": 16,
+        "N3": 3
       },
-      "target_score": 644,
+      "target_score": 997,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -1777,25 +1715,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 47,
-        "N1": 16,
-        "N2": 3,
-        "N3": 46
+        "N0": 21,
+        "N1": 45,
+        "N2": 17,
+        "N3": 48
       },
-      "target_score": 786,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 823,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -1819,33 +1748,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N2"
-        ],
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 53,
-        "N1": 48,
-        "N2": 82,
-        "N3": 60
+        "N0": 22,
+        "N1": 54,
+        "N2": 23,
+        "N3": 30
       },
-      "target_score": 265,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 283,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -1884,12 +1796,12 @@
         ]
       ],
       "node_values": {
-        "N0": 11,
-        "N1": 77,
-        "N2": 50,
-        "N3": 58
+        "N0": 60,
+        "N1": 15,
+        "N2": 46,
+        "N3": 12
       },
-      "target_score": 973,
+      "target_score": 803,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -1917,7 +1829,7 @@
       ],
       "edges": [
         [
-          "N1",
+          "N2",
           "N3"
         ],
         [
@@ -1926,12 +1838,12 @@
         ]
       ],
       "node_values": {
-        "N0": 23,
-        "N1": 34,
-        "N2": 57,
-        "N3": 68
+        "N0": 46,
+        "N1": 50,
+        "N2": 15,
+        "N3": 23
       },
-      "target_score": 734,
+      "target_score": 306,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -1960,24 +1872,16 @@
       "edges": [
         [
           "N1",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 65,
-        "N1": 70,
-        "N2": 28,
-        "N3": 22
+        "N0": 35,
+        "N1": 20,
+        "N2": 57,
+        "N3": 40
       },
-      "target_score": 372,
+      "target_score": 211,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -2018,12 +1922,12 @@
         ]
       ],
       "node_values": {
-        "N0": 81,
-        "N1": 81,
-        "N2": 34,
-        "N3": 89
+        "N0": 64,
+        "N1": 61,
+        "N2": 56,
+        "N3": 34
       },
-      "target_score": 746,
+      "target_score": 1007,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -2049,21 +1953,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 23,
-        "N1": 12,
-        "N2": 20,
+        "N0": 4,
+        "N1": 13,
+        "N2": 54,
         "N3": 23
       },
-      "target_score": 823,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 839,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -2090,20 +1989,24 @@
       "edges": [
         [
           "N0",
-          "N3"
+          "N2"
         ],
         [
           "N1",
+          "N2"
+        ],
+        [
+          "N0",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 5,
-        "N1": 84,
+        "N0": 30,
+        "N1": 5,
         "N2": 6,
         "N3": 32
       },
-      "target_score": 774,
+      "target_score": 492,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -2149,7 +2052,7 @@
         "N2": 66,
         "N3": 70
       },
-      "target_score": 77,
+      "target_score": 561,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -2189,9 +2092,9 @@
         "N0": 34,
         "N1": 4,
         "N2": 43,
-        "N3": 86
+        "N3": 66
       },
-      "target_score": 518,
+      "target_score": 433,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -2217,16 +2120,29 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N3"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 66,
-        "N1": 17,
-        "N2": 26,
-        "N3": 62
+        "N0": 29,
+        "N1": 57,
+        "N2": 40,
+        "N3": 29
       },
-      "target_score": 392,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 506,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -2265,12 +2181,12 @@
         ]
       ],
       "node_values": {
-        "N0": 93,
-        "N1": 26,
-        "N2": 72,
-        "N3": 29
+        "N0": 43,
+        "N1": 52,
+        "N2": 56,
+        "N3": 67
       },
-      "target_score": 990,
+      "target_score": 919,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -2298,12 +2214,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 78,
-        "N1": 72,
-        "N2": 57,
-        "N3": 40
+        "N0": 53,
+        "N1": 24,
+        "N2": 45,
+        "N3": 11
       },
-      "target_score": 415,
+      "target_score": 634,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -2332,28 +2248,16 @@
       "edges": [
         [
           "N1",
-          "N2"
-        ],
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 72,
-        "N1": 24,
-        "N2": 45,
-        "N3": 11
+        "N0": 64,
+        "N1": 48,
+        "N2": 17,
+        "N3": 7
       },
-      "target_score": 398,
+      "target_score": 833,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -2394,12 +2298,12 @@
         ]
       ],
       "node_values": {
-        "N0": 48,
-        "N1": 17,
-        "N2": 7,
-        "N3": 2
+        "N0": 16,
+        "N1": 9,
+        "N2": 63,
+        "N3": 37
       },
-      "target_score": 154,
+      "target_score": 599,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -2427,12 +2331,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 52,
-        "N1": 16,
-        "N2": 9,
-        "N3": 63
+        "N0": 30,
+        "N1": 40,
+        "N2": 40,
+        "N3": 58
       },
-      "target_score": 396,
+      "target_score": 77,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -2458,16 +2362,29 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N2"
+        ],
+        [
+          "N0",
+          "N3"
+        ],
+        [
+          "N1",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 37,
-        "N1": 45,
-        "N2": 30,
-        "N3": 40
+        "N0": 32,
+        "N1": 61,
+        "N2": 65,
+        "N3": 59
       },
-      "target_score": 458,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 314,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -2506,12 +2423,12 @@
         ]
       ],
       "node_values": {
-        "N0": 20,
-        "N1": 69,
-        "N2": 10,
-        "N3": 15
+        "N0": 19,
+        "N1": 6,
+        "N2": 6,
+        "N3": 34
       },
-      "target_score": 746,
+      "target_score": 648,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -2539,17 +2456,17 @@
       ],
       "edges": [
         [
-          "N1",
+          "N0",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 61,
-        "N1": 65,
-        "N2": 59,
-        "N3": 61
+        "N0": 57,
+        "N1": 67,
+        "N2": 51,
+        "N3": 57
       },
-      "target_score": 520,
+      "target_score": 101,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -2575,16 +2492,29 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N2"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 8,
-        "N1": 65,
-        "N2": 75,
-        "N3": 9
+        "N0": 18,
+        "N1": 27,
+        "N2": 69,
+        "N3": 46
       },
-      "target_score": 26,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 254,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -2623,12 +2553,12 @@
         ]
       ],
       "node_values": {
-        "N0": 34,
-        "N1": 16,
-        "N2": 12,
-        "N3": 87
+        "N0": 37,
+        "N1": 71,
+        "N2": 41,
+        "N3": 9
       },
-      "target_score": 585,
+      "target_score": 167,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -2656,12 +2586,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 57,
-        "N1": 67,
-        "N2": 51,
-        "N3": 57
+        "N0": 28,
+        "N1": 60,
+        "N2": 57,
+        "N3": 70
       },
-      "target_score": 997,
+      "target_score": 980,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -2702,12 +2632,12 @@
         ]
       ],
       "node_values": {
-        "N0": 18,
-        "N1": 27,
-        "N2": 69,
-        "N3": 77
+        "N0": 20,
+        "N1": 24,
+        "N2": 26,
+        "N3": 36
       },
-      "target_score": 684,
+      "target_score": 147,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -2748,12 +2678,12 @@
         ]
       ],
       "node_values": {
-        "N0": 40,
-        "N1": 90,
-        "N2": 37,
-        "N3": 71
+        "N0": 45,
+        "N1": 53,
+        "N2": 64,
+        "N3": 14
       },
-      "target_score": 733,
+      "target_score": 659,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -2779,16 +2709,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N1",
+          "N3"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 41,
-        "N1": 84,
-        "N2": 9,
-        "N3": 77
+        "N0": 10,
+        "N1": 31,
+        "N2": 70,
+        "N3": 25
       },
-      "target_score": 618,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 247,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -2812,25 +2751,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N2"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 27,
-        "N1": 40,
-        "N2": 64,
-        "N3": 44
+        "N0": 47,
+        "N1": 60,
+        "N2": 38,
+        "N3": 42
       },
-      "target_score": 594,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 444,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -2869,12 +2799,12 @@
         ]
       ],
       "node_values": {
-        "N0": 26,
-        "N1": 36,
-        "N2": 35,
-        "N3": 60
+        "N0": 10,
+        "N1": 63,
+        "N2": 56,
+        "N3": 1
       },
-      "target_score": 843,
+      "target_score": 676,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -2902,12 +2832,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 54,
-        "N1": 45,
-        "N2": 53,
-        "N3": 64
+        "N0": 23,
+        "N1": 62,
+        "N2": 41,
+        "N3": 55
       },
-      "target_score": 370,
+      "target_score": 252,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -2933,29 +2863,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 10,
-        "N1": 31,
-        "N2": 70,
-        "N3": 25
+        "N0": 54,
+        "N1": 52,
+        "N2": 49,
+        "N3": 19
       },
-      "target_score": 855,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 904,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -2994,12 +2911,12 @@
         ]
       ],
       "node_values": {
-        "N0": 42,
-        "N1": 40,
-        "N2": 24,
-        "N3": 40
+        "N0": 55,
+        "N1": 24,
+        "N2": 5,
+        "N3": 35
       },
-      "target_score": 270,
+      "target_score": 533,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3027,12 +2944,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 81,
-        "N1": 10,
-        "N2": 63,
-        "N3": 56
+        "N0": 62,
+        "N1": 58,
+        "N2": 23,
+        "N3": 26
       },
-      "target_score": 911,
+      "target_score": 285,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -3058,16 +2975,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N2",
+          "N3"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 79,
-        "N1": 1,
-        "N2": 49,
-        "N3": 23
+        "N0": 4,
+        "N1": 33,
+        "N2": 55,
+        "N3": 57
       },
-      "target_score": 775,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 576,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -3106,12 +3032,12 @@
         ]
       ],
       "node_values": {
-        "N0": 67,
-        "N1": 54,
-        "N2": 52,
-        "N3": 49
+        "N0": 66,
+        "N1": 4,
+        "N2": 71,
+        "N3": 50
       },
-      "target_score": 154,
+      "target_score": 883,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3137,25 +3063,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 55,
-        "N1": 24,
-        "N2": 5,
-        "N3": 35
+        "N0": 6,
+        "N1": 36,
+        "N2": 68,
+        "N3": 2
       },
-      "target_score": 473,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 373,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -3179,16 +3096,29 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N1",
+          "N2"
+        ],
+        [
+          "N0",
+          "N2"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 62,
-        "N1": 58,
-        "N2": 90,
-        "N3": 23
+        "N0": 64,
+        "N1": 44,
+        "N2": 26,
+        "N3": 71
       },
-      "target_score": 226,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 309,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -3227,12 +3157,12 @@
         ]
       ],
       "node_values": {
-        "N0": 56,
-        "N1": 13,
-        "N2": 4,
-        "N3": 33
+        "N0": 27,
+        "N1": 23,
+        "N2": 36,
+        "N3": 21
       },
-      "target_score": 189,
+      "target_score": 672,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3260,12 +3190,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 90,
-        "N1": 57,
-        "N2": 48,
-        "N3": 14
+        "N0": 52,
+        "N1": 49,
+        "N2": 6,
+        "N3": 28
       },
-      "target_score": 760,
+      "target_score": 291,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -3293,12 +3223,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 1,
-        "N1": 66,
-        "N2": 4,
-        "N3": 71
+        "N0": 56,
+        "N1": 35,
+        "N2": 26,
+        "N3": 15
       },
-      "target_score": 390,
+      "target_score": 49,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -3339,12 +3269,12 @@
         ]
       ],
       "node_values": {
-        "N0": 36,
-        "N1": 68,
-        "N2": 82,
-        "N3": 82
+        "N0": 5,
+        "N1": 41,
+        "N2": 55,
+        "N3": 52
       },
-      "target_score": 578,
+      "target_score": 826,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3372,17 +3302,17 @@
       ],
       "edges": [
         [
-          "N0",
+          "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 54,
-        "N1": 45,
-        "N2": 31,
-        "N3": 29
+        "N0": 28,
+        "N1": 57,
+        "N2": 12,
+        "N3": 16
       },
-      "target_score": 178,
+      "target_score": 893,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -3414,8 +3344,8 @@
           "N2"
         ],
         [
-          "N0",
-          "N2"
+          "N1",
+          "N3"
         ],
         [
           "N0",
@@ -3423,12 +3353,12 @@
         ]
       ],
       "node_values": {
-        "N0": 55,
-        "N1": 27,
-        "N2": 23,
-        "N3": 36
+        "N0": 17,
+        "N1": 36,
+        "N2": 34,
+        "N3": 17
       },
-      "target_score": 580,
+      "target_score": 776,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -3469,12 +3399,12 @@
         ]
       ],
       "node_values": {
-        "N0": 49,
-        "N1": 6,
-        "N2": 28,
-        "N3": 86
+        "N0": 33,
+        "N1": 1,
+        "N2": 48,
+        "N3": 4
       },
-      "target_score": 890,
+      "target_score": 216,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3502,12 +3432,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 35,
-        "N1": 26,
-        "N2": 74,
-        "N3": 15
+        "N0": 34,
+        "N1": 20,
+        "N2": 12,
+        "N3": 22
       },
-      "target_score": 304,
+      "target_score": 572,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -3545,15 +3475,19 @@
         [
           "N1",
           "N3"
+        ],
+        [
+          "N0",
+          "N3"
         ]
       ],
       "node_values": {
-        "N0": 5,
-        "N1": 40,
-        "N2": 81,
-        "N3": 81
+        "N0": 48,
+        "N1": 53,
+        "N2": 42,
+        "N3": 14
       },
-      "target_score": 94,
+      "target_score": 654,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -3594,12 +3528,12 @@
         ]
       ],
       "node_values": {
-        "N0": 16,
-        "N1": 4,
-        "N2": 39,
-        "N3": 75
+        "N0": 70,
+        "N1": 60,
+        "N2": 67,
+        "N3": 53
       },
-      "target_score": 389,
+      "target_score": 823,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3625,25 +3559,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 17,
-        "N1": 72,
-        "N2": 36,
-        "N3": 34
+        "N0": 38,
+        "N1": 23,
+        "N2": 61,
+        "N3": 46
       },
-      "target_score": 997,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 262,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -3667,16 +3592,29 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N1",
+          "N2"
+        ],
+        [
+          "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 17,
-        "N1": 26,
-        "N2": 66,
-        "N3": 75
+        "N0": 21,
+        "N1": 4,
+        "N2": 18,
+        "N3": 8
       },
-      "target_score": 231,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 382,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -3715,12 +3653,12 @@
         ]
       ],
       "node_values": {
-        "N0": 1,
-        "N1": 48,
-        "N2": 4,
-        "N3": 64
+        "N0": 28,
+        "N1": 45,
+        "N2": 40,
+        "N3": 55
       },
-      "target_score": 406,
+      "target_score": 572,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3748,12 +3686,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 79,
-        "N1": 88,
-        "N2": 20,
-        "N3": 12
+        "N0": 14,
+        "N1": 10,
+        "N2": 65,
+        "N3": 31
       },
-      "target_score": 423,
+      "target_score": 533,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -3779,25 +3717,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
         "N0": 43,
-        "N1": 55,
-        "N2": 7,
-        "N3": 72
+        "N1": 41,
+        "N2": 58,
+        "N3": 38
       },
-      "target_score": 471,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 951,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -3836,12 +3765,12 @@
         ]
       ],
       "node_values": {
-        "N0": 14,
-        "N1": 72,
-        "N2": 2,
-        "N3": 58
+        "N0": 37,
+        "N1": 64,
+        "N2": 27,
+        "N3": 48
       },
-      "target_score": 509,
+      "target_score": 705,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3869,12 +3798,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 80,
-        "N1": 33,
-        "N2": 72,
-        "N3": 75
+        "N0": 63,
+        "N1": 41,
+        "N2": 53,
+        "N3": 44
       },
-      "target_score": 556,
+      "target_score": 808,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -3900,16 +3829,29 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N3"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 88,
-        "N1": 60,
-        "N2": 67,
-        "N3": 75
+        "N0": 21,
+        "N1": 39,
+        "N2": 43,
+        "N3": 60
       },
-      "target_score": 842,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 45,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -3948,12 +3890,12 @@
         ]
       ],
       "node_values": {
-        "N0": 23,
-        "N1": 61,
-        "N2": 46,
-        "N3": 17
+        "N0": 18,
+        "N1": 55,
+        "N2": 24,
+        "N3": 57
       },
-      "target_score": 940,
+      "target_score": 40,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -3981,12 +3923,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 87,
-        "N1": 61,
-        "N2": 6,
-        "N3": 30
+        "N0": 4,
+        "N1": 58,
+        "N2": 56,
+        "N3": 43
       },
-      "target_score": 960,
+      "target_score": 1001,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -4015,16 +3957,20 @@
       "edges": [
         [
           "N1",
+          "N2"
+        ],
+        [
+          "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 85,
-        "N1": 21,
-        "N2": 4,
-        "N3": 73
+        "N0": 55,
+        "N1": 60,
+        "N2": 44,
+        "N3": 47
       },
-      "target_score": 37,
+      "target_score": 668,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -4065,12 +4011,12 @@
         ]
       ],
       "node_values": {
-        "N0": 27,
-        "N1": 51,
-        "N2": 28,
-        "N3": 85
+        "N0": 15,
+        "N1": 32,
+        "N2": 59,
+        "N3": 47
       },
-      "target_score": 115,
+      "target_score": 165,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -4096,16 +4042,21 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N2",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 40,
-        "N1": 87,
-        "N2": 55,
-        "N3": 93
+        "N0": 23,
+        "N1": 67,
+        "N2": 16,
+        "N3": 1
       },
-      "target_score": 644,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 166,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -4129,29 +4080,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 38,
-        "N1": 49,
-        "N2": 33,
-        "N3": 28
+        "N0": 12,
+        "N1": 31,
+        "N2": 61,
+        "N3": 32
       },
-      "target_score": 226,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 510,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -4190,12 +4128,12 @@
         ]
       ],
       "node_values": {
-        "N0": 48,
-        "N1": 71,
-        "N2": 63,
-        "N3": 41
+        "N0": 22,
+        "N1": 22,
+        "N2": 24,
+        "N3": 45
       },
-      "target_score": 912,
+      "target_score": 842,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -4223,12 +4161,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 44,
-        "N1": 20,
-        "N2": 66,
-        "N3": 71
+        "N0": 63,
+        "N1": 60,
+        "N2": 64,
+        "N3": 27
       },
-      "target_score": 107,
+      "target_score": 976,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -4257,28 +4195,16 @@
       "edges": [
         [
           "N1",
-          "N2"
-        ],
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N0",
-          "N3"
-        ],
-        [
-          "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 65,
-        "N1": 46,
-        "N2": 76,
-        "N3": 29
+        "N0": 25,
+        "N1": 47,
+        "N2": 58,
+        "N3": 52
       },
-      "target_score": 20,
+      "target_score": 708,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -4319,12 +4245,12 @@
         ]
       ],
       "node_values": {
-        "N0": 24,
-        "N1": 81,
-        "N2": 57,
-        "N3": 89
+        "N0": 52,
+        "N1": 44,
+        "N2": 56,
+        "N3": 9
       },
-      "target_score": 672,
+      "target_score": 735,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -4352,21 +4278,17 @@
       ],
       "edges": [
         [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
+          "N2",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 58,
-        "N1": 78,
-        "N2": 89,
-        "N3": 90
+        "N0": 30,
+        "N1": 53,
+        "N2": 15,
+        "N3": 17
       },
-      "target_score": 583,
+      "target_score": 739,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -4394,12 +4316,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 44,
-        "N1": 91,
-        "N2": 55,
-        "N3": 60
+        "N0": 13,
+        "N1": 25,
+        "N2": 62,
+        "N3": 62
       },
-      "target_score": 955,
+      "target_score": 273,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -4440,12 +4362,12 @@
         ]
       ],
       "node_values": {
-        "N0": 7,
-        "N1": 6,
-        "N2": 15,
-        "N3": 32
+        "N0": 37,
+        "N1": 32,
+        "N2": 61,
+        "N3": 57
       },
-      "target_score": 797,
+      "target_score": 575,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -4473,12 +4395,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 59,
-        "N1": 47,
-        "N2": 15,
-        "N3": 68
+        "N0": 50,
+        "N1": 37,
+        "N2": 71,
+        "N3": 41
       },
-      "target_score": 577,
+      "target_score": 539,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -4504,21 +4426,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 1,
-        "N1": 91,
-        "N2": 12,
-        "N3": 31
+        "N0": 32,
+        "N1": 44,
+        "N2": 64,
+        "N3": 34
       },
-      "target_score": 840,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 359,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -4557,12 +4474,12 @@
         ]
       ],
       "node_values": {
-        "N0": 14,
-        "N1": 41,
-        "N2": 22,
-        "N3": 81
+        "N0": 39,
+        "N1": 15,
+        "N2": 33,
+        "N3": 10
       },
-      "target_score": 905,
+      "target_score": 737,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -4588,25 +4505,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ],
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 60,
-        "N1": 64,
-        "N2": 27,
-        "N3": 35
+        "N0": 14,
+        "N1": 69,
+        "N2": 68,
+        "N3": 7
       },
-      "target_score": 181,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 159,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -4630,21 +4538,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 47,
-        "N1": 58,
-        "N2": 52,
-        "N3": 46
+        "N0": 5,
+        "N1": 50,
+        "N2": 58,
+        "N3": 8
       },
-      "target_score": 922,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 205,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -4683,12 +4586,12 @@
         ]
       ],
       "node_values": {
-        "N0": 44,
-        "N1": 56,
-        "N2": 9,
-        "N3": 16
+        "N0": 46,
+        "N1": 34,
+        "N2": 25,
+        "N3": 19
       },
-      "target_score": 585,
+      "target_score": 219,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -4716,12 +4619,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 63,
-        "N1": 58,
-        "N2": 30,
-        "N3": 87
+        "N0": 39,
+        "N1": 64,
+        "N2": 28,
+        "N3": 8
       },
-      "target_score": 743,
+      "target_score": 188,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -4747,21 +4650,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 15,
-        "N1": 83,
-        "N2": 76,
-        "N3": 17
+        "N0": 21,
+        "N1": 48,
+        "N2": 40,
+        "N3": 20
       },
-      "target_score": 247,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 631,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -4800,12 +4698,12 @@
         ]
       ],
       "node_values": {
-        "N0": 62,
-        "N1": 58,
-        "N2": 52,
-        "N3": 19
+        "N0": 18,
+        "N1": 46,
+        "N2": 21,
+        "N3": 62
       },
-      "target_score": 125,
+      "target_score": 684,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -4833,12 +4731,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 32,
-        "N1": 78,
-        "N2": 81,
-        "N3": 61
+        "N0": 68,
+        "N1": 10,
+        "N2": 44,
+        "N3": 11
       },
-      "target_score": 119,
+      "target_score": 437,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -4866,7 +4764,15 @@
       ],
       "edges": [
         [
-          "N2",
+          "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N2"
+        ],
+        [
+          "N0",
           "N3"
         ],
         [
@@ -4875,12 +4781,12 @@
         ]
       ],
       "node_values": {
-        "N0": 92,
-        "N1": 32,
-        "N2": 44,
-        "N3": 90
+        "N0": 22,
+        "N1": 17,
+        "N2": 67,
+        "N3": 44
       },
-      "target_score": 706,
+      "target_score": 754,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -4921,12 +4827,12 @@
         ]
       ],
       "node_values": {
-        "N0": 23,
-        "N1": 26,
-        "N2": 89,
-        "N3": 39
+        "N0": 32,
+        "N1": 35,
+        "N2": 56,
+        "N3": 23
       },
-      "target_score": 687,
+      "target_score": 149,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -4952,21 +4858,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 14,
-        "N1": 69,
-        "N2": 68,
-        "N3": 7
+        "N0": 16,
+        "N1": 35,
+        "N2": 26,
+        "N3": 6
       },
-      "target_score": 908,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 654,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -4992,12 +4893,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 5,
-        "N1": 91,
-        "N2": 50,
-        "N3": 75
+        "N0": 37,
+        "N1": 33,
+        "N2": 20,
+        "N3": 7
       },
-      "target_score": 383,
+      "target_score": 286,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -5038,12 +4939,12 @@
         ]
       ],
       "node_values": {
-        "N0": 27,
-        "N1": 36,
-        "N2": 46,
-        "N3": 34
+        "N0": 68,
+        "N1": 10,
+        "N2": 22,
+        "N3": 12
       },
-      "target_score": 103,
+      "target_score": 227,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -5071,12 +4972,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 25,
-        "N1": 19,
-        "N2": 34,
+        "N0": 21,
+        "N1": 26,
+        "N2": 68,
         "N3": 39
       },
-      "target_score": 880,
+      "target_score": 821,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -5104,7 +5005,15 @@
       ],
       "edges": [
         [
-          "N2",
+          "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N2"
+        ],
+        [
+          "N1",
           "N3"
         ],
         [
@@ -5113,12 +5022,12 @@
         ]
       ],
       "node_values": {
-        "N0": 68,
-        "N1": 79,
-        "N2": 21,
-        "N3": 48
+        "N0": 50,
+        "N1": 71,
+        "N2": 9,
+        "N3": 7
       },
-      "target_score": 613,
+      "target_score": 761,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -5159,12 +5068,12 @@
         ]
       ],
       "node_values": {
-        "N0": 72,
-        "N1": 27,
-        "N2": 65,
-        "N3": 74
+        "N0": 39,
+        "N1": 11,
+        "N2": 71,
+        "N3": 18
       },
-      "target_score": 464,
+      "target_score": 647,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -5192,17 +5101,17 @@
       ],
       "edges": [
         [
-          "N0",
+          "N2",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 46,
-        "N1": 21,
-        "N2": 62,
-        "N3": 77
+        "N0": 28,
+        "N1": 57,
+        "N2": 66,
+        "N3": 71
       },
-      "target_score": 541,
+      "target_score": 337,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -5230,12 +5139,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 68,
-        "N1": 10,
-        "N2": 44,
-        "N3": 11
+        "N0": 32,
+        "N1": 28,
+        "N2": 12,
+        "N3": 24
       },
-      "target_score": 387,
+      "target_score": 469,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -5276,12 +5185,12 @@
         ]
       ],
       "node_values": {
-        "N0": 5,
-        "N1": 71,
-        "N2": 49,
-        "N3": 13
+        "N0": 42,
+        "N1": 53,
+        "N2": 3,
+        "N3": 11
       },
-      "target_score": 629,
+      "target_score": 733,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -5307,16 +5216,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N2",
+          "N3"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 49,
-        "N1": 11,
-        "N2": 22,
-        "N3": 17
+        "N0": 59,
+        "N1": 47,
+        "N2": 36,
+        "N3": 57
       },
-      "target_score": 913,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 294,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -5342,12 +5260,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 67,
-        "N1": 44,
-        "N2": 39,
-        "N3": 32
+        "N0": 14,
+        "N1": 68,
+        "N2": 52,
+        "N3": 17
       },
-      "target_score": 587,
+      "target_score": 308,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -5388,12 +5306,12 @@
         ]
       ],
       "node_values": {
-        "N0": 56,
-        "N1": 74,
-        "N2": 91,
-        "N3": 77
+        "N0": 42,
+        "N1": 17,
+        "N2": 55,
+        "N3": 65
       },
-      "target_score": 938,
+      "target_score": 246,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -5419,21 +5337,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 16,
-        "N1": 79,
-        "N2": 35,
-        "N3": 26
+        "N0": 5,
+        "N1": 33,
+        "N2": 26,
+        "N3": 29
       },
-      "target_score": 849,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 789,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -5460,28 +5373,16 @@
       "edges": [
         [
           "N1",
-          "N2"
-        ],
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
-          "N0",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 22,
-        "N1": 12,
-        "N2": 61,
-        "N3": 21
+        "N0": 46,
+        "N1": 66,
+        "N2": 24,
+        "N3": 62
       },
-      "target_score": 119,
+      "target_score": 935,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -5522,12 +5423,12 @@
         ]
       ],
       "node_values": {
-        "N0": 66,
-        "N1": 26,
-        "N2": 54,
-        "N3": 14
+        "N0": 6,
+        "N1": 67,
+        "N2": 29,
+        "N3": 29
       },
-      "target_score": 292,
+      "target_score": 88,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -5555,12 +5456,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 61,
-        "N1": 57,
-        "N2": 57,
-        "N3": 45
+        "N0": 25,
+        "N1": 16,
+        "N2": 4,
+        "N3": 68
       },
-      "target_score": 491,
+      "target_score": 866,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -5588,25 +5489,17 @@
       ],
       "edges": [
         [
-          "N1",
-          "N2"
-        ],
-        [
           "N0",
-          "N3"
-        ],
-        [
-          "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 52,
-        "N1": 39,
-        "N2": 11,
-        "N3": 71
+        "N0": 20,
+        "N1": 65,
+        "N2": 70,
+        "N3": 68
       },
-      "target_score": 835,
+      "target_score": 218,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -5647,12 +5540,12 @@
         ]
       ],
       "node_values": {
-        "N0": 57,
-        "N1": 66,
-        "N2": 71,
-        "N3": 75
+        "N0": 6,
+        "N1": 36,
+        "N2": 6,
+        "N3": 62
       },
-      "target_score": 773,
+      "target_score": 602,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -5678,25 +5571,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ],
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 10,
-        "N1": 62,
-        "N2": 47,
-        "N3": 93
+        "N0": 15,
+        "N1": 43,
+        "N2": 8,
+        "N3": 44
       },
-      "target_score": 559,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 623,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -5720,21 +5604,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 11,
-        "N1": 19,
-        "N2": 66,
-        "N3": 33
+        "N0": 59,
+        "N1": 58,
+        "N2": 62,
+        "N3": 49
       },
-      "target_score": 737,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 808,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -5773,12 +5652,12 @@
         ]
       ],
       "node_values": {
-        "N0": 47,
-        "N1": 36,
-        "N2": 57,
-        "N3": 75
+        "N0": 31,
+        "N1": 66,
+        "N2": 17,
+        "N3": 26
       },
-      "target_score": 525,
+      "target_score": 840,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -5811,12 +5690,12 @@
         ]
       ],
       "node_values": {
-        "N0": 52,
-        "N1": 17,
-        "N2": 41,
-        "N3": 52
+        "N0": 55,
+        "N1": 61,
+        "N2": 15,
+        "N3": 18
       },
-      "target_score": 187,
+      "target_score": 321,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -5844,12 +5723,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 31,
-        "N1": 87,
-        "N2": 42,
-        "N3": 17
+        "N0": 34,
+        "N1": 61,
+        "N2": 18,
+        "N3": 71
       },
-      "target_score": 758,
+      "target_score": 644,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -5890,12 +5769,12 @@
         ]
       ],
       "node_values": {
-        "N0": 33,
-        "N1": 26,
-        "N2": 29,
-        "N3": 47
+        "N0": 32,
+        "N1": 19,
+        "N2": 16,
+        "N3": 12
       },
-      "target_score": 104,
+      "target_score": 290,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -5923,12 +5802,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 10,
-        "N1": 78,
-        "N2": 88,
-        "N3": 91
+        "N0": 6,
+        "N1": 51,
+        "N2": 63,
+        "N3": 3
       },
-      "target_score": 57,
+      "target_score": 986,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -5954,16 +5833,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N3"
+        ],
+        [
+          "N1",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 46,
-        "N1": 66,
-        "N2": 24,
-        "N3": 90
+        "N0": 19,
+        "N1": 29,
+        "N2": 71,
+        "N3": 68
       },
-      "target_score": 975,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 636,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6002,12 +5890,12 @@
         ]
       ],
       "node_values": {
-        "N0": 47,
-        "N1": 6,
-        "N2": 84,
+        "N0": 20,
+        "N1": 50,
+        "N2": 33,
         "N3": 67
       },
-      "target_score": 32,
+      "target_score": 333,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -6033,21 +5921,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 62,
-        "N1": 25,
-        "N2": 16,
-        "N3": 4
+        "N0": 51,
+        "N1": 63,
+        "N2": 58,
+        "N3": 18
       },
-      "target_score": 280,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 346,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6071,16 +5954,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N2",
+          "N3"
+        ],
+        [
+          "N1",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 68,
-        "N1": 48,
-        "N2": 25,
-        "N3": 84
+        "N0": 69,
+        "N1": 46,
+        "N2": 53,
+        "N3": 37
       },
-      "target_score": 660,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 79,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6119,12 +6011,12 @@
         ]
       ],
       "node_values": {
-        "N0": 1,
-        "N1": 72,
-        "N2": 6,
-        "N3": 72
+        "N0": 21,
+        "N1": 59,
+        "N2": 12,
+        "N3": 70
       },
-      "target_score": 908,
+      "target_score": 949,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -6152,12 +6044,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 6,
-        "N1": 62,
-        "N2": 77,
-        "N3": 15
+        "N0": 61,
+        "N1": 33,
+        "N2": 10,
+        "N3": 9
       },
-      "target_score": 859,
+      "target_score": 163,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -6185,21 +6077,25 @@
       ],
       "edges": [
         [
-          "N0",
+          "N1",
+          "N2"
+        ],
+        [
+          "N1",
           "N3"
         ],
         [
-          "N2",
+          "N0",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 58,
-        "N1": 62,
-        "N2": 49,
-        "N3": 86
+        "N0": 62,
+        "N1": 70,
+        "N2": 44,
+        "N3": 41
       },
-      "target_score": 276,
+      "target_score": 851,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -6240,12 +6136,12 @@
         ]
       ],
       "node_values": {
-        "N0": 73,
-        "N1": 31,
-        "N2": 66,
-        "N3": 86
+        "N0": 56,
+        "N1": 36,
+        "N2": 29,
+        "N3": 24
       },
-      "target_score": 811,
+      "target_score": 665,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -6271,25 +6167,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N3"
-        ],
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 61,
-        "N1": 15,
-        "N2": 18,
-        "N3": 34
+        "N0": 45,
+        "N1": 70,
+        "N2": 12,
+        "N3": 2
       },
-      "target_score": 457,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 908,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6315,12 +6202,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 92,
-        "N1": 61,
-        "N2": 18,
-        "N3": 71
+        "N0": 52,
+        "N1": 15,
+        "N2": 1,
+        "N3": 56
       },
-      "target_score": 421,
+      "target_score": 239,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -6361,12 +6248,12 @@
         ]
       ],
       "node_values": {
-        "N0": 85,
-        "N1": 32,
-        "N2": 19,
-        "N3": 16
+        "N0": 9,
+        "N1": 37,
+        "N2": 28,
+        "N3": 18
       },
-      "target_score": 958,
+      "target_score": 122,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -6392,21 +6279,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 51,
-        "N1": 63,
-        "N2": 3,
-        "N3": 42
+        "N0": 57,
+        "N1": 57,
+        "N2": 9,
+        "N3": 21
       },
-      "target_score": 990,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 381,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6430,29 +6312,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N0",
-          "N3"
-        ],
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 71,
-        "N1": 68,
-        "N2": 87,
-        "N3": 26
+        "N0": 53,
+        "N1": 9,
+        "N2": 20,
+        "N3": 37
       },
-      "target_score": 277,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 585,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6491,12 +6360,12 @@
         ]
       ],
       "node_values": {
-        "N0": 50,
-        "N1": 33,
-        "N2": 67,
-        "N3": 49
+        "N0": 65,
+        "N1": 40,
+        "N2": 16,
+        "N3": 15
       },
-      "target_score": 782,
+      "target_score": 112,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -6524,12 +6393,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 77,
-        "N1": 91,
-        "N2": 63,
-        "N3": 58
+        "N0": 16,
+        "N1": 34,
+        "N2": 68,
+        "N3": 25
       },
-      "target_score": 911,
+      "target_score": 557,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -6555,25 +6424,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 46,
-        "N1": 53,
-        "N2": 76,
-        "N3": 91
+        "N0": 34,
+        "N1": 2,
+        "N2": 23,
+        "N3": 7
       },
-      "target_score": 973,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 387,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6612,12 +6472,12 @@
         ]
       ],
       "node_values": {
-        "N0": 61,
-        "N1": 21,
-        "N2": 59,
-        "N3": 12
+        "N0": 24,
+        "N1": 12,
+        "N2": 37,
+        "N3": 62
       },
-      "target_score": 206,
+      "target_score": 564,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -6645,12 +6505,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 70,
-        "N1": 86,
-        "N2": 61,
-        "N3": 33
+        "N0": 5,
+        "N1": 39,
+        "N2": 30,
+        "N3": 14
       },
-      "target_score": 519,
+      "target_score": 47,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -6676,16 +6536,29 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N2"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 10,
-        "N1": 9,
-        "N2": 1,
-        "N3": 48
+        "N0": 30,
+        "N1": 63,
+        "N2": 10,
+        "N3": 67
       },
-      "target_score": 418,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 663,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6724,12 +6597,12 @@
         ]
       ],
       "node_values": {
-        "N0": 38,
-        "N1": 62,
-        "N2": 70,
-        "N3": 81
+        "N0": 10,
+        "N1": 68,
+        "N2": 28,
+        "N3": 3
       },
-      "target_score": 300,
+      "target_score": 764,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -6755,16 +6628,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N0",
+          "N3"
+        ],
+        [
+          "N1",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 41,
-        "N1": 14,
-        "N2": 93,
-        "N3": 28
+        "N0": 66,
+        "N1": 46,
+        "N2": 10,
+        "N3": 2
       },
-      "target_score": 689,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 815,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6788,29 +6670,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N2"
-        ],
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 45,
-        "N1": 70,
-        "N2": 12,
-        "N3": 2
+        "N0": 22,
+        "N1": 22,
+        "N2": 1,
+        "N3": 46
       },
-      "target_score": 294,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 288,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6849,12 +6718,12 @@
         ]
       ],
       "node_values": {
-        "N0": 56,
-        "N1": 8,
-        "N2": 20,
-        "N3": 12
+        "N0": 4,
+        "N1": 40,
+        "N2": 31,
+        "N3": 65
       },
-      "target_score": 36,
+      "target_score": 214,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -6880,25 +6749,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 18,
-        "N1": 73,
-        "N2": 57,
-        "N3": 82
+        "N0": 13,
+        "N1": 6,
+        "N2": 18,
+        "N3": 22
       },
-      "target_score": 371,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 169,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -6924,12 +6784,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 91,
-        "N1": 79,
-        "N2": 57,
-        "N3": 9
+        "N0": 42,
+        "N1": 42,
+        "N2": 47,
+        "N3": 46
       },
-      "target_score": 735,
+      "target_score": 517,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -6970,12 +6830,12 @@
         ]
       ],
       "node_values": {
-        "N0": 20,
-        "N1": 77,
-        "N2": 37,
-        "N3": 67
+        "N0": 35,
+        "N1": 17,
+        "N2": 60,
+        "N3": 5
       },
-      "target_score": 778,
+      "target_score": 126,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7003,12 +6863,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 7,
-        "N1": 57,
-        "N2": 65,
-        "N3": 40
+        "N0": 34,
+        "N1": 54,
+        "N2": 52,
+        "N3": 59
       },
-      "target_score": 816,
+      "target_score": 480,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -7034,29 +6894,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N2"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 81,
-        "N1": 34,
-        "N2": 2,
-        "N3": 23
+        "N0": 54,
+        "N1": 66,
+        "N2": 26,
+        "N3": 58
       },
-      "target_score": 156,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 751,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -7095,12 +6942,12 @@
         ]
       ],
       "node_values": {
-        "N0": 7,
-        "N1": 24,
-        "N2": 12,
-        "N3": 37
+        "N0": 33,
+        "N1": 68,
+        "N2": 19,
+        "N3": 44
       },
-      "target_score": 699,
+      "target_score": 269,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7128,12 +6975,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 92,
-        "N1": 5,
-        "N2": 39,
+        "N0": 52,
+        "N1": 70,
+        "N2": 63,
         "N3": 30
       },
-      "target_score": 213,
+      "target_score": 220,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -7162,24 +7009,16 @@
       "edges": [
         [
           "N0",
-          "N2"
-        ],
-        [
-          "N1",
-          "N2"
-        ],
-        [
-          "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 14,
-        "N1": 91,
-        "N2": 81,
-        "N3": 30
+        "N0": 15,
+        "N1": 26,
+        "N2": 18,
+        "N3": 47
       },
-      "target_score": 806,
+      "target_score": 487,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -7220,12 +7059,12 @@
         ]
       ],
       "node_values": {
-        "N0": 2,
-        "N1": 88,
-        "N2": 24,
-        "N3": 10
+        "N0": 23,
+        "N1": 39,
+        "N2": 34,
+        "N3": 67
       },
-      "target_score": 784,
+      "target_score": 565,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7253,12 +7092,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 28,
-        "N1": 3,
-        "N2": 26,
-        "N3": 32
+        "N0": 61,
+        "N1": 25,
+        "N2": 70,
+        "N3": 33
       },
-      "target_score": 560,
+      "target_score": 116,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -7284,25 +7123,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N2"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 46,
-        "N1": 10,
-        "N2": 2,
-        "N3": 74
+        "N0": 61,
+        "N1": 59,
+        "N2": 13,
+        "N3": 38
       },
-      "target_score": 93,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 613,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -7341,12 +7171,12 @@
         ]
       ],
       "node_values": {
-        "N0": 46,
-        "N1": 3,
-        "N2": 87,
-        "N3": 21
+        "N0": 6,
+        "N1": 60,
+        "N2": 50,
+        "N3": 37
       },
-      "target_score": 900,
+      "target_score": 915,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7374,12 +7204,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 4,
-        "N1": 40,
-        "N2": 31,
-        "N3": 65
+        "N0": 9,
+        "N1": 43,
+        "N2": 64,
+        "N3": 29
       },
-      "target_score": 271,
+      "target_score": 164,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -7408,16 +7238,24 @@
       "edges": [
         [
           "N0",
+          "N2"
+        ],
+        [
+          "N1",
+          "N2"
+        ],
+        [
+          "N1",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 6,
-        "N1": 18,
-        "N2": 22,
-        "N3": 87
+        "N0": 10,
+        "N1": 8,
+        "N2": 37,
+        "N3": 34
       },
-      "target_score": 527,
+      "target_score": 535,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -7458,12 +7296,12 @@
         ]
       ],
       "node_values": {
-        "N0": 46,
-        "N1": 73,
-        "N2": 71,
-        "N3": 8
+        "N0": 42,
+        "N1": 42,
+        "N2": 14,
+        "N3": 51
       },
-      "target_score": 326,
+      "target_score": 992,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7489,16 +7327,25 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N1",
+          "N3"
+        ],
+        [
+          "N0",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 74,
-        "N1": 35,
-        "N2": 64,
-        "N3": 35
+        "N0": 18,
+        "N1": 3,
+        "N2": 59,
+        "N3": 10
       },
-      "target_score": 301,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 509,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -7524,25 +7371,17 @@
       ],
       "edges": [
         [
-          "N1",
-          "N2"
-        ],
-        [
-          "N1",
-          "N3"
-        ],
-        [
           "N0",
           "N3"
         ]
       ],
       "node_values": {
-        "N0": 88,
-        "N1": 54,
-        "N2": 66,
-        "N3": 26
+        "N0": 8,
+        "N1": 7,
+        "N2": 55,
+        "N3": 37
       },
-      "target_score": 717,
+      "target_score": 616,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -7583,12 +7422,12 @@
         ]
       ],
       "node_values": {
-        "N0": 19,
-        "N1": 33,
-        "N2": 68,
-        "N3": 87
+        "N0": 34,
+        "N1": 18,
+        "N2": 29,
+        "N3": 6
       },
-      "target_score": 153,
+      "target_score": 365,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7614,21 +7453,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 44,
-        "N1": 90,
-        "N2": 52,
-        "N3": 78
+        "N0": 6,
+        "N1": 12,
+        "N2": 27,
+        "N3": 12
       },
-      "target_score": 224,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 142,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -7652,16 +7486,33 @@
         "N2",
         "N3"
       ],
-      "edges": [],
+      "edges": [
+        [
+          "N1",
+          "N2"
+        ],
+        [
+          "N0",
+          "N2"
+        ],
+        [
+          "N0",
+          "N3"
+        ],
+        [
+          "N1",
+          "N3"
+        ]
+      ],
       "node_values": {
-        "N0": 63,
-        "N1": 89,
-        "N2": 90,
-        "N3": 90
+        "N0": 20,
+        "N1": 49,
+        "N2": 4,
+        "N3": 34
       },
-      "target_score": 230,
-      "parallelism": 0.75,
-      "critical_path": 1,
+      "target_score": 66,
+      "parallelism": 0.5,
+      "critical_path": 2,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -7700,12 +7551,12 @@
         ]
       ],
       "node_values": {
-        "N0": 15,
-        "N1": 26,
-        "N2": 89,
-        "N3": 18
+        "N0": 11,
+        "N1": 8,
+        "N2": 68,
+        "N3": 16
       },
-      "target_score": 819,
+      "target_score": 613,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7733,12 +7584,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 60,
-        "N1": 76,
-        "N2": 66,
-        "N3": 90
+        "N0": 59,
+        "N1": 36,
+        "N2": 24,
+        "N3": 31
       },
-      "target_score": 743,
+      "target_score": 623,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -7768,15 +7619,19 @@
         [
           "N1",
           "N3"
+        ],
+        [
+          "N2",
+          "N3"
         ]
       ],
       "node_values": {
-        "N0": 39,
-        "N1": 34,
-        "N2": 67,
-        "N3": 72
+        "N0": 19,
+        "N1": 44,
+        "N2": 34,
+        "N3": 45
       },
-      "target_score": 352,
+      "target_score": 292,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -7817,12 +7672,12 @@
         ]
       ],
       "node_values": {
-        "N0": 65,
-        "N1": 61,
-        "N2": 59,
-        "N3": 13
+        "N0": 37,
+        "N1": 38,
+        "N2": 61,
+        "N3": 59
       },
-      "target_score": 850,
+      "target_score": 757,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7850,12 +7705,12 @@
       ],
       "edges": [],
       "node_values": {
-        "N0": 16,
-        "N1": 16,
-        "N2": 17,
-        "N3": 6
+        "N0": 65,
+        "N1": 24,
+        "N2": 57,
+        "N3": 4
       },
-      "target_score": 938,
+      "target_score": 36,
       "parallelism": 0.75,
       "critical_path": 1,
       "metadata": {
@@ -7892,12 +7747,12 @@
         ]
       ],
       "node_values": {
-        "N0": 43,
-        "N1": 64,
-        "N2": 29,
-        "N3": 27
+        "N0": 28,
+        "N1": 11,
+        "N2": 11,
+        "N3": 62
       },
-      "target_score": 252,
+      "target_score": 606,
       "parallelism": 0.5,
       "critical_path": 2,
       "metadata": {
@@ -7938,12 +7793,12 @@
         ]
       ],
       "node_values": {
-        "N0": 64,
-        "N1": 87,
-        "N2": 87,
-        "N3": 10
+        "N0": 28,
+        "N1": 56,
+        "N2": 37,
+        "N3": 61
       },
-      "target_score": 355,
+      "target_score": 902,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -7969,21 +7824,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 34,
-        "N1": 30,
-        "N2": 53,
-        "N3": 27
+        "N0": 35,
+        "N1": 68,
+        "N2": 12,
+        "N3": 13
       },
-      "target_score": 504,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 753,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -8007,21 +7857,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N1",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 14,
-        "N1": 51,
-        "N2": 25,
-        "N3": 55
+        "N0": 66,
+        "N1": 9,
+        "N2": 40,
+        "N3": 11
       },
-      "target_score": 779,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 102,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",
@@ -8060,12 +7905,12 @@
         ]
       ],
       "node_values": {
-        "N0": 3,
-        "N1": 59,
-        "N2": 10,
-        "N3": 42
+        "N0": 23,
+        "N1": 47,
+        "N2": 66,
+        "N3": 6
       },
-      "target_score": 407,
+      "target_score": 938,
       "parallelism": 0.0,
       "critical_path": 4,
       "metadata": {
@@ -8091,25 +7936,16 @@
         "N2",
         "N3"
       ],
-      "edges": [
-        [
-          "N2",
-          "N3"
-        ],
-        [
-          "N0",
-          "N3"
-        ]
-      ],
+      "edges": [],
       "node_values": {
-        "N0": 55,
-        "N1": 37,
-        "N2": 89,
-        "N3": 67
+        "N0": 1,
+        "N1": 34,
+        "N2": 32,
+        "N3": 25
       },
-      "target_score": 55,
-      "parallelism": 0.5,
-      "critical_path": 2,
+      "target_score": 988,
+      "parallelism": 0.75,
+      "critical_path": 1,
       "metadata": {
         "generator": "threshold-5-hard-paired",
         "difficulty": "hard",

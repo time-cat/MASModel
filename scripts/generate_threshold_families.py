@@ -14,18 +14,24 @@ from pathlib import Path
 
 
 DEFAULT_FAMILIES = {
-    "threshold-2-narrow": {"distribution": "2:1.0", "difficulty": "medium"},
-    "threshold-5-narrow": {"distribution": "5:1.0", "difficulty": "medium"},
-    "threshold-8-narrow": {"distribution": "8:1.0", "difficulty": "easy"},
-    "threshold-8-medium": {"distribution": "8:1.0", "difficulty": "medium"},
-    "threshold-8-hard": {"distribution": "8:1.0", "difficulty": "hard"},    
-    "threshold-2-5-mixed": {
-        "distribution": "2:0.5,5:0.5",
-        "difficulty": "medium",
+    "threshold-3-easy": {"distribution": "3:1.0", "difficulty": "easy"},
+    "threshold-5-easy": {"distribution": "5:1.0", "difficulty": "easy"},
+    "threshold-7-easy": {"distribution": "7:1.0", "difficulty": "easy"},
+    "threshold-3-5-mixed": {
+        "distribution": "3:0.5,5:0.5",
+        "difficulty": "easy",
     },
-    "threshold-2-5-8-spread": {
-        "distribution": "2:0.25,5:0.5,8:0.25",
-        "difficulty": "medium",
+    "threshold-3-7-mixed": {
+        "distribution": "3:0.5,7:0.5",
+        "difficulty": "easy",
+    },
+    "threshold-5-7-mixed": {
+        "distribution": "5:0.5,7:0.5",
+        "difficulty": "easy",
+    },
+    "threshold-3-5-7-spread": {
+        "distribution": "3:0.25,5:0.5,7:0.25",
+        "difficulty": "easy",
     },
 }
 
@@ -33,7 +39,7 @@ DEFAULT_FAMILIES = {
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", type=Path, default=Path("datasets/threshold_families"))
-    parser.add_argument("--num-instances", type=int, default=240)
+    parser.add_argument("--num-instances", type=int, default=200)
     parser.add_argument("--seed", type=int, default=20260910)
     parser.add_argument(
         "--families",

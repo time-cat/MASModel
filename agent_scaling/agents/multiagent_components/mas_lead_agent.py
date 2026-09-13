@@ -35,6 +35,7 @@ class LeadAgent(BaseAgentWithTools):
         max_rounds: int | None = 10,
         max_execution_time: int = 600,
         decision_budget_per_agent: int | None = None,
+        use_remaining_budget_for_verification: bool = True,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -45,6 +46,9 @@ class LeadAgent(BaseAgentWithTools):
         self.max_rounds = max_rounds
         self.max_execution_time = max_execution_time
         self.decision_budget_per_agent = decision_budget_per_agent
+        self.use_remaining_budget_for_verification = (
+            use_remaining_budget_for_verification
+        )
         self.decision_budget_per_round = per_round_cap(
             decision_budget_per_agent, max_rounds
         )
@@ -193,6 +197,9 @@ class LeadAgent(BaseAgentWithTools):
                 max_iterations_per_agent=self.max_iterations_per_agent,
                 decision_budget=self.decision_budget_per_agent,
                 decision_budget_per_round=self.decision_budget_per_round,
+                use_remaining_budget_for_verification=(
+                    self.use_remaining_budget_for_verification
+                ),
                 **filtered_subagent_kwargs,
             )
             self.subagents[subtask.agent_id] = subagent
@@ -493,6 +500,19 @@ class LeadAgent(BaseAgentWithTools):
         self, round_num: int, round_results: Dict[str, SubAgentRoundResult]
     ) -> bool:
         """LLM-driven orchestrator decision on whether to stop with FULL team visibility"""
+        # Once a worker proposes a terminal action, let the shared ReAct policy
+        # finish its verification passes instead of allowing the lead to cut the
+        # worker off with unused local budget.
+        if self.use_remaining_budget_for_verification:
+            verification_in_progress = any(
+                agent.submission_policy.candidates
+                and agent.budget.remaining_decision_calls not in (None, 0)
+                and agent.conv_history.status == "active"
+                for agent in self.subagents.values()
+            )
+            if verification_in_progress:
+                return False
+
         # We have found a solution
         if any(result.env_status.success for result in round_results.values()):
             return True

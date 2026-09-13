@@ -20,6 +20,7 @@ from agent_scaling.env import AgentEnvironment
 from agent_scaling.logger import logger
 from agent_scaling.utils import write_yaml
 from agent_scaling.budget import BudgetLedger
+from agent_scaling.verification import DeferredSubmissionPolicy
 
 from .registry import register_agent
 
@@ -36,13 +37,20 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
         self,
         max_steps: Optional[int] = None,
         total_decision_budget: Optional[int] = 32,
+        use_remaining_budget_for_verification: bool = True,
         *args,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.max_steps = max_steps
         self.total_decision_budget = total_decision_budget
+        self.use_remaining_budget_for_verification = (
+            use_remaining_budget_for_verification
+        )
         self.budget: Optional[BudgetLedger] = None
+        self.submission_policy = DeferredSubmissionPolicy(
+            enabled=use_remaining_budget_for_verification
+        )
 
     def run_agent(
         self,
@@ -53,6 +61,9 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
     ) -> DatasetInstanceOutputWithTrajectory:
         llm_params_dict = llm_params.model_dump() if llm_params else {}
         self.budget = BudgetLedger(self.total_decision_budget)
+        self.submission_policy = DeferredSubmissionPolicy(
+            enabled=self.use_remaining_budget_for_verification
+        )
         max_steps = self.max_steps
         if max_steps is None:
             max_steps = self.budget.remaining_decision_calls
@@ -83,16 +94,32 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
 
             messages.append(convert_to_openai_messages(response))
             tool_resp: ToolMessage | None = None
+            was_deferred = False
             if response.tool_calls:
                 tool_call = response.tool_calls[0]
                 tool_name = ""
                 try:
-                    tool_resp = env.execute_tool(tool_call)
                     tool_name = tool_call["name"]
                     tool_input = tool_call["args"]
                     action = f"{tool_name}({', '.join([f'{k}={v}' for k, v in tool_input.items()])})"
+                    remaining_steps = max_steps - step - 1
+                    deferred_content = self.submission_policy.defer_if_needed(
+                        tool_call, remaining_steps
+                    )
+                    if deferred_content is not None:
+                        was_deferred = True
+                        tool_resp = ToolMessage(
+                            content=deferred_content,
+                            tool_call_id=tool_call["id"],
+                            name=tool_name,
+                        )
+                    else:
+                        tool_resp = env.execute_tool(tool_call)
                     messages.append(convert_to_openai_messages(tool_resp))
-                    is_done = tool_name == "done"
+                    is_done = (
+                        not was_deferred
+                        and self.submission_policy.is_terminal_tool(tool_name)
+                    )
                 except Exception as e:
                     action = ""
                     messages.append(
@@ -167,17 +194,6 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
                                     "different strategy. Do NOT continue with variations of the same command."
                                 ),
                             })
-            # Budget warning — alert agent when running low on steps
-            remaining_steps = max_steps - step - 1
-            if remaining_steps == max_steps // 4:
-                messages.append({
-                    "role": "user",
-                    "content": (
-                        f"BUDGET WARNING: You have only {remaining_steps} steps remaining out of {max_steps}. "
-                        "If you haven't already, make your code changes NOW and submit. "
-                        "Do not spend remaining steps on exploration — focus on implementation and submission."
-                    ),
-                })
             if is_done or env.env_done():
                 final_answer = trajectory[-1].observation
                 break
@@ -192,9 +208,12 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
                     submit_tool_name = "submit_patch"
                 elif "submit" in env.tools:
                     submit_tool_name = "submit"
-                if submit_tool_name:
+                fallback_tool_call = self.submission_policy.latest_tool_call(
+                    call_id="auto_submit_latest_candidate"
+                )
+                if fallback_tool_call is not None or submit_tool_name is not None:
                     try:
-                        tool_call = {
+                        tool_call = fallback_tool_call or {
                             "name": submit_tool_name,
                             "args": {"reasoning": "Auto-submit: step budget exhausted"},
                             "id": "auto_submit_budget",
@@ -210,6 +229,7 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
                 "trajectory": [t.model_dump() for t in trajectory],
                 "final_answer": final_answer,
                 "budget": self.budget.snapshot() if self.budget else None,
+                "verification": self.submission_policy.snapshot(),
             }
             write_yaml(
                 out,

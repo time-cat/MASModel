@@ -59,6 +59,7 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         max_rounds: int | None = 10,
         consensus_threshold: float = 0.5,
         total_decision_budget: int | None = 32,
+        use_remaining_budget_for_verification: bool = True,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -69,6 +70,9 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         self.max_rounds = max_rounds
         self.consensus_threshold = consensus_threshold
         self.total_decision_budget = total_decision_budget
+        self.use_remaining_budget_for_verification = (
+            use_remaining_budget_for_verification
+        )
         self.per_agent_decision_budget = (
             None
             if total_decision_budget is None
@@ -106,6 +110,9 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
                 decision_budget=self.per_agent_decision_budget,
                 decision_budget_per_round=per_round_cap(
                     self.per_agent_decision_budget, self.max_rounds
+                ),
+                use_remaining_budget_for_verification=(
+                    self.use_remaining_budget_for_verification
                 ),
             )
             self.subagents[agent_id] = subagent
@@ -416,6 +423,10 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
                 "total_decision_calls": total_decision_calls,
                 "per_agent_budgets": {
                     aid: agent.budget.snapshot()
+                    for aid, agent in self.subagents.items()
+                },
+                "per_agent_verification": {
+                    aid: agent.submission_policy.snapshot()
                     for aid, agent in self.subagents.items()
                 },
                 "winning_agent": winning_agent,

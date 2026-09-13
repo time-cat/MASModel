@@ -36,6 +36,7 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
         max_iterations_per_agent: int | None = None,
         enable_peer_communication: bool = True,
         total_decision_budget: int | None = 32,
+        use_remaining_budget_for_verification: bool = True,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
@@ -60,6 +61,9 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
             num_base_agents=n_base_agents,
             max_rounds=kwargs.get("max_rounds", 10),
             max_execution_time=kwargs.get("max_execution_time", 600),
+            use_remaining_budget_for_verification=(
+                use_remaining_budget_for_verification
+            ),
             domain_config={"task_blurb": kwargs.get("task_blurb", "hybrid coordinator")},
             **{k: v for k, v in kwargs.items() if k not in ("max_rounds", "max_execution_time", "task_blurb")},
         )
@@ -246,6 +250,10 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
             )
             output_data["per_agent_budgets"] = {
                 aid: agent.budget.snapshot()
+                for aid, agent in self.lead_agent.subagents.items()
+            }
+            output_data["per_agent_verification"] = {
+                aid: agent.submission_policy.snapshot()
                 for aid, agent in self.lead_agent.subagents.items()
             }
             write_yaml(
