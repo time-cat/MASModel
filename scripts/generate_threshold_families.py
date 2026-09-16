@@ -13,32 +13,67 @@ import sys
 from pathlib import Path
 
 
-DEFAULT_FAMILIES = {
-    "threshold-3-easy": {"distribution": "3:1.0", "difficulty": "easy"},
-    "threshold-5-easy": {"distribution": "5:1.0", "difficulty": "easy"},
-    "threshold-7-easy": {"distribution": "7:1.0", "difficulty": "easy"},
+DEFAULT_FAMILIES_ = {
+    "threshold-3-easy": {
+        "distribution": "3:1.0",
+        "difficulty": "easy",
+        "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
+    },
+    "threshold-5-easy": {
+        "distribution": "5:1.0",
+        "difficulty": "easy",
+        "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
+    },
+    "threshold-7-easy": {
+        "distribution": "7:1.0",
+        "difficulty": "easy",
+        "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
+    },
     "threshold-3-5-mixed": {
         "distribution": "3:0.5,5:0.5",
         "difficulty": "easy",
+        "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
     },
     "threshold-3-7-mixed": {
         "distribution": "3:0.5,7:0.5",
         "difficulty": "easy",
+        "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
     },
     "threshold-5-7-mixed": {
         "distribution": "5:0.5,7:0.5",
         "difficulty": "easy",
+        "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
     },
     "threshold-3-5-7-spread": {
         "distribution": "3:0.25,5:0.5,7:0.25",
         "difficulty": "easy",
+        "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
+    },
+}
+
+DEFAULT_BUDGET_DISTRIBUTION = "2:0.15,3:0.2,4:0.3,5:0.2,6:0.15"
+DEFAULT_FAMILIES = {
+    "threshold-chain": {
+        "distribution": DEFAULT_BUDGET_DISTRIBUTION,
+        "difficulty": "medium",
+        "structure_distribution": "chain:1.0",
+    },
+    "threshold-wide": {
+        "distribution": DEFAULT_BUDGET_DISTRIBUTION,
+        "difficulty": "medium",
+        "structure_distribution": "wide:1.0",
+    },
+    "threshold-balanced": {
+        "distribution": DEFAULT_BUDGET_DISTRIBUTION,
+        "difficulty": "medium",
+        "structure_distribution": "balanced:1.0",
     },
 }
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output-dir", type=Path, default=Path("datasets/threshold_families"))
+    parser.add_argument("--output-dir", type=Path, default=Path("datasets/threshold_families_structure"))
     parser.add_argument("--num-instances", type=int, default=200)
     parser.add_argument("--seed", type=int, default=20260910)
     parser.add_argument(
@@ -68,6 +103,7 @@ def main() -> None:
             families[name.strip()] = {
                 "distribution": distribution.strip(),
                 "difficulty": args.difficulty,
+                "structure_distribution": args.structure_distribution,
             }
 
     generator = Path(__file__).with_name("generate_synthetic_dag.py")
@@ -76,12 +112,12 @@ def main() -> None:
         "generator": str(generator),
         "num_instances": args.num_instances,
         "seed": args.seed,
-        "structure_distribution": args.structure_distribution,
         "families": {},
     }
     for offset, (name, spec) in enumerate(families.items()):
         distribution = spec["distribution"]
         difficulty = spec["difficulty"]
+        structure_distribution = spec["structure_distribution"]
         output = args.output_dir / f"{name}.json"
         command = [
             sys.executable,
@@ -97,7 +133,7 @@ def main() -> None:
             "--difficulty",
             difficulty,
             "--structure-distribution",
-            args.structure_distribution,
+            structure_distribution,
             "--family-name",
             name,
         ]
@@ -106,6 +142,7 @@ def main() -> None:
             "path": str(output),
             "budget_distribution": distribution,
             "difficulty": difficulty,
+            "structure_distribution": structure_distribution,
             "seed": args.seed + offset,
         }
     manifest_path = args.output_dir / "manifest.json"

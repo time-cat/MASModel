@@ -13,7 +13,7 @@ from omegaconf import DictConfig, OmegaConf
 
 from agent_scaling.config.run import RunConfig
 from agent_scaling.exp_runner import ExperimentRunner
-from agent_scaling.logger import add_sink, logger
+from agent_scaling.logger import add_sink, configure_logger, logger
 from agent_scaling.utils import get_run_conf_dir, write_yaml
 
 import litellm
@@ -59,6 +59,9 @@ def main(cfg: DictConfig):
     cfg_dict["save_dir"] = output_dir
 
     config = RunConfig(**{str(k): v for k, v in cfg_dict.items()})
+    console_level = config.effective_console_log_level
+    quiet_console = console_level not in {"DEBUG", "INFO"}
+    configure_logger(level=console_level)
 
     # Register cleanup handlers to prevent Docker container leaks
     atexit.register(_cleanup_all_containers)
@@ -73,6 +76,12 @@ def main(cfg: DictConfig):
     write_yaml(config.get_run_metadata(), osp.join(output_dir, "run_config.yaml"))
     runner = ExperimentRunner(config)
     lptr = add_sink(osp.join(output_dir, "run.log"))
+    if quiet_console:
+        print(
+            f"Running {config.agent.name} on {config.dataset.dataset_id} "
+            f"({len(runner._get_instances())} instances, "
+            f"{config.num_workers} workers)"
+        )
     if config.run_parallel:
         logger.info(f"Running experiment in parallel with {config.num_workers} workers")
         all_metrics = runner.run_parallel(num_workers=config.num_workers)
@@ -84,6 +93,9 @@ def main(cfg: DictConfig):
         f"Experiment completed with metrics:\n{json.dumps(all_metrics, indent=2)}"
     )
     logger.info("Results saved to: " + output_dir)
+    if quiet_console:
+        print(f"Experiment completed: {json.dumps(all_metrics, ensure_ascii=False)}")
+        print(f"Results saved to: {output_dir}")
     logger.remove(lptr)
 
 

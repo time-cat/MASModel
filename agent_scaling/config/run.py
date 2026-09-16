@@ -87,10 +87,19 @@ class RunConfig(BaseModel):
     debug: bool = False
     max_instances: Optional[int] = None
     num_workers: int = 1
+    console_log_level: Optional[str] = None
 
     @property
     def run_parallel(self) -> bool:
         return self.num_workers > 1
+
+    @property
+    def effective_console_log_level(self) -> str:
+        if self.console_log_level is not None:
+            return self.console_log_level.upper()
+        if self.agent.name.startswith("multi-agent-"):
+            return "WARNING"
+        return "INFO"
 
     def model_post_init(self, context: Any) -> None:
         client = get_lf_client()
@@ -125,4 +134,5 @@ class RunConfig(BaseModel):
             ret["save_dir"] = self.save_dir
         ret["run_name"] = self.run_name
         ret["num_workers"] = self.num_workers
+        ret["console_log_level"] = self.effective_console_log_level
         return ret

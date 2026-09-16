@@ -71,6 +71,31 @@ class ExperimentRunner:
         instances = instances[:max_instances]
         return instances
 
+    def _failure_metrics(
+        self, instance: Optional[DatasetInstance] = None
+    ) -> Dict[str, Any]:
+        """Create dataset-compatible metrics for an instance-level failure."""
+        dataset_id = self.dataset.dataset_id
+        if dataset_id in {"synthetic_dag", "synthetic-dag"}:
+            return {
+                "submitted_score": -1,
+                "submitted": False,
+                "success": False,
+                "parallelism": float(getattr(instance, "parallelism", 0.0)),
+                "critical_path": float(getattr(instance, "critical_path", 0.0)),
+            }
+        if dataset_id == "plancraft-test":
+            return {"success": False, "num_steps": 0}
+        if "swebench" in dataset_id or "terminalbench" in dataset_id:
+            return {"resolved": 0, "num_steps": 0, "success": 0}
+        if "browsecomp" in dataset_id:
+            return {"is_correct": False, "confidence": 0.0}
+        if dataset_id in {"simpleqa", "multiagent_simpleqa"}:
+            return {"grade": "NOT_ATTEMPTED", "confidence": 0.0}
+        # Most remaining aggregators either use these keys or defensively read
+        # optional correctness fields with dict.get()/membership checks.
+        return {"resolved": 0, "num_steps": 0, "success": 0}
+
     def run(self):
         metrics = []
         instances = self._get_instances()
@@ -105,7 +130,7 @@ class ExperimentRunner:
                 logger.error(f"Instance {i} failed with error: {e}")
                 # Record failure metrics so experiment continues
                 # Use "resolved" key to match dataset get_metrics expectations
-                metrics.append({"resolved": 0, "num_steps": 0, "success": 0})
+                metrics.append(self._failure_metrics(instance))
                 consecutive_failures += 1
                 if consecutive_failures >= max_consecutive_failures:
                     logger.error(
@@ -226,9 +251,9 @@ class ExperimentRunner:
             work_items.append((i, instance, instance_dir))
 
         # Process in parallel
-        metrics: List[Dict[str, int | float] | str] = [""] * len(
-            work_items
-        )  # Pre-allocate to maintain order
+        metrics: List[Dict[str, Any]] = [
+            self._failure_metrics(instance) for _, instance, _ in work_items
+        ]  # Pre-allocate valid failures to maintain order
 
         # Parallel processing with progress bar
 
@@ -258,9 +283,7 @@ class ExperimentRunner:
                         logger.error(
                             f"Error generating output: {exc}\nTraceback:\n{tb_str}"
                         )
-                        metrics[i] = (
-                            f"Failed with exception: {exc}\nTraceback:\n{tb_str}"
-                        )
+                        metrics[i] = self._failure_metrics(instances[i])
 
                     pbar.update(1)
 

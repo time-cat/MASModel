@@ -1,0 +1,93 @@
+# Budgeted Coordination Law: plancraft-test multi-agent experiments
+# Run from the MASModel repository root: bash multiagent_budget_experiments_plancraft.txt
+#
+# IMPORTANT: agent.total_decision_budget is a SYSTEM worker budget. The code
+# assigns floor(total_budget / n_base_agents) calls to each worker. The primary
+# sweep therefore uses total_budget=n*per_agent_budget when local budget is
+# the controlled variable.
+
+set -euo pipefail
+
+DATASET="datasets/plancraft-test.json"
+MODEL="openai/qwen-flash"
+COMMON=(
+  dataset=plancraft-test
+  dataset.local_path="$DATASET"
+  llm.model="$MODEL"
+  llm.params.temperature=0.0
+  max_instances=100
+  num_workers=3
+  debug=false
+  log_langfuse=false
+  use_disk_cache=true
+  agent.min_iterations_per_agent=0
+  agent.use_remaining_budget_for_verification=true
+)
+
+run_independent() {
+  local n="$1"; local budget="$2"
+  python scripts/run_experiment.py \
+    agent=multi-agent-independent "${COMMON[@]}" \
+    agent.n_base_agents="$n" agent.total_decision_budget="$budget"
+}
+
+run_coordinated() {
+  local arch="$1"; local n="$2"; local budget="$3"; local rounds="$4"
+  python scripts/run_experiment.py \
+    agent="$arch" "${COMMON[@]}" \
+    agent.n_base_agents="$n" agent.total_decision_budget="$budget" \
+    agent.max_rounds="$rounds"
+}
+
+
+# PHASE 1: fixed per-agent lifetime budget. b is local budget, n is team size,
+# so system budget is exactly n*b. Main architectures: Independent, Centralized,
+# Decentralized. n={2,3,4,5}, b={2,4,8,16,32}; 60 runs.
+for n in 2 3 4 5; do
+  for b in 2 4 8 16 32; do
+    run_independent "$n" "$((n * b))"
+  done
+done
+for arch in multi-agent-centralized multi-agent-decentralized; do
+  for n in 2 3 4 5; do
+    for b in 2 4 8 16 32; do
+      run_coordinated "$arch" "$n" "$((n * b))" 3
+    done
+  done
+done
+
+
+# PHASE 2: fixed SYSTEM budget. This separates coordination/parallelism from
+# simply buying more calls. Use five evenly spaced total budgets. 
+# For n={2,3,4,5}, nominal per-agent budgets are: B={16,48,80}:
+# Core architectures only, 36 runs.
+for arch in multi-agent-independent multi-agent-centralized multi-agent-decentralized; do
+  for total_budget in 16 48 80; do
+    for n in 2 3 4 5; do
+      if [[ "$arch" == "multi-agent-independent" ]]; then
+        run_independent "$n" "$total_budget"
+      else
+        run_coordinated "$arch" "$n" "$total_budget" 3
+      fi
+    done
+  done
+done
+
+
+# PHASE 3: coordination-horizon ablation. n=3, system budget=48 (local=16),
+# max_rounds={1,3,5}; 2 architectures x 3 horizons = 6 runs.
+for arch in multi-agent-centralized multi-agent-decentralized; do
+  for rounds in 1 3 5; do
+    run_coordinated "$arch" 3 48 "$rounds"
+  done
+done
+
+# PHASE 4: verification ablation. n=3, system budget=48, max_rounds=3;
+# compare deferred verification on/off for three coordinated architectures;
+# 4 runs.
+for arch in multi-agent-centralized multi-agent-decentralized; do
+  python scripts/run_experiment.py agent="$arch" "${COMMON[@]}" agent.n_base_agents=3 agent.total_decision_budget=48 agent.max_rounds=3 agent.use_remaining_budget_for_verification=true
+  python scripts/run_experiment.py agent="$arch" "${COMMON[@]}" agent.n_base_agents=3 agent.total_decision_budget=48 agent.max_rounds=3 agent.use_remaining_budget_for_verification=false
+done
+
+

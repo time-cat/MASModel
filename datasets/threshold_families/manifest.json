@@ -2,48 +2,54 @@
   "generator": "/home/ecs-user/agent-scaling/scripts/generate_synthetic_dag.py",
   "num_instances": 200,
   "seed": 20260910,
-  "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
   "families": {
     "threshold-3-easy": {
       "path": "datasets/threshold_families/threshold-3-easy.json",
       "budget_distribution": "3:1.0",
       "difficulty": "easy",
+      "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
       "seed": 20260910
     },
     "threshold-5-easy": {
       "path": "datasets/threshold_families/threshold-5-easy.json",
       "budget_distribution": "5:1.0",
       "difficulty": "easy",
+      "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
       "seed": 20260911
     },
     "threshold-7-easy": {
       "path": "datasets/threshold_families/threshold-7-easy.json",
       "budget_distribution": "7:1.0",
       "difficulty": "easy",
+      "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
       "seed": 20260912
     },
     "threshold-3-5-mixed": {
       "path": "datasets/threshold_families/threshold-3-5-mixed.json",
       "budget_distribution": "3:0.5,5:0.5",
       "difficulty": "easy",
+      "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
       "seed": 20260913
     },
     "threshold-3-7-mixed": {
       "path": "datasets/threshold_families/threshold-3-7-mixed.json",
       "budget_distribution": "3:0.5,7:0.5",
       "difficulty": "easy",
+      "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
       "seed": 20260914
     },
     "threshold-5-7-mixed": {
       "path": "datasets/threshold_families/threshold-5-7-mixed.json",
       "budget_distribution": "5:0.5,7:0.5",
       "difficulty": "easy",
+      "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
       "seed": 20260915
     },
     "threshold-3-5-7-spread": {
       "path": "datasets/threshold_families/threshold-3-5-7-spread.json",
       "budget_distribution": "3:0.25,5:0.5,7:0.25",
       "difficulty": "easy",
+      "structure_distribution": "chain:0.34,wide:0.33,balanced:0.33",
       "seed": 20260916
     }
   }

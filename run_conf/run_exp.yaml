@@ -18,6 +18,9 @@ use_disk_cache: true
 num_workers: 1 
 debug: true
 max_instances: 3
+# null: INFO for single-agent, WARNING for multi-agent. Override explicitly
+# with INFO/DEBUG when interactive trace output is needed.
+console_log_level: null
 run_name: ${agent.name}_${llm.model}_${now:%Y-%m-%d}_${now:%H-%M-%S}
 
 hydra:

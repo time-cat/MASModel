@@ -1,3 +1,4 @@
+import threading
 from datetime import datetime
 from functools import cached_property
 from typing import Any, Dict, List, Literal, Optional
@@ -8,6 +9,7 @@ from litellm.types.utils import ModelResponse
 from pydantic import BaseModel, Field, computed_field
 
 from agent_scaling.datasets.base import DatasetEnvStatus
+from agent_scaling.logger import logger
 
 from .plan import OrchestrationPlan
 
@@ -17,6 +19,34 @@ completion_cost(response_obj)
 
 # Use https://artificialanalysis.ai/models/gpt-4 to track 
 """
+
+
+_cost_warning_lock = threading.Lock()
+_cost_warnings: set[str] = set()
+
+
+def _safe_completion_cost(message: ModelResponse | None) -> Optional[float]:
+    """Return a best-effort cost without making trace serialization fail.
+
+    OpenAI-compatible endpoints commonly expose local or third-party model
+    names that are absent from LiteLLM's pricing table. Cost is optional trace
+    metadata, so an unavailable price must not discard a completed experiment.
+    """
+    if message is None:
+        return None
+    try:
+        return completion_cost(message)
+    except Exception as exc:
+        warning_key = str(exc)
+        with _cost_warning_lock:
+            should_warn = warning_key not in _cost_warnings
+            if should_warn:
+                _cost_warnings.add(warning_key)
+        if should_warn:
+            logger.warning(
+                f"Unable to estimate LLM cost; recording cost=None. {exc}"
+            )
+        return None
 
 
 class MessageTurn(BaseModel):
@@ -37,7 +67,7 @@ class MessageTurnInternal(MessageTurn):
 
     @property
     def cost(self) -> Optional[float]:
-        return completion_cost(self.litellm_message) if self.litellm_message else None
+        return _safe_completion_cost(self.litellm_message)
 
 
 class LLMResponseMessage(BaseModel):
@@ -47,7 +77,7 @@ class LLMResponseMessage(BaseModel):
     @computed_field
     @cached_property
     def cost(self) -> Optional[float]:
-        return completion_cost(self.litellm_message) if self.litellm_message else None
+        return _safe_completion_cost(self.litellm_message)
 
 
 class AgentConversationHistory(BaseModel):

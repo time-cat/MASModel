@@ -1,0 +1,28 @@
+{
+  "generator": "/home/ecs-user/agent-scaling/scripts/generate_synthetic_dag.py",
+  "num_instances": 200,
+  "seed": 20260910,
+  "families": {
+    "threshold-chain": {
+      "path": "datasets/threshold_families_structure/threshold-chain.json",
+      "budget_distribution": "2:0.15,3:0.2,4:0.3,5:0.2,6:0.15",
+      "difficulty": "medium",
+      "structure_distribution": "chain:1.0",
+      "seed": 20260910
+    },
+    "threshold-wide": {
+      "path": "datasets/threshold_families_structure/threshold-wide.json",
+      "budget_distribution": "2:0.15,3:0.2,4:0.3,5:0.2,6:0.15",
+      "difficulty": "medium",
+      "structure_distribution": "wide:1.0",
+      "seed": 20260911
+    },
+    "threshold-balanced": {
+      "path": "datasets/threshold_families_structure/threshold-balanced.json",
+      "budget_distribution": "2:0.15,3:0.2,4:0.3,5:0.2,6:0.15",
+      "difficulty": "medium",
+      "structure_distribution": "balanced:1.0",
+      "seed": 20260912
+    }
+  }
+}
