@@ -171,6 +171,15 @@ def test_environment_enforces_dependencies_and_submit():
     assert auto.env_done() is True
     assert auto.success is False
 
+    labelled = SyntheticDAGEnvironment(
+        dataset_instance=instance, tools=["inspect_node", "submit"]
+    )
+    labelled_result = labelled.submit.invoke(
+        {"reasoning": "Observed b0=3. Final Answer: 17"}
+    )
+    assert "FINAL_SCORE: 17" in str(labelled_result)
+    assert labelled.success is True
+
 
 def test_worker_environments_do_not_leak_state():
     instance = SyntheticDAGInstance(

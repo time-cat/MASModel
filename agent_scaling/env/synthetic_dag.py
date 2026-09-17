@@ -60,14 +60,25 @@ class SyntheticDAGEnvironment(AgentEnvironmentTools):
         budget-exhaustion auto-submit path.
         """
         if answer is None:
-            match = re.search(r"-?\d+", reasoning)
+            # Prefer an explicitly labelled final value.  The previous parser
+            # used the first integer in arbitrary reasoning, so text such as
+            # ``b0=43 ... Final Answer: 877`` was submitted as 43.
+            labelled = re.findall(
+                r"(?:final\s+(?:answer|score)|answer|score)\s*[:=]\s*(-?\d+)",
+                reasoning,
+                flags=re.IGNORECASE,
+            )
+            match = labelled[-1] if labelled else None
+            if match is None:
+                integers = re.findall(r"-?\d+", reasoning)
+                match = integers[-1] if integers else None
             if match is None:
                 # The generic runner auto-submits with a textual reason when
                 # the decision budget is exhausted. Record that as an explicit
                 # invalid score so the run is persisted as a normal failure.
                 answer = -1
             else:
-                answer = int(match.group(0))
+                answer = int(match)
         self.submitted_score = int(answer)
         self.success = self.submitted_score == self.dataset_instance.target_score
         self.is_done = True

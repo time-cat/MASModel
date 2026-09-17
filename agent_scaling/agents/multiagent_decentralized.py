@@ -31,6 +31,7 @@ from agent_scaling.budget import per_round_cap
 from .multiagent_components.conversation import SubAgentRoundResult
 from .multiagent_components.mas_subagent import WorkerSubagent
 from .multiagent_components.memory import EnhancedMemory
+from .multiagent_utils.result_selection import first_successful_agent, submit_tool_call
 from .registry import register_agent
 
 
@@ -226,24 +227,16 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         if env.env_done():
             return consensus_answer
 
-        submit_tool_name = None
-        if "submit_patch" in env.tools:
-            submit_tool_name = "submit_patch"
-        elif "submit" in env.tools:
-            submit_tool_name = "submit"
-        if not submit_tool_name:
+        tool_call = submit_tool_call(
+            env, consensus_answer, "consensus_submit_decentralized"
+        )
+        if not tool_call:
             return consensus_answer
 
         logger.info(
-            f"Submitting consensus answer via {target_id} using {submit_tool_name}"
+            f"Submitting consensus answer via {target_id} using {tool_call['name']}"
         )
         try:
-            tool_call = {
-                "name": submit_tool_name,
-                "args": {"reasoning": consensus_answer[:500]},
-                "id": "consensus_submit_decentralized",
-                "type": "tool_call",
-            }
             tool_msg = env.execute_tool(tool_call)
             return str(tool_msg.content)
         except Exception as e:
@@ -386,6 +379,10 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         if winning_agent is not None:
             env = self.subagents[winning_agent].env
             final_env_status = env.env_status()
+        if not getattr(final_env_status, "success", False):
+            successful_agent = first_successful_agent(self.subagents.values())
+            if successful_agent is not None:
+                final_env_status = successful_agent.env.env_status()
         if final_env_status is None:
             for agent in self.subagents.values():
                 if agent.env.env_done():
@@ -430,6 +427,7 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
                     for aid, agent in self.subagents.items()
                 },
                 "winning_agent": winning_agent,
+                "canonical_agent_output": final_answer,
                 "total_iterations": total_decision_calls,
                 "execution_time": execution_time,
                 "agent_findings": {

@@ -27,6 +27,7 @@ from agent_scaling.utils import write_yaml
 
 from .multiagent_components.mas_subagent import WorkerSubagent
 from .multiagent_components.memory import EnhancedMemory
+from .multiagent_utils.result_selection import submit_tool_call
 from .registry import register_agent
 from agent_scaling.budget import per_round_cap
 
@@ -124,27 +125,18 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
             env = agent.env
             if env.env_done():
                 continue
-            submit_tool_name = None
-            if "submit_patch" in env.tools:
-                submit_tool_name = "submit_patch"
-            elif "submit" in env.tools:
-                submit_tool_name = "submit"
-            if submit_tool_name:
+            tool_call = submit_tool_call(
+                env, synthesized_answer, "synthesis_submit_independent"
+            )
+            if tool_call:
                 logger.info(
-                    f"Submitting synthesis via {agent_id} using {submit_tool_name}"
+                    f"Submitting synthesis via {agent_id} using {tool_call['name']}"
                 )
                 try:
-                    tool_call = {
-                        "name": submit_tool_name,
-                        "args": {"reasoning": synthesized_answer[:500]},
-                        "id": "synthesis_submit_independent",
-                        "type": "tool_call",
-                    }
                     tool_msg = env.execute_tool(tool_call)
                     return str(tool_msg.content)
                 except Exception as e:
-                    logger.warning(f"Synthesis auto-submit failed: {e}")
-            break
+                    logger.warning(f"Synthesis auto-submit via {agent_id} failed: {e}")
         return ""
 
     def run_agent(
@@ -274,6 +266,7 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
                 "total_decision_calls": total_decision_calls,
                 "execution_time": execution_time,
                 "synthesized_answer": synthesized_answer,
+                "canonical_agent_output": final_answer,
                 "total_decision_budget": self.total_decision_budget,
                 "per_agent_budgets": {
                     aid: agent.budget.snapshot()

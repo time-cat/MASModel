@@ -12,6 +12,12 @@ from agent_scaling.utils import write_yaml
 from .multiagent_components.conversation import OrchestrationResult
 from .multiagent_components.mas_lead_agent import LeadAgent
 from .multiagent_components.memory import EnhancedMemory
+from .multiagent_utils.result_selection import (
+    first_nonempty_answer,
+    first_successful_agent,
+    last_external_answer,
+    submit_tool_call,
+)
 from .registry import register_agent
 
 
@@ -72,35 +78,26 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
     ) -> str:
         """Auto-submit after orchestration if no subagent already submitted.
 
-        Uses agent_1's environment to trigger the submit/submit_patch tool,
-        passing the synthesized answer as reasoning.
+        Uses the first available worker environment and derives the call shape
+        from that environment's terminal-tool schema.
         """
         # Pick the first subagent's environment for submission
         for agent_id, agent in self.lead_agent.subagents.items():
             env = agent.env
-            reasoning = (synthesized_answer or "Multi-agent synthesis")[:500]
             if env.env_done():
-                break
-            # Use execute_tool with a synthetic ToolCall
-            submit_tool_name = None
-            if "submit_patch" in env.tools:
-                submit_tool_name = "submit_patch"
-            elif "submit" in env.tools:
-                submit_tool_name = "submit"
-            if submit_tool_name:
-                logger.info(f"Auto-submitting via {agent_id} using {submit_tool_name}")
+                continue
+            tool_call = submit_tool_call(
+                env, synthesized_answer or "Multi-agent synthesis", "auto_submit"
+            )
+            if tool_call:
+                logger.info(
+                    f"Auto-submitting via {agent_id} using {tool_call['name']}"
+                )
                 try:
-                    tool_call = {
-                        "name": submit_tool_name,
-                        "args": {"reasoning": reasoning},
-                        "id": "auto_submit",
-                        "type": "tool_call",
-                    }
                     tool_msg = env.execute_tool(tool_call)
                     return str(tool_msg.content)
                 except Exception as e:
-                    logger.warning(f"Auto {submit_tool_name} failed: {e}")
-            break  # Only try the first subagent
+                    logger.warning(f"Auto submission via {agent_id} failed: {e}")
         return synthesized_answer
 
     def run_agent(
@@ -147,12 +144,23 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
                 else f"Final answer extracted: {final_answer}"
             )
 
-        # Auto-submit if no subagent already submitted
-        # This ensures evaluation runs even when subagents only explored
-        any_done = any(
-            agent.env.env_done()
-            for agent in self.lead_agent.subagents.values()
-        )
+        agents = list(self.lead_agent.subagents.values())
+        successful_agent = first_successful_agent(agents)
+
+        # A successful worker is already the canonical result for centralized
+        # execution.  Preserve its final response instead of returning None
+        # merely because the lead skipped synthesis after early success.
+        if not final_answer:
+            final_answer = (
+                last_external_answer(successful_agent)
+                if successful_agent is not None
+                else first_nonempty_answer(agents)
+            )
+
+        # Auto-submit only when no worker reached a terminal state.  The call is
+        # schema-aware: scalar-answer tools receive a scalar, reasoning tools
+        # receive the full text, and no tool receives a truncated arbitrary prefix.
+        any_done = any(agent.env.env_done() for agent in agents)
         if not any_done:
             # If synthesis is empty, build reasoning from sub-agent findings
             submit_reasoning = final_answer or ""
@@ -170,9 +178,11 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
                 logger.warning(
                     f"Synthesis was empty, using sub-agent findings for auto-submit: {submit_reasoning[:100]}..."
                 )
-            final_answer = self._auto_submit(
+            submission_response = self._auto_submit(
                 processing_result, submit_reasoning
             )
+            if not final_answer:
+                final_answer = submission_response
 
         execution_time = time.time() - start_time
         total_decision_calls = sum(
@@ -188,6 +198,19 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
 
         if instance_dir is not None:
             output_data = processing_result.model_dump()
+            output_data["canonical_agent_output"] = final_answer
+            output_data["canonical_agent_id"] = (
+                next(
+                    (
+                        aid
+                        for aid, agent in self.lead_agent.subagents.items()
+                        if agent is successful_agent
+                    ),
+                    None,
+                )
+                if successful_agent is not None
+                else None
+            )
             output_data["total_decision_budget"] = self.total_decision_budget
             output_data["total_decision_calls"] = total_decision_calls
             output_data["max_rounds"] = self.lead_agent.max_rounds
@@ -210,11 +233,14 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
             )
 
         # Re-fetch env status after potential auto-submit
-        final_env_status = None
-        for agent_id, agent in self.lead_agent.subagents.items():
-            if agent.env.env_done():
-                final_env_status = agent.env.env_status()
-                break
+        final_env_status = (
+            successful_agent.env.env_status() if successful_agent is not None else None
+        )
+        if final_env_status is None:
+            for agent in agents:
+                if agent.env.env_done():
+                    final_env_status = agent.env.env_status()
+                    break
         if final_env_status is None:
             final_env_status = processing_result.combined_env_status
 
