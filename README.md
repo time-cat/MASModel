@@ -1,335 +1,125 @@
-# Agent Scaling
+# MASModel
 
-A framework for studying scaling behaviors of LLM-based single-agent and multi-agent systems on complex reasoning tasks. Code release accompanying the Nature Machine Intelligence manuscript *"Beyond more agents: quantifying when multi-agent collaboration benefits large language model agents"* (the arXiv preprint at arXiv:2512.08296 retains the earlier title *"Towards a science of scaling agent systems"*).
+`MASModel` is a framework for measuring how single-agent and multi-agent LLM systems scale on tool-use, reasoning, and partially observable computation-graph tasks. The canonical repository is [time-cat/MASModel](https://github.com/time-cat/MASModel).
 
-## Quick Start
+The current checkout declares package version `0.1.0`, requires Python 3.11 or newer, and pins the development interpreter to 3.11 in `.python-version`. Earlier documentation referred to `ybkim95/agent-scaling` and `v2.1.3`.
 
-### Prerequisites
+## Install
 
-- Python 3.11+
-- [uv](https://docs.astral.sh/uv/getting-started/installation/) package manager
-
-### Installation
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) first, then run these commands from the `MASModel` directory:
 
 ```bash
-# Clone the repository and check out the release used for the manuscript
-git clone https://github.com/ybkim95/agent-scaling.git
-cd agent-scaling
-git checkout v2.1.3   # release tag cited in the Code Availability section of the manuscript
+git clone https://github.com/time-cat/MASModel.git
+cd MASModel
+uv sync --locked
 
-# Install dependencies
-uv sync --prerelease=allow
+# Optional: install the extra dependency used by the SWE-bench loader.
+uv sync --locked --extra swebench
 
-# Install flash-attn (needed for BrowseComp+ environment)
-uv pip install --no-build-isolation flash-attn
-
-# Activate the virtual environment
-source .venv/bin/activate
+cp .env.example .env       # PowerShell: Copy-Item .env.example .env
+# Edit .env and add at least one LLM provider key.
 ```
 
-### Setting Environment Variables
+Use `uv run ...` below so activation is not required. If you prefer an activated environment, use `source .venv/bin/activate` on Linux/macOS or `.venv\\Scripts\\Activate.ps1` in PowerShell. The base project does not declare `flash-attn`; installing it is not part of the supported base setup. BrowseComp-Plus additionally needs a compatible FAISS/Tevatron/PyTorch retrieval setup and local index, as described in [`DATA_AVAILABILITY.md`](DATA_AVAILABILITY.md).
 
-Create a `.env` file with your LLM API keys. See [LiteLLM providers](https://docs.litellm.ai/docs/providers) for supported providers.
+Required keys are provider-specific. The checked-in `.env.example` documents `OPENAI_API_KEY`, `GEMINI_API_KEY`, and `ANTHROPIC_API_KEY`; `TAVILY_API_KEY` is required by Finance-Agent's `web_search` tool. LangFuse keys are optional and only needed when `log_langfuse=true`.
+
+## Quick start
+
+Run a one-instance smoke test against the checked-in synthetic DAG data:
 
 ```bash
-# Required: At least one LLM provider API key
-OPENAI_API_KEY="your-openai-key"
-GEMINI_API_KEY="your-gemini-key"
-ANTHROPIC_API_KEY="your-anthropic-key"
-
-# Optional: LangFuse for LLM call tracing
-LANGFUSE_HOST="https://us.cloud.langfuse.com"
-LANGFUSE_SECRET_KEY="your-secret-key"
-LANGFUSE_PUBLIC_KEY="your-public-key"
+uv run python scripts/run_experiment.py \
+  agent=single-agent \
+  dataset=synthetic-dag \
+  dataset.local_path=datasets/synthetic_dag_240.json \
+  llm.model=openai/gpt-5-mini \
+  max_instances=1 \
+  num_workers=1
 ```
 
-## Running Experiments
-
-### Basic Usage
-
-Run an experiment with default configuration:
+The default configuration in `run_conf/run_exp.yaml` is centralized multi-agent on PlanCraft with `debug=true` and `max_instances=3`. Any Hydra value can be overridden on the command line:
 
 ```bash
-python scripts/run_experiment.py
+uv run python scripts/run_experiment.py agent=single-agent dataset=plancraft-test max_instances=5
+uv run python scripts/run_experiment.py agent=multi-agent-centralized dataset=synthetic-dag dataset.local_path=datasets/synthetic_dag_240.json agent.n_base_agents=3
+uv run python scripts/run_experiment.py llm.model=openai/gpt-5-mini num_workers=4 max_instances=10
 ```
 
-Run in debug mode (processes fewer instances):
+The available agent configs are:
+
+| Config | Behavior |
+|---|---|
+| `single-agent` | One tool-using agent |
+| `multi-agent-independent` | Independent workers with `synthesis_only` aggregation |
+| `multi-agent-centralized` | Lead agent with orchestrated subagents |
+| `multi-agent-decentralized` | Peer debate with a 70% consensus threshold |
+| `multi-agent-hybrid` | Lead coordination with peer communication |
+| `direct-prompt` | Direct prompt baseline |
+
+The available dataset config names are `plancraft-test`, `browsecomp-plus`, `synthetic-dag`, `swebench-verified`, `terminalbench`, and (after setup) `finance-agent` and `workbench`. See [`DATA_AVAILABILITY.md`](DATA_AVAILABILITY.md) for exact local paths, counts, and acquisition steps.
+
+## Reproducing the multi-agent sweeps
+
+The files in `bash/` are executable shell scripts despite their `.txt` suffix. They invoke `python` directly, so activate `.venv` first (or otherwise put the project environment on `PATH`). Run them from the repository root with the `bash/` prefix:
 
 ```bash
-python scripts/run_experiment.py debug=true
+bash bash/multiagent_budget_experiments.txt
+bash bash/multiagent_budget_experiments_plancraft_.txt
+bash bash/multiagent_budget_experiments_plancraft.txt
+bash bash/multiagent_budget_experiments_dag_stru_wide.txt
+bash bash/multiagent_budget_experiments_dag_stru_chain.txt
+bash bash/multiagent_budget_experiments_dag_stru_balance.txt
 ```
 
-### Configuring Experiments
+Their current roles are:
 
-The framework uses [Hydra](https://hydra.cc/docs/intro/) for configuration management. Override parameters via command line:
+- `multiagent_budget_experiments.txt`: synthetic DAG budget law, verification, horizon, and arithmetic-difficulty controls; it uses `datasets/threshold_families/threshold-3-5-7-spread.json`.
+- `multiagent_budget_experiments_plancraft_.txt`: the larger PlanCraft budget sweep (`max_instances=100`). The trailing underscore is part of the filename.
+- `multiagent_budget_experiments_plancraft.txt`: a shorter PlanCraft sweep (`max_instances=60`).
+- `multiagent_budget_experiments_dag_stru_wide.txt`, `_chain.txt`, and `_balance.txt`: structure-specific synthetic DAG sweeps using `threshold-wide.json`, `threshold-chain.json`, and `threshold-balanced.json` respectively (`max_instances=60`).
+
+Every sweep sets `agent.total_decision_budget` explicitly. For a team of `n` workers, each worker receives `floor(total_decision_budget / n)` lifetime decision calls; this budget is not reset between communication rounds. Planning, coordination, synthesis, and optional verification calls are tracked separately. The scripts use `openai/qwen-flash` as their configured model identifier; replace it with a model available through your LiteLLM provider if that identifier is not available in your account.
+
+## Dataset setup
+
+For the two upstream-converted datasets, activate `.venv` first because these scripts invoke `python` directly:
 
 ```bash
-# Run single-agent on PlanCraft dataset
-python scripts/run_experiment.py agent=single-agent dataset=plancraft-test
-
-# Run multi-agent centralized system
-python scripts/run_experiment.py agent=multi-agent-centralized dataset=plancraft-test
-
-# Run with different LLM (use any model from the paper pool: gpt-5, gpt-5-mini, gpt-5-nano,
-# gemini/gemini-2.0-flash, gemini/gemini-2.5-pro, anthropic/claude-sonnet-4-5, etc.)
-python scripts/run_experiment.py llm.model=openai/gpt-5-mini
-
-# Run with parallel workers
-python scripts/run_experiment.py num_workers=4
-
-# Process more instances
-python scripts/run_experiment.py max_instances=10
+bash scripts/setup_finance_agent.sh
+bash scripts/setup_workbench.sh
 ```
 
-### Available Configurations
+For SWE-bench Verified and Terminal-Bench, obtain the upstream JSON files and place them at the paths in [`DATA_AVAILABILITY.md`](DATA_AVAILABILITY.md). Both environments require Docker. BrowseComp-Plus also requires its retrieval index and the optional retrieval stack; the checked-in JSON alone is not sufficient to initialize the FAISS search environment.
 
-#### Agent Types
+## Outputs and configuration
 
-| Agent | Config Name | Description |
-|-------|-------------|-------------|
-| Single Agent | `single-agent` | Single LLM agent with tool use |
-| Multi-Agent Centralized | `multi-agent-centralized` | Orchestrated multi-agent system with lead agent |
-| Multi-Agent Decentralized | `multi-agent-decentralized` | Peer-to-peer multi-agent coordination |
-| Multi-Agent Hybrid | `multi-agent-hybrid` | Hybrid coordination approach |
-| Multi-Agent Independent | `multi-agent-independent` | Independent parallel agents |
+Hydra writes each run below:
 
-#### Datasets
+```text
+exp_outputs/{dataset_id}/{agent_name}/{llm.model}/{date}/{time}/
+├── run_config.yaml
+├── run.log
+├── dataset_eval_metrics.json
+└── instance_runs/
+    └── 0000/
+        └── instance_save.yaml
+```
 
-The paper evaluates on six benchmarks. All six are runnable from this repository. Four ship with direct config files; two (Workbench and Finance Agent) ship with setup scripts that download the upstream tasks and generate the dataset config in one command — see `DATA_AVAILABILITY.md` and `REPRODUCTION.md` for the per-benchmark workflow.
+The resolved configuration is saved in `run_config.yaml`; `run.log` contains the execution trace; `dataset_eval_metrics.json` contains aggregate metrics; and `instance_runs/` contains per-instance records. Keep the generated directory outside version control.
 
-| Dataset | Config Name | Description |
-|---------|-------------|-------------|
-| BrowseComp-Plus | `browsecomp-plus` | Web browsing / multi-hop question answering |
-| PlanCraft | `plancraft-test` | Minecraft crafting planning tasks |
-| SWE-bench Verified | `swebench-verified` | Real-world GitHub issue resolution (Docker; 7 tools) |
-| Terminal-Bench | `terminalbench` | CLI task execution (Docker; 2 tools) |
-| Workbench | `workbench` | Common business tool-use tasks. Run `bash scripts/setup_workbench.sh` to download upstream and generate the dataset config (upstream: https://github.com/olly-styles/WorkBench). |
-| Finance Agent | `finance-agent` | Multi-step financial reasoning. Run `bash scripts/setup_finance_agent.sh` to download upstream and generate the dataset config (upstream: https://github.com/vals-ai/finance-agent). |
+Key configuration files are under `run_conf/agent/`, `run_conf/dataset/`, and `run_conf/run_exp.yaml`. The canonical multi-agent parameters are `n_base_agents`, `total_decision_budget`, `min_iterations_per_agent`, and, for coordinated protocols, `max_rounds`. The centralized, decentralized, and hybrid defaults use three workers and a ten-round communication horizon; independent workers do not communicate.
 
-#### Supported LLMs
+## Development checks
 
-| Provider | Models |
-|----------|--------|
-| OpenAI | GPT-5, GPT-5-mini, GPT-5-nano |
-| Google | Gemini-2.5 Pro, Gemini-2.5 Flash, Gemini-2.0 Flash |
-| Anthropic | Claude Sonnet 4.5, Claude Sonnet 4, Claude Sonnet 3.7 (original 4 benchmarks only; deprecated February 2026 and therefore unavailable for SWE-bench Verified and Terminal-Bench) |
-
-## Example Experiments
-
-### Single-Agent on PlanCraft
+Run the repository tests after installation:
 
 ```bash
-python scripts/run_experiment.py \
-    agent=single-agent \
-    dataset=plancraft-test \
-    llm.model=gemini/gemini-2.0-flash \
-    max_instances=5
+uv run pytest -q
 ```
 
-### Multi-Agent Centralized on PlanCraft
+The current test suite covers the decentralized debate, independent synthesis, result selection, synthetic DAG generator/environment, and Finance-Agent/WorkBench adapters. The changelog records 28 tests for the current integration set.
 
-```bash
-python scripts/run_experiment.py \
-    agent=multi-agent-centralized \
-    dataset=plancraft-test \
-    llm.model=gemini/gemini-2.0-flash \
-    max_instances=5
-```
+## Citation and license
 
-### Multi-Agent Centralized on BrowseComp-Plus
-
-```bash
-python scripts/run_experiment.py \
-    agent=multi-agent-centralized \
-    dataset=browsecomp-plus \
-    llm.model=openai/gpt-5-mini \
-    max_instances=5
-```
-
-### Single-Agent on SWE-bench Verified (Docker required)
-
-```bash
-python scripts/run_experiment.py \
-    agent=single-agent \
-    dataset=swebench-verified \
-    llm.model=openai/gpt-5-mini \
-    max_instances=5
-```
-
-### Multi-Agent Centralized on Terminal-Bench (Docker required)
-
-```bash
-python scripts/run_experiment.py \
-    agent=multi-agent-centralized \
-    dataset=terminalbench \
-    llm.model=openai/gpt-5-mini \
-    max_instances=5
-```
-
-### Scaling Number of Agents
-
-The multi-agent centralized system supports configuring the number of agents:
-
-```bash
-# Run with 5 agents
-python scripts/run_experiment.py \
-    agent=multi-agent-centralized \
-    agent.n_base_agents=5 \
-    dataset=plancraft-test
-
-# Run with 10 agents
-python scripts/run_experiment.py \
-    agent=multi-agent-centralized \
-    agent.n_base_agents=10 \
-    dataset=plancraft-test
-```
-
-## Output Structure
-
-Experiment outputs are saved to `exp_outputs/{dataset}/{agent}/{model}/{date}/{time}/`:
-
-```
-exp_outputs/
-└── plancraft-test/
-    └── multi-agent-centralized/
-        └── gemini/
-            └── gemini-2.0-flash/
-                └── 2025-01-21/
-                    └── 12-30-45/
-                        ├── run_config.yaml        # Experiment configuration
-                        ├── run.log                # Detailed execution logs
-                        ├── dataset_eval_metrics.json  # Aggregated metrics
-                        └── instance_runs/         # Per-instance outputs
-                            ├── 0000/
-                            ├── 0001/
-                            └── ...
-```
-
-### Output Files
-
-- **`run_config.yaml`**: Full configuration used for the experiment
-- **`run.log`**: Detailed logs including prompts, LLM responses, and tool calls
-- **`dataset_eval_metrics.json`**: Aggregated evaluation metrics
-  ```json
-  {
-    "avg_success": 0.85,
-    "avg_num_steps": 7.2,
-    "num_instances": 100
-  }
-  ```
-
-## Example Traces
-
-See `example_traces/` directory for sanitized sample experiment outputs demonstrating:
-- Single-agent execution traces
-- Multi-agent coordination logs
-- Per-instance and aggregated evaluation metrics
-
-## Project Structure
-
-```
-agent-scaling/
-├── agent_scaling/           # Main Python package
-│   ├── agents/              # Agent implementations
-│   │   ├── single_agent.py
-│   │   ├── multiagent_centralized.py
-│   │   ├── multiagent_decentralized.py
-│   │   ├── multiagent_hybrid.py
-│   │   └── multiagent_independent.py
-│   ├── datasets/            # Dataset loaders (SWE-bench, Terminal-Bench, etc.)
-│   ├── env/                 # Environment & tools (includes Docker environments)
-│   ├── llm/                 # LLM integration
-│   └── config/              # Configuration classes
-├── scripts/                 # Entry point + analysis scripts
-│   ├── run_experiment.py
-│   └── (regression and scaling-principle analysis scripts)
-├── run_conf/                # Hydra configurations
-│   ├── agent/               # Agent configs (single, centralized, decentralized, hybrid, independent)
-│   ├── dataset/             # Dataset configs
-│   └── run_exp.yaml         # Master config
-├── prompts/                 # Prompt templates
-├── example_traces/          # Sanitized sample execution traces
-├── datasets/                # (user-populated) Dataset files; see DATA_AVAILABILITY.md
-├── REPRODUCTION.md          # Step-by-step reproduction guide
-└── DATA_AVAILABILITY.md     # Benchmark source URLs and subset selection methodology
-```
-
-## Configuration Reference
-
-### Master Config (`run_conf/run_exp.yaml`)
-
-```yaml
-defaults:
-  - agent: multi-agent-centralized  # Agent type
-  - dataset: plancraft-test         # Dataset
-
-llm:
-  model: gemini/gemini-2.0-flash    # LLM model
-  params:
-    temperature: 0.0                # Generation temperature
-
-log_langfuse: false                 # Enable LangFuse tracing
-use_disk_cache: true                # Cache LLM calls
-num_workers: 1                      # Parallel workers
-debug: true                         # Debug mode
-max_instances: 3                    # Max instances to process
-```
-
-### Multi-Agent Config (`run_conf/agent/multi-agent-centralized.yaml`)
-
-```yaml
-name: multi-agent-centralized
-total_decision_budget: 32             # Lifetime worker decision budget B
-n_base_agents: 3                    # Number of agents
-min_iterations_per_agent: 0         # No artificial minimum in budget-controlled runs
-max_rounds: 10                       # Fixed communication horizon (not the worker budget)
-consensus_threshold: 0.7            # Decentralized only: agreement fraction for consensus
-communication:
-  strategy: orchestrated            # Communication strategy
-```
-
-### Lifetime decision budgets
-
-Each agent configuration exposes `total_decision_budget` (default `32`). This
-is a per-instance lifetime budget for worker decision calls: a single-agent
-run receives `B` decisions, while an `n_base_agents` multi-agent run gives each
-worker `floor(B / n_base_agents)` decisions across all rounds. Planning,
-coordination, debate-summary, and synthesis calls are auxiliary calls and do
-not consume the worker decision budget. `max_steps` and
-`max_iterations_per_agent` are optional legacy safety caps and are omitted from
-the canonical budget-controlled configurations. Multi-round protocols retain a
-fixed `max_rounds: 10` communication horizon; it controls when agents exchange
-information, while each worker's per-round quota is derived as
-`ceil((B / n) / max_rounds)` and the lifetime ledger remains authoritative.
-`min_iterations_per_agent` is capped by the worker's allocated lifetime budget.
-The ledger also records prompt/completion tokens and auxiliary-call counts for
-reporting compute separately from the decision-call budget.
-
-For example, with `B=32`, `n=3`, and `max_rounds=10`, each worker receives
-`floor(32/3)=10` lifetime decisions and at most one decision per communication
-round; the budget is never reset between rounds.
-
-Wall-clock safeguards are implementation-level controls, not experimental
-variables: dataset-specific `time_limit` values (or the internal 600-second
-fallback) stop a run if it hangs. The old configuration fields
-`worker_timeout` and `max_findings` are not part of the active orchestration
-path and are intentionally omitted from the canonical YAML files.
-
-## Citation
-
-This work is currently under revision at *Nature Machine Intelligence* under the title *"Beyond more agents: quantifying when multi-agent collaboration benefits large language model agents"*. While the revision is in review, please cite the arXiv preprint (which retains the original title):
-
-```bibtex
-@article{kim2025towards,
-  title={Towards a science of scaling agent systems},
-  author={Kim, Yubin and Gu, Ken and Park, Chanwoo and Park, Chunjong and Schmidgall, Samuel and Heydari, A Ali and Yan, Yao and Zhang, Zhihan and Zhuang, Yuchen and Liu, Yun and others},
-  journal={arXiv preprint arXiv:2512.08296},
-  year={2025}
-}
-```
-
-For the archived code release accompanying this work, please cite the version-specific Zenodo DOI given in the accompanying manuscript's Code Availability section, or the persistent concept DOI `10.5281/zenodo.20144433` which always resolves to the latest archived release of this repository.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+If you use the research code, cite the accompanying work and record the exact Git commit used for your experiments. The repository is released under the MIT License; see [`LICENSE`](LICENSE).
