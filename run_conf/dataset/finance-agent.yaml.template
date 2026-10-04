@@ -8,6 +8,7 @@
 # License: see upstream repository.
 
 dataset_id: finance_agent
+output_type: free_text
 from_langfuse: false
 local_path: datasets/finance_agent.json  # populated by scripts/setup_finance_agent.sh
 templates_local_path: prompts/dataset-shared/finance_agent.yaml

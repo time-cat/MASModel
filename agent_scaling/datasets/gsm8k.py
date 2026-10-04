@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Literal, Union
 
 from agent_scaling.datasets.base import Dataset, DatasetInstance, DatasetInstanceOutput
 from agent_scaling.datasets.registry import register_dataset, register_dataset_instance
@@ -20,6 +20,7 @@ class GSM8KInstance(DatasetInstance):
 
 @register_dataset("gsm8k")
 class GSM8KDataset(Dataset):
+    output_type: Literal["scalar_exact"] = "scalar_exact"
     dataset_id: str = "gsm8k"
     instances: List[GSM8KInstance]
 
@@ -32,7 +33,7 @@ class GSM8KDataset(Dataset):
         self, instance_output: DatasetInstanceOutput[GSM8KInstance]
     ) -> Dict[str, Any]:
         return {
-            "pred": self.extract_answer(instance_output.agent_output),
+            "pred": self.extract_answer(str(instance_output.submission)),
         }
 
     def get_metrics(self, eval_outputs: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -56,7 +57,7 @@ class GSM8KDataset(Dataset):
     ) -> Dict[str, Union[int, float]]:
         return {
             "correct": int(
-                self.extract_answer(instance_output.agent_output)
+                self.extract_answer(str(instance_output.submission))
                 == instance_output.data_instance.answer
             ),
         }

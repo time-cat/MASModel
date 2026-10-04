@@ -26,7 +26,7 @@ This adapter implements two grading paths, both honestly described:
   distinction is preserved.
 """
 import re
-from typing import Any, Dict, List, Optional, Set, Tuple, Union
+from typing import Any, Dict, List, Literal, Optional, Set, Tuple, Union
 
 from pydantic import Field
 
@@ -133,6 +133,7 @@ class WorkbenchInstance(DatasetInstance):
 
 @register_dataset(DATASET_IDS)
 class WorkbenchDataset(Dataset):
+    output_type: Literal["free_text"] = "free_text"
     instances: List[WorkbenchInstance]
     dataset_id: str = "workbench"
     metadata: Dict[str, Any] = Field(default_factory=dict)
@@ -146,7 +147,7 @@ class WorkbenchDataset(Dataset):
         self, instance_output: DatasetInstanceOutput[WorkbenchInstance]
     ) -> Dict[str, Any]:
         return {
-            "answer": instance_output.agent_output,
+            "answer": instance_output.submission,
             "expected_output": instance_output.data_instance.expected_output,
         }
 
@@ -154,7 +155,7 @@ class WorkbenchDataset(Dataset):
         self, instance_output: DatasetInstanceOutput[WorkbenchInstance]
     ) -> Dict[str, Union[int, float, str, bool]]:
         instance = instance_output.data_instance
-        response = instance_output.agent_output or ""
+        response = instance_output.submission or ""
 
         # Build the expected-actions list from the normalised JSON.
         expected_calls_text = "\n".join(

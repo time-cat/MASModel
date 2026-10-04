@@ -1,6 +1,6 @@
 """Terminal-Bench 2.0 dataset classes."""
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 
 from agent_scaling.datasets.base import Dataset, DatasetInstance, DatasetInstanceOutput
 from agent_scaling.datasets.registry import register_dataset, register_dataset_instance
@@ -33,6 +33,7 @@ class TerminalBenchInstance(DatasetInstance):
 
 @register_dataset(DATASET_IDS)
 class TerminalBenchDataset(Dataset):
+    output_type: Literal["patch_or_state"] = "patch_or_state"
     """Terminal-Bench 2.0 dataset (89 Linux terminal tasks)."""
 
     dataset_id: str = "terminalbench"

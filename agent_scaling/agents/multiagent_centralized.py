@@ -12,10 +12,12 @@ from agent_scaling.utils import write_yaml
 from .multiagent_components.conversation import OrchestrationResult
 from .multiagent_components.mas_lead_agent import LeadAgent
 from .multiagent_components.memory import EnhancedMemory
+from .multiagent_utils.aggregation import AggregationRequest, CandidateRecord, aggregate
 from .multiagent_utils.result_selection import (
     first_nonempty_answer,
     first_successful_agent,
     last_external_answer,
+    task_output_type,
     submit_tool_call,
 )
 from .registry import register_agent
@@ -157,6 +159,32 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
                 else first_nonempty_answer(agents)
             )
 
+        raw_candidates = {
+            aid: last_external_answer(agent)
+            for aid, agent in self.lead_agent.subagents.items()
+            if last_external_answer(agent)
+        }
+        # Lead synthesis is expected to be one plan.  If it is absent or a
+        # worker plan is the only available result, choose one candidate under
+        # the task contract rather than merging worker outputs.
+        if task_output_type(self) == "executable_plan":
+            if final_answer:
+                final_answer = aggregate(
+                    AggregationRequest(
+                        output_type="executable_plan",
+                        candidates=[("lead", final_answer)],
+                        agents=tuple(agents),
+                    )
+                ).output
+            elif raw_candidates:
+                final_answer = aggregate(
+                    AggregationRequest(
+                        output_type="executable_plan",
+                        candidates=list(raw_candidates.items()),
+                        agents=tuple(agents),
+                    )
+                ).output
+
         # Auto-submit only when no worker reached a terminal state.  The call is
         # schema-aware: scalar-answer tools receive a scalar, reasoning tools
         # receive the full text, and no tool receives a truncated arbitrary prefix.
@@ -184,7 +212,33 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
             if not final_answer:
                 final_answer = submission_response
 
+        successful_agent = successful_agent or first_successful_agent(agents)
+
         execution_time = time.time() - start_time
+        aggregation_candidates = (
+            [
+                CandidateRecord(
+                    "lead",
+                    final_answer,
+                    env=(
+                        successful_agent.env
+                        if task_output_type(self) in {"executable_plan", "patch_or_state"}
+                        and successful_agent
+                        else None
+                    ),
+                )
+            ]
+            if final_answer
+            else list(raw_candidates.items())
+        )
+        aggregation_result = aggregate(
+            AggregationRequest(
+                output_type=task_output_type(self),
+                candidates=aggregation_candidates or [("lead", final_answer)],
+                agents=tuple(agents),
+                plan_strategy="successful",
+            )
+        )
         total_decision_calls = sum(
             agent.budget.snapshot()["used_decision_calls"]
             for agent in self.lead_agent.subagents.values()
@@ -199,6 +253,21 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
         if instance_dir is not None:
             output_data = processing_result.model_dump()
             output_data["canonical_agent_output"] = final_answer
+            output_data["raw_candidates"] = raw_candidates
+            output_data["aggregated_output"] = final_answer
+            output_data["canonical_submission"] = aggregation_result.canonical_submission
+            output_data["output_type"] = task_output_type(self)
+            output_data.update(aggregation_result.to_metadata())
+            output_data["evaluation_semantics"] = (
+                "success_environment_state_selection"
+                if task_output_type(self) in {"executable_plan", "patch_or_state"}
+                else "task_contract_submission"
+            )
+            output_data["selected_environment_trajectory"] = (
+                getattr(successful_agent.env, "get_action_trace", lambda: [])()
+                if successful_agent is not None
+                else []
+            )
             output_data["canonical_agent_id"] = (
                 next(
                     (
@@ -244,10 +313,19 @@ class CentralizedMultiAgentSystem(AgentSystemWithTools):
         if final_env_status is None:
             final_env_status = processing_result.combined_env_status
 
+        successful_agent = successful_agent or first_successful_agent(agents)
+        selected_env = successful_agent.env if successful_agent is not None else None
+        canonical_submission = aggregation_result.canonical_submission
+
         # Return DatasetInstanceOutputWithTrajectory like single_agent.py
         return DatasetInstanceOutputWithTrajectory(
             data_instance=instance,
             agent_output=final_answer,
-            trajectory=[],  # Multi-agent doesn't have a single trajectory
+            canonical_submission=canonical_submission,
+            trajectory=(
+                getattr(selected_env, "get_action_trace", lambda: [])()
+                if selected_env is not None
+                else []
+            ),
             final_env_output=final_env_status,
         )

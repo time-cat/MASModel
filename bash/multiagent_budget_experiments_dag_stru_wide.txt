@@ -1,0 +1,75 @@
+# Budgeted Coordination Law: plancraft-test multi-agent experiments
+# Run from the MASModel repository root: bash multiagent_budget_experiments_plancraft.txt
+#
+# IMPORTANT: agent.total_decision_budget is a SYSTEM worker budget. The code
+# assigns floor(total_budget / n_base_agents) calls to each worker. The primary
+# sweep therefore uses total_budget=n*per_agent_budget when local budget is
+# the controlled variable.
+
+set -euo pipefail
+
+DATASET="datasets/threshold_families_structure/threshold-wide.json"
+MODEL="openai/qwen-flash"
+COMMON=(
+  dataset=synthetic-dag
+  dataset.local_path="$DATASET"
+  llm.model="$MODEL"
+  llm.params.temperature=0.8
+  max_instances=60
+  num_workers=3
+  debug=false
+  log_langfuse=false
+  use_disk_cache=false
+  agent.min_iterations_per_agent=0
+  agent.use_remaining_budget_for_verification=true
+)
+
+run_independent() {
+  local n="$1"; local budget="$2"
+  python scripts/run_experiment.py \
+    agent=multi-agent-independent "${COMMON[@]}" \
+    agent.n_base_agents="$n" agent.total_decision_budget="$budget"
+}
+
+run_coordinated() {
+  local arch="$1"; local n="$2"; local budget="$3"; local rounds="$4"
+  python scripts/run_experiment.py \
+    agent="$arch" "${COMMON[@]}" \
+    agent.n_base_agents="$n" agent.total_decision_budget="$budget" \
+    agent.max_rounds="$rounds"
+}
+
+
+# PHASE 1: fixed per-agent lifetime budget. b is local budget, n is team size,
+# so system budget is exactly n*b. Main architectures: Independent, Centralized,
+# Decentralized. n={2,3,4,5}, b={2,3,4,5,6}; 60 runs.
+for n in 2 3 4 5; do
+  for b in 2 3 4 5 6; do
+    run_independent "$n" "$((n * b))"
+  done
+done
+for arch in multi-agent-centralized multi-agent-decentralized; do
+  for n in 2 3 4 5; do
+    for b in 2 3 4 5 6; do
+      run_coordinated "$arch" "$n" "$((n * b))" 3
+    done
+  done
+done
+
+
+# PHASE 2: fixed SYSTEM budget. This separates coordination/parallelism from simply buying more calls.
+# Core architectures only, 36 runs.
+# for arch in multi-agent-independent multi-agent-centralized multi-agent-decentralized; do
+#   for total_budget in 8 12 16 20 24; do
+#     for n in 2 3 4 5; do
+#       if [[ "$arch" == "multi-agent-independent" ]]; then
+#         run_independent "$n" "$total_budget"
+#       else
+#         run_coordinated "$arch" "$n" "$total_budget" 3
+#       fi
+#     done
+#   done
+# done
+
+
+

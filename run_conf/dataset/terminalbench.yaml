@@ -1,4 +1,5 @@
 dataset_id: terminalbench
+output_type: patch_or_state
 from_langfuse: false
 local_path: datasets/terminalbench.json
 templates_local_path: prompts/dataset-shared/terminalbench.yaml

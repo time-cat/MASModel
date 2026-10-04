@@ -8,6 +8,7 @@
 # License: see upstream repository.
 
 dataset_id: workbench
+output_type: free_text
 from_langfuse: false
 local_path: datasets/workbench.json  # populated by scripts/setup_workbench.sh
 templates_local_path: prompts/dataset-shared/workbench.yaml

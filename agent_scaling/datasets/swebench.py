@@ -1,7 +1,7 @@
 """SWE-Bench Verified and Pro dataset classes."""
 
 import json
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 
 from pydantic import Field
 
@@ -85,6 +85,7 @@ class SWEBenchInstance(DatasetInstance):
 
 @register_dataset(DATASET_IDS)
 class SWEBenchDataset(Dataset):
+    output_type: Literal["patch_or_state"] = "patch_or_state"
     """SWE-Bench Verified or Pro dataset."""
 
     dataset_id: str = "swebench-verified"
@@ -97,7 +98,7 @@ class SWEBenchDataset(Dataset):
             "success": instance_output.final_env_output.success or False,
             "num_steps": instance_output.final_env_output.num_steps or -1,
             "instance_id": instance_output.data_instance.instance_id,
-            "model_patch": instance_output.agent_output or "",
+            "model_patch": instance_output.submission or "",
         }
 
     def get_instance_eval_metrics(

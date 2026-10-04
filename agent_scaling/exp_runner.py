@@ -19,7 +19,9 @@ from agent_scaling.utils import write_json, write_yaml
 class InstanceSave(BaseModel):
     inp: Dict[str, Any]
     output: Dict[str, Any]
-    metrics: Dict[str, Union[int, float, str]]
+    # Dataset outputs may contain structured audit data (for example a
+    # PlanCraft action trace), while metrics remain scalar by convention.
+    metrics: Dict[str, Any]
     expected_output: Optional[Any] = None
 
 

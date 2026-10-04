@@ -14,10 +14,12 @@ from .multiagent_components.conversation import OrchestrationResult, SubAgentRou
 from .multiagent_components.mas_lead_agent import LeadAgent
 from .multiagent_components.mas_subagent import WorkerSubagent
 from .multiagent_components.memory import EnhancedMemory
+from .multiagent_utils.aggregation import AggregationRequest, CandidateRecord, aggregate
 from .multiagent_utils.result_selection import (
     first_nonempty_answer,
     first_successful_agent,
     last_external_answer,
+    task_output_type,
     submit_tool_call,
 )
 from .registry import register_agent
@@ -212,6 +214,48 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
                 else first_nonempty_answer(agents)
             )
 
+        # Lead synthesis is normally a single answer, but it can contain a
+        # tool-call trace or Markdown-wrapped scalar.  Preserve that reasoning
+        # while adding an explicit final marker so downstream scalar graders do
+        # not accidentally consume an intermediate number.
+        raw_candidates = {
+            aid: last_external_answer(agent)
+            for aid, agent in self.lead_agent.subagents.items()
+            if last_external_answer(agent)
+        }
+        if task_output_type(self) == "executable_plan":
+            # A peer round may update worker state without changing the lead's
+            # synthesis.  Keep the lead plan if present; otherwise select one
+            # worker plan.  Never append peer plans to the submitted plan.
+            if final_answer:
+                final_answer = aggregate(
+                    AggregationRequest(
+                        output_type="executable_plan",
+                        candidates=[("lead", final_answer)],
+                        agents=tuple(agents),
+                    )
+                ).output
+            elif raw_candidates:
+                final_answer = aggregate(
+                    AggregationRequest(
+                        output_type="executable_plan",
+                        candidates=list(raw_candidates.items()),
+                        agents=tuple(agents),
+                    )
+                ).output
+        elif task_output_type(self) == "scalar_exact" and final_answer:
+            # Scalar canonicalization is owned by the aggregation layer.  This
+            # keeps Hybrid from appending numeric markers to free-text or
+            # patch/state tasks and gives scalar tasks one parser everywhere.
+            scalar_result = aggregate(
+                AggregationRequest(
+                    output_type="scalar_exact",
+                    candidates=[("lead", final_answer)],
+                    agents=tuple(agents),
+                )
+            )
+            final_answer = scalar_result.output
+
         # Auto-submit only when no worker reached a terminal state, using the
         # terminal tool's schema to preserve task-specific answer semantics.
         any_done = any(agent.env.env_done() for agent in agents)
@@ -237,6 +281,33 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
             if not final_answer:
                 final_answer = submission_response
 
+        successful_agent = successful_agent or first_successful_agent(agents)
+
+        aggregation_candidates = (
+            [
+                CandidateRecord(
+                    "lead",
+                    final_answer,
+                    env=(
+                        successful_agent.env
+                        if task_output_type(self) in {"executable_plan", "patch_or_state"}
+                        and successful_agent
+                        else None
+                    ),
+                )
+            ]
+            if final_answer
+            else list(raw_candidates.items())
+        )
+        aggregation_result = aggregate(
+            AggregationRequest(
+                output_type=task_output_type(self),
+                candidates=aggregation_candidates or [("lead", final_answer)],
+                agents=tuple(agents),
+                plan_strategy="successful",
+            )
+        )
+
         execution_time = time.time() - start_time
         total_decision_calls = sum(
             a.budget.snapshot()["used_decision_calls"]
@@ -251,6 +322,24 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
         if instance_dir is not None:
             output_data = processing_result.model_dump()
             output_data["canonical_agent_output"] = final_answer
+            output_data["raw_candidates"] = raw_candidates
+            output_data["aggregated_output"] = final_answer
+            output_data["canonical_submission"] = aggregation_result.canonical_submission
+            output_data.update(aggregation_result.to_metadata())
+            output_data["output_type"] = task_output_type(self)
+            output_data["evaluation_semantics"] = (
+                "success_environment_state_selection"
+                if task_output_type(self) in {"executable_plan", "patch_or_state"}
+                else "task_contract_submission"
+            )
+            output_data["selected_environment_trajectory"] = (
+                getattr(successful_agent.env, "get_action_trace", lambda: [])()
+                if successful_agent is not None
+                else []
+            )
+            # The peer round updates worker state/memory only.  The lead's
+            # centralized synthesis remains the submitted answer by design.
+            output_data["peer_round_re_synthesized"] = False
             output_data["canonical_agent_id"] = (
                 next(
                     (
@@ -296,9 +385,18 @@ class HybridMultiAgentSystem(AgentSystemWithTools):
         if final_env_status is None:
             final_env_status = processing_result.combined_env_status
 
+        successful_agent = successful_agent or first_successful_agent(agents)
+        selected_env = successful_agent.env if successful_agent is not None else None
+        canonical_submission = aggregation_result.canonical_submission
+
         return DatasetInstanceOutputWithTrajectory(
             data_instance=instance,
             agent_output=final_answer,
-            trajectory=[],
+            canonical_submission=canonical_submission,
+            trajectory=(
+                getattr(selected_env, "get_action_trace", lambda: [])()
+                if selected_env is not None
+                else []
+            ),
             final_env_output=final_env_status,
         )

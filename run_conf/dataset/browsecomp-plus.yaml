@@ -1,4 +1,5 @@
 dataset_id: browsecomp_plus_sampled_100
+output_type: free_text
 from_langfuse: false
 local_path: datasets/browsecomp_plus_sampled_100.json
 templates_local_path: prompts/dataset-shared/browsecomp.yaml

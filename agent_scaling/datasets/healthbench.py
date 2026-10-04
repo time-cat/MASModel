@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 
 from agent_scaling.datasets.base import Dataset, DatasetInstance, DatasetInstanceOutput
 from agent_scaling.datasets.registry import register_dataset, register_dataset_instance
@@ -36,6 +36,7 @@ class HealthBenchInstance(DatasetInstance):
 
 @register_dataset("healthbench")
 class HealthBenchDataset(Dataset):
+    output_type: Literal["free_text"] = "free_text"
     dataset_id: str = "healthbench"
     instances: List[HealthBenchInstance]
 
@@ -88,7 +89,7 @@ class HealthBenchDataset(Dataset):
     def get_instance_eval_output(
         self, instance_output: DatasetInstanceOutput[HealthBenchInstance]
     ) -> Dict[str, Any]:
-        llm_output = instance_output.agent_output
+        llm_output = instance_output.submission
         return {
             "pred": self.extract_answer(llm_output),
             "reasoning_trace": self.extract_reasoning_trace(llm_output),
@@ -115,7 +116,7 @@ class HealthBenchDataset(Dataset):
         self, instance_output: DatasetInstanceOutput[HealthBenchInstance]
     ) -> Dict[str, Union[int, float]]:
         instance = instance_output.data_instance
-        llm_output = instance_output.agent_output
+        llm_output = instance_output.submission
         pred_response = self.extract_answer(llm_output)
 
         # For HealthBench, we evaluate based on rubric criteria if available

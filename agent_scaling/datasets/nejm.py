@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, Union, cast
+from typing import Any, Dict, List, Literal, Optional, Union, cast
 
 from langchain_core.messages import AIMessage, BaseMessage
 from pydantic import BaseModel, field_validator
@@ -72,6 +72,7 @@ def _strip_json_code_block(text: str) -> str:
 
 @register_dataset("nejm")
 class NEJMDataset(Dataset):
+    output_type: Literal["free_text"] = "free_text"
     """
     NEJM dataset with optional LLM-based grading for evaluation.
     Set use_llm_eval=True to use LLM for grading, otherwise uses string match.
@@ -143,11 +144,11 @@ class NEJMDataset(Dataset):
         self, instance_output: DatasetInstanceOutput[NEJMInstance]
     ) -> Dict[str, Any]:
         return {
-            "pred": self.extract_answer(instance_output.agent_output),
+            "pred": self.extract_answer(str(instance_output.submission)),
             "reasoning_trace": self.extract_reasoning_trace(
-                instance_output.agent_output
+                instance_output.submission
             ),
-            "full_response": instance_output.agent_output,
+            "full_response": instance_output.submission,
         }
 
     def get_metrics(self, eval_outputs: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -180,7 +181,7 @@ class NEJMDataset(Dataset):
         Otherwise, use string-matching logic and rationale is empty.
         """
         instance = instance_output.data_instance
-        llm_output = instance_output.agent_output
+        llm_output = instance_output.submission
         if self.use_llm_eval:
             # Use LLM grader utility
             reference = (

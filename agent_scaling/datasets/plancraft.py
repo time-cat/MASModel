@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Literal
 
 from plancraft.simple import PlancraftExample
 
@@ -27,7 +27,13 @@ class PlancraftInstance(PlancraftExample, DatasetInstance):
 
 @register_dataset(DATASET_IDS)
 class PlancraftDataset(Dataset):
+    """PlanCraft is evaluated from environment state, not plan-text matching.
+
+    Multi-agent runs select one worker's environment (success-first); the
+    recorded action trace is diagnostic evidence of that selected execution.
+    """
     dataset_id: str = "plancraft-test"
+    output_type: Literal["executable_plan"] = "executable_plan"
     instances: List[PlancraftInstance]
 
     def get_instance_eval_output(
@@ -40,12 +46,22 @@ class PlancraftDataset(Dataset):
             "num_steps": instance_output.final_env_output.num_steps
             if instance_output.final_env_output
             else -1,
+            "evaluation_semantics": "environment_state_execution",
+            "submission_semantics": "selected_environment_action_trace",
+            "action_trace": [step.model_dump() for step in instance_output.trajectory],
         }
 
     def get_instance_eval_metrics(
         self, instance_output: DatasetInstanceOutputWithTrajectory[PlancraftInstance]
     ) -> Dict[str, Any]:
-        return self.get_instance_eval_output(instance_output)
+        # Metrics are scalar values consumed by Langfuse and dataset-level
+        # aggregation.  Keep the full action trace in the instance output and
+        # trajectory audit fields, not in this scalar metrics dictionary.
+        evaluation = self.get_instance_eval_output(instance_output)
+        return {
+            "success": evaluation["success"],
+            "num_steps": evaluation["num_steps"],
+        }
 
     def get_metrics(self, eval_outputs: List[Dict[str, Any]]) -> Dict[str, Any]:
         return {

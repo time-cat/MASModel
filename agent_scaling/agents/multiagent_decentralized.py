@@ -31,7 +31,15 @@ from agent_scaling.budget import per_round_cap
 from .multiagent_components.conversation import SubAgentRoundResult
 from .multiagent_components.mas_subagent import WorkerSubagent
 from .multiagent_components.memory import EnhancedMemory
-from .multiagent_utils.result_selection import first_successful_agent, submit_tool_call
+from .multiagent_utils.aggregation import AggregationRequest, CandidateRecord, aggregate
+from .multiagent_utils.result_selection import (
+    append_final_scalar,
+    explicit_scalar_candidate,
+    first_successful_agent,
+    last_external_answer,
+    task_output_type,
+    submit_tool_call,
+)
 from .registry import register_agent
 
 
@@ -174,12 +182,57 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         if not non_empty:
             return "", None
 
-        answer_to_supporters: Dict[str, List[str]] = {}
+        # Exact and executable contracts are delegated to the shared layer;
+        # the debate/consensus object remains responsible only for exposing
+        # peer findings and round state.
+        if task_output_type(self) in {
+            "scalar_exact", "executable_plan", "patch_or_state"
+        }:
+            result = aggregate(
+                AggregationRequest(
+                    output_type=task_output_type(self),
+                    candidates=non_empty,
+                    agents=tuple(self.subagents.values()),
+                    plan_strategy="majority",
+                )
+            )
+            return result.output, result.selected_agent
+
+        # Vote on an explicit scalar value when one is present, rather than on
+        # the entire chain-of-thought string.  Agents commonly reach the same
+        # answer with different formatting or arithmetic explanations.
+        answer_to_supporters: Dict[Tuple[str, str], List[str]] = {}
+        representative: Dict[Tuple[str, str], str] = {}
+        scalar_for_key: Dict[Tuple[str, str], str] = {}
+        use_scalar_contract = task_output_type(self) == "scalar_exact"
         for aid, ans in non_empty:
-            answer_to_supporters.setdefault(ans, []).append(aid)
+            scalar = (
+                explicit_scalar_candidate(self.subagents.get(aid), ans)
+                if use_scalar_contract
+                else ""
+            )
+            if scalar:
+                try:
+                    numeric = float(scalar)
+                    normalized = (
+                        str(int(numeric))
+                        if numeric.is_integer()
+                        else format(numeric, "g")
+                    )
+                except ValueError:
+                    normalized = scalar.strip()
+                key = ("scalar", normalized)
+                scalar_for_key[key] = normalized
+            else:
+                # Preserve the original exact-string consensus semantics for
+                # free-form answers (and its deterministic first-seen tie-break).
+                key = ("text", ans)
+            answer_to_supporters.setdefault(key, []).append(aid)
+            representative.setdefault(key, ans)
 
         all_agent_ids = [aid for aid, _ in non_empty]
-        for ans, supporters in answer_to_supporters.items():
+        for key, supporters in answer_to_supporters.items():
+            ans = representative[key]
             proposer = supporters[0]
             finding_id = len(self.consensus.pending_findings)
             self.consensus.share_finding(
@@ -196,10 +249,15 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         self.consensus.synchronize()
 
         counts = Counter(
-            {ans: len(supporters) for ans, supporters in answer_to_supporters.items()}
+            {key: len(supporters) for key, supporters in answer_to_supporters.items()}
         )
-        winning_answer, vote_count = counts.most_common(1)[0]
-        winning_agent = answer_to_supporters[winning_answer][0]
+        winning_key, vote_count = counts.most_common(1)[0]
+        winning_agent = answer_to_supporters[winning_key][0]
+        winning_answer = representative[winning_key]
+        if use_scalar_contract and winning_key in scalar_for_key:
+            winning_answer = append_final_scalar(
+                winning_answer, scalar_for_key[winning_key]
+            )
         share = vote_count / len(non_empty)
         logger.info(
             f"Consensus vote: '{winning_answer[:80]}...' wins with "
@@ -242,6 +300,30 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         except Exception as e:
             logger.warning(f"Consensus auto-submit failed: {e}")
             return consensus_answer
+
+    def _select_environment_agent(self, winning_agent_id: Optional[str]):
+        """Choose one worker as the source of all environment-backed outputs.
+
+        Worker environments are isolated.  If the textual consensus winner did
+        not complete the task, its answer cannot be paired with another
+        worker's successful environment without producing a misleading result.
+        """
+        winning_agent = (
+            self.subagents.get(winning_agent_id)
+            if winning_agent_id is not None
+            else None
+        )
+        if winning_agent is not None:
+            status = winning_agent.env.env_status()
+            if bool(getattr(status, "success", False)):
+                return winning_agent
+
+        successful_agent = first_successful_agent(self.subagents.values())
+        if successful_agent is not None:
+            return successful_agent
+        if winning_agent is not None:
+            return winning_agent
+        return next(iter(self.subagents.values()), None)
 
     def run_agent(
         self,
@@ -373,12 +455,13 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
             consensus_answer, winning_agent
         )
 
-        # Pick the canonical env_status: prefer the winning agent's env if it
-        # has reported a status; otherwise fall back to the first available.
+        output_type = task_output_type(self)
+        environment_backed_output = output_type in {"executable_plan", "patch_or_state"}
+
+        # Pick the canonical env_status using the existing fallback behavior.
         final_env_status = None
         if winning_agent is not None:
-            env = self.subagents[winning_agent].env
-            final_env_status = env.env_status()
+            final_env_status = self.subagents[winning_agent].env.env_status()
         if not getattr(final_env_status, "success", False):
             successful_agent = first_successful_agent(self.subagents.values())
             if successful_agent is not None:
@@ -394,6 +477,42 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
                 break
 
         final_answer = consensus_answer or submission_response
+        selected_agent = self.subagents.get(winning_agent) if winning_agent else None
+        if selected_agent is None:
+            selected_agent = first_successful_agent(self.subagents.values())
+        selected_env = selected_agent.env if selected_agent is not None else None
+
+        if environment_backed_output:
+            # Keep status, trajectory, and canonical submission attached to the
+            # same worker.  A successful fallback worker must also supply the
+            # final text; otherwise the log would describe one worker while
+            # the evaluator scores another worker's environment.
+            selected_agent = self._select_environment_agent(winning_agent)
+            selected_env = selected_agent.env if selected_agent is not None else None
+            final_env_status = (
+                selected_env.env_status() if selected_env is not None else None
+            )
+            if selected_agent is not None and selected_agent.agent_id != winning_agent:
+                selected_answer = last_external_answer(selected_agent)
+                if selected_answer:
+                    final_answer = selected_answer
+            if not final_answer and selected_agent is not None:
+                final_answer = last_external_answer(selected_agent)
+
+        aggregation_candidates = (
+            [CandidateRecord(selected_agent.agent_id, final_answer, agent=selected_agent)]
+            if final_answer and selected_agent is not None
+            else final_round_answers
+        )
+        aggregation_result = aggregate(
+            AggregationRequest(
+                output_type=output_type,
+                candidates=aggregation_candidates,
+                agents=tuple(self.subagents.values()),
+                plan_strategy="majority",
+            )
+        )
+        canonical_submission = aggregation_result.canonical_submission
 
         execution_time = time.time() - start_time
         total_decision_calls = sum(
@@ -427,7 +546,30 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
                     for aid, agent in self.subagents.items()
                 },
                 "winning_agent": winning_agent,
+                "selected_agent": (
+                    selected_agent.agent_id if selected_agent is not None else None
+                ),
                 "canonical_agent_output": final_answer,
+                "raw_candidates": {
+                    aid: ans for aid, ans in final_round_answers
+                },
+                "aggregated_output": final_answer,
+                "canonical_submission": canonical_submission,
+                "candidate_submissions": aggregation_result.candidate_submissions,
+                "vote_counts": aggregation_result.vote_counts,
+                "tie_break_reason": aggregation_result.tie_break_reason,
+                "aggregation_invalid_reason": aggregation_result.invalid_reason,
+                "output_type": task_output_type(self),
+                "evaluation_semantics": (
+                    "success_environment_state_selection"
+                    if task_output_type(self) in {"executable_plan", "patch_or_state"}
+                    else "task_contract_submission"
+                ),
+                "selected_environment_trajectory": (
+                    getattr(selected_env, "get_action_trace", lambda: [])()
+                    if selected_env is not None
+                    else []
+                ),
                 "total_iterations": total_decision_calls,
                 "execution_time": execution_time,
                 "agent_findings": {
@@ -453,6 +595,11 @@ class DecentralizedMultiAgentSystem(AgentSystemWithTools):
         return DatasetInstanceOutputWithTrajectory(
             data_instance=instance,
             agent_output=final_answer,
-            trajectory=[],
+            canonical_submission=canonical_submission,
+            trajectory=(
+                getattr(selected_env, "get_action_trace", lambda: [])()
+                if selected_env is not None
+                else []
+            ),
             final_env_output=final_env_status,
         )

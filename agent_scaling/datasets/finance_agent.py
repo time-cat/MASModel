@@ -20,7 +20,7 @@ criterion is judged by an LLM, score = fraction of correctness criteria
 satisfied). When no rubric is present we fall back to a single LLM judge
 against ``expected_answer``.
 """
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 
 from langchain_core.messages import BaseMessage
 from pydantic import Field
@@ -61,6 +61,7 @@ class FinanceAgentInstance(DatasetInstance):
 
 @register_dataset(DATASET_IDS)
 class FinanceAgentDataset(Dataset):
+    output_type: Literal["free_text"] = "free_text"
     instances: List[FinanceAgentInstance]
     dataset_id: str = "finance_agent"
     metadata: Dict[str, Any] = Field(default_factory=dict)
@@ -71,7 +72,7 @@ class FinanceAgentDataset(Dataset):
         self, instance_output: DatasetInstanceOutput[FinanceAgentInstance]
     ) -> Dict[str, Any]:
         return {
-            "answer": instance_output.agent_output,
+            "answer": instance_output.submission,
             "expected_output": instance_output.data_instance.expected_output,
         }
 
@@ -136,7 +137,7 @@ class FinanceAgentDataset(Dataset):
         assert self.eval_prompts is not None, "eval_prompts must be set"
         assert self.eval_llm is not None, "eval_llm must be set"
         instance = instance_output.data_instance
-        response = instance_output.agent_output or ""
+        response = instance_output.submission or ""
 
         rubric = (instance.metadata or {}).get("rubric")
         if isinstance(rubric, list) and rubric:

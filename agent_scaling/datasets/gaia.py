@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List, Literal, Union
 
 from pydantic import field_validator
 
@@ -38,6 +38,7 @@ class GAIAInstance(DatasetInstance):
 
 @register_dataset("gaia")
 class GAIADataset(Dataset):
+    output_type: Literal["free_text"] = "free_text"
     dataset_id: str = "gaia"
     instances: List[GAIAInstance]
 
@@ -100,7 +101,7 @@ class GAIADataset(Dataset):
     def get_instance_eval_output(
         self, instance_output: DatasetInstanceOutput[GAIAInstance]
     ) -> Dict[str, Any]:
-        llm_output = instance_output.agent_output
+        llm_output = instance_output.submission
         return {
             "pred": self.extract_answer(llm_output),
             "reasoning_trace": self.extract_reasoning_trace(llm_output),
@@ -126,7 +127,7 @@ class GAIADataset(Dataset):
     def get_instance_eval_metrics(
         self, instance_output: DatasetInstanceOutput[GAIAInstance]
     ) -> Dict[str, Union[int, float]]:
-        llm_output = instance_output.agent_output
+        llm_output = instance_output.submission
         instance = instance_output.data_instance
         pred_answer = self.extract_answer(llm_output)
 

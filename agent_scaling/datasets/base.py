@@ -35,11 +35,27 @@ class TrajectoryStep(BaseModel):
     observation: str
     response: str
     thought: str
+    tool: str | None = None
+    args: Dict[str, Any] = Field(default_factory=dict)
+    success: bool | None = None
+    step: int | None = None
 
 
 class DatasetInstanceOutput(BaseModel, Generic[T]):
     data_instance: T
     agent_output: str | Any
+    # Task-aware submission produced by the MAS adapter. Evaluators may use
+    # this canonical value instead of reparsing an architecture-specific
+    # reasoning transcript.
+    canonical_submission: Any | None = None
+
+    @property
+    def submission(self) -> Any:
+        # Distinguish an explicit invalid submission (None) from legacy/direct
+        # callers that did not provide the canonical field at all.
+        if "canonical_submission" not in self.model_fields_set:
+            return self.agent_output
+        return self.canonical_submission
 
 
 class DatasetInstanceOutputWithTrajectory(DatasetInstanceOutput[T], Generic[T]):
@@ -126,6 +142,9 @@ class Dataset(BaseModel, ABC):
 
     dataset_id: str
     instances: List[DatasetInstance]
+    output_type: Literal[
+        "scalar_exact", "free_text", "executable_plan", "patch_or_state"
+    ]
     use_llm_eval: bool = Field(default=False, exclude=True)
     eval_llm: Optional[ChatLiteLLMLC] = Field(default=None, exclude=True)
     eval_prompts: Optional[Dict[str, Prompt]] = Field(default=None, exclude=True)

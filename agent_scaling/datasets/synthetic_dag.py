@@ -9,7 +9,7 @@ leaving the structural inspection threshold unchanged.
 """
 
 import re
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Literal
 
 from pydantic import Field, model_validator
 
@@ -76,25 +76,26 @@ class SyntheticDAGInstance(DatasetInstance):
 @register_dataset(DATASET_IDS)
 class SyntheticDAGDataset(Dataset):
     dataset_id: str = "synthetic_dag"
+    output_type: Literal["scalar_exact"] = "scalar_exact"
     instances: List[SyntheticDAGInstance]
 
     def get_instance_eval_output(
         self, instance_output: DatasetInstanceOutput[SyntheticDAGInstance]
     ) -> Dict[str, Any]:
-        raw = str(instance_output.agent_output or "")
+        submission = instance_output.submission
+        raw = str(submission) if submission is not None else ""
         labelled = re.findall(
-            r"(?:final\s+score|final\s+answer|answer|score)\s*[:=]\s*(-?\d+)",
+            r"(?:final\s+score|final\s+answer|answer|score)\s*(?::|=|\bis\s)*\s*(-?\d+)",
             raw,
             flags=re.IGNORECASE,
         )
-        integers = re.findall(r"-?\d+", raw)
-        # ``InstanceSave.metrics`` accepts scalar numeric values but not None.
-        # Use -1 as an explicitly invalid score when a run never submitted an
-        # answer (for example, when the decision budget is exhausted before the
-        # first tool call). This preserves failure semantics while allowing the
-        # runner to persist the per-instance result.
+        canonical_number = (
+            re.fullmatch(r"-?\d+", raw.strip())
+            if instance_output.canonical_submission is not None
+            else None
+        )
         submitted = int(labelled[-1]) if labelled else (
-            int(integers[-1]) if integers else -1
+            int(canonical_number.group(0)) if canonical_number else -1
         )
         target = instance_output.data_instance.target_score
         return {

@@ -1,4 +1,5 @@
 dataset_id: plancraft-test
+output_type: executable_plan
 from_langfuse: false
 local_path: datasets/plancraft-test.json
 templates_local_path: prompts/dataset-shared/plancraft.yaml

@@ -147,6 +147,17 @@ def test_dataset_exact_integer_grader():
     assert missing["submitted"] is False
     assert missing["success"] is False
 
+    explicit_invalid = dataset.get_instance_eval_metrics(
+        DatasetInstanceOutput(
+            data_instance=instance,
+            agent_output="I inspected N3 but have not finished.",
+            canonical_submission=None,
+        )
+    )
+    assert explicit_invalid["submitted_score"] == -1
+    assert explicit_invalid["submitted"] is False
+    assert explicit_invalid["success"] is False
+
 
 def test_environment_enforces_dependencies_and_submit():
     instance = SyntheticDAGInstance(

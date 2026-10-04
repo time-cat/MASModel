@@ -199,3 +199,31 @@ def test_consensus_vote_includes_completed_agents_last_answer():
     assert "terminated-but-final answer C" in candidates
     assert winning_answer == "active answer"
     assert winning_agent in {"agent_1", "agent_2"}
+
+
+def test_environment_selection_rebinds_failed_winner_to_successful_worker():
+    """Environment-backed outputs must come from one coherent worker."""
+    sys_ = _new_system()
+
+    def make_env_agent(agent_id: str, success: bool):
+        env = SimpleNamespace(
+            env_status=lambda: SimpleNamespace(success=success),
+            env_done=lambda: success,
+            tools={},
+        )
+        conv = SimpleNamespace(
+            last_outgoing_external_message=f"answer from {agent_id}",
+            status="completed" if success else "active",
+            total_iterations=1,
+        )
+        return SimpleNamespace(agent_id=agent_id, env=env, conv_history=conv)
+
+    sys_.subagents = {
+        "agent_1": make_env_agent("agent_1", False),
+        "agent_2": make_env_agent("agent_2", True),
+    }
+
+    selected = sys_._select_environment_agent("agent_1")
+
+    assert selected.agent_id == "agent_2"
+    assert selected.env.env_status().success is True

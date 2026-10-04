@@ -1,18 +1,9 @@
-"""Independent multi-agent system: N agents work in parallel with synthesis_only aggregation.
+"""Independent parallel ensemble with contract-aware aggregation.
 
-Matches the Methods section of the revised manuscript (Section 6.1):
-    A = {a_1, ..., a_n}, C = {(a_i, a_agg)},  Omega = synthesis_only.
-
-The synthesis_only aggregator concatenates sub-agent outputs without
-cross-validation or majority voting; the aggregator performs no analytical
-comparison of responses, so any performance differences arise purely from
-parallel exploration rather than error correction.
-
-This is a parallel ensemble without coordination. The aggregator is
-intentionally the weakest in the architectural ablation, isolating
-"parallelism" from "coordination". All N sub-agents run to completion and
-their outputs are concatenated in insertion order; the system does not
-perform any first-to-succeed race, voting, or cross-validation.
+All workers run independently.  The aggregation layer preserves a complete
+text synthesis for free-form tasks, performs exact-value voting for scalar
+tasks, and selects one successful environment trajectory for executable plans.
+No incompatible environment states are merged.
 """
 import asyncio
 import os.path as osp
@@ -27,7 +18,11 @@ from agent_scaling.utils import write_yaml
 
 from .multiagent_components.mas_subagent import WorkerSubagent
 from .multiagent_components.memory import EnhancedMemory
-from .multiagent_utils.result_selection import submit_tool_call
+from .multiagent_utils.aggregation import AggregationRequest, aggregate
+from .multiagent_utils.result_selection import (
+    task_output_type,
+    submit_tool_call,
+)
 from .registry import register_agent
 from agent_scaling.budget import per_round_cap
 
@@ -36,9 +31,8 @@ from agent_scaling.budget import per_round_cap
 class IndependentMultiAgentSystem(AgentSystemWithTools):
     """N agents run in parallel with no inter-agent communication.
 
-    Aggregator policy: synthesis_only - concatenates each sub-agent's final
-    answer into a single response. No voting, no cross-validation, no
-    analytic comparison.
+    Aggregation is delegated to the shared type-aware layer. The original
+    worker transcripts remain in ``raw_candidates`` for auditability.
 
     `max_iterations_per_agent` is an optional legacy safety cap. Canonical
     budget experiments omit it and use the per-worker lifetime budget.
@@ -74,7 +68,7 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
 
         logger.info(
             f"IndependentMultiAgentSystem: {n_base_agents} agents in parallel, "
-            f"synthesis_only aggregation (concatenation, no voting)"
+            f"type-aware aggregation"
         )
 
     def _create_subagents(self, task_instance: DatasetInstance):
@@ -105,7 +99,7 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         )
 
     def _synthesize_only(self) -> Tuple[str, List[str]]:
-        """Concatenate each sub-agent's final answer without analysis or voting.
+        """Concatenate each sub-agent's final answer without rewriting it.
 
         Returns (synthesized_answer, contributing_agent_ids).
         """
@@ -209,19 +203,36 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
                 except Exception as e:
                     logger.warning(f"Agent {agent_id} failed: {e}")
 
-        # synthesis_only aggregator: concatenate every agent's last answer.
-        # The synthesized text is the canonical agent output returned to the
-        # caller and used for grading; individual agent env statuses are
-        # secondary and reported only as infrastructure metadata.
+        # Preserve every raw candidate for auditability.  The canonical output
+        # is produced exclusively by the shared type-aware aggregation layer.
         synthesized_answer, contributing_ids = self._synthesize_only()
+        raw_candidates = {
+            aid: agent.conv_history.last_outgoing_external_message or ""
+            for aid, agent in self.subagents.items()
+        }
+        result_candidates = (
+            list(raw_candidates.items())
+            if task_output_type(self) in {"scalar_exact", "executable_plan", "patch_or_state"}
+            else [("synthesis", synthesized_answer)]
+        )
+        aggregation_result = aggregate(
+            AggregationRequest(
+                output_type=task_output_type(self),
+                candidates=result_candidates,
+                agents=tuple(self.subagents.values()),
+                plan_strategy="successful",
+            )
+        )
+        canonical_answer = aggregation_result.output
+        selected_agent_id = aggregation_result.selected_agent
+        candidate_submissions = aggregation_result.candidate_submissions
+        vote_counts = aggregation_result.vote_counts
 
-        # Always attempt to submit the synthesized answer to an env so that
-        # the grader sees the aggregated output rather than any single
-        # agent's intermediate submission. _auto_submit is a no-op on
-        # already-done envs, so this never double-submits.
+        # Give the canonical result to an available environment only when the
+        # workers did not already reach a terminal state.
         submission_response = ""
-        if synthesized_answer:
-            submission_response = self._auto_submit(synthesized_answer)
+        if canonical_answer and not any(agent.env.env_done() for agent in self.subagents.values()):
+            submission_response = self._auto_submit(canonical_answer)
 
         # Canonical env status. For text-output benchmarks (Finance-Agent,
         # WorkBench, BrowseComp-Plus, PlanCraft) the grader reads
@@ -240,18 +251,27 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         # termination of a later sub-agent), where it remains positional
         # rather than success-based.
         agents_in_order = list(self.subagents.values())
-        final_env_status = (
-            agents_in_order[0].env.env_status() if agents_in_order else None
-        )
+        if selected_agent_id and selected_agent_id in self.subagents:
+            final_env_status = self.subagents[selected_agent_id].env.env_status()
+        else:
+            final_env_status = (
+                agents_in_order[0].env.env_status() if agents_in_order else None
+            )
 
-        final_answer = synthesized_answer or submission_response
+        final_answer = canonical_answer or submission_response
+        selected_env = (
+            self.subagents[selected_agent_id].env
+            if selected_agent_id in self.subagents
+            else (agents_in_order[0].env if agents_in_order else None)
+        )
+        canonical_submission = aggregation_result.canonical_submission
 
         execution_time = time.time() - start_time
         total_decision_calls = sum(
             a.budget.snapshot()["used_decision_calls"] for a in self.subagents.values()
         )
         logger.info(
-            f"Independent (synthesis_only) processing completed in {execution_time:.2f}s "
+            f"Independent aggregation completed in {execution_time:.2f}s "
             f"with {total_decision_calls} worker decisions across {len(self.subagents)} agents. "
             f"Contributing agents: {contributing_ids}"
         )
@@ -259,14 +279,33 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         if instance_dir is not None:
             output_data = {
                 "architecture": "independent",
-                "aggregator": "synthesis_only",
+                "aggregator": "type_aware_aggregation",
                 "n_agents": self.n_base_agents,
                 "contributing_agents": contributing_ids,
                 "total_iterations": total_decision_calls,
                 "total_decision_calls": total_decision_calls,
                 "execution_time": execution_time,
                 "synthesized_answer": synthesized_answer,
+                "raw_candidates": raw_candidates,
+                "aggregated_output": canonical_answer,
+                "canonical_submission": canonical_submission,
+                "output_type": task_output_type(self),
+                "selected_agent": selected_agent_id,
+                "candidate_submissions": candidate_submissions,
+                "vote_counts": vote_counts,
+                "tie_break_reason": aggregation_result.tie_break_reason,
+                "aggregation_invalid_reason": aggregation_result.invalid_reason,
                 "canonical_agent_output": final_answer,
+                "evaluation_semantics": (
+                    "success_environment_state_selection"
+                    if task_output_type(self) in {"executable_plan", "patch_or_state"}
+                    else "task_contract_submission"
+                ),
+                "selected_environment_trajectory": (
+                    getattr(selected_env, "get_action_trace", lambda: [])()
+                    if selected_env is not None
+                    else []
+                ),
                 "total_decision_budget": self.total_decision_budget,
                 "per_agent_budgets": {
                     aid: agent.budget.snapshot()
@@ -287,6 +326,11 @@ class IndependentMultiAgentSystem(AgentSystemWithTools):
         return DatasetInstanceOutputWithTrajectory(
             data_instance=instance,
             agent_output=final_answer,
-            trajectory=[],
+            canonical_submission=canonical_submission,
+            trajectory=(
+                getattr(selected_env, "get_action_trace", lambda: [])()
+                if selected_env is not None
+                else []
+            ),
             final_env_output=final_env_status,
         )

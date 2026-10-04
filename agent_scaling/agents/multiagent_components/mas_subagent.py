@@ -1,6 +1,6 @@
 import threading
 import traceback
-from typing import cast
+from typing import Any, cast
 
 from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.messages.utils import convert_to_openai_messages
@@ -64,6 +64,7 @@ class WorkerSubagent(BaseAgentWithTools):
             enabled=use_remaining_budget_for_verification
         )
         self._terminal_action_executed = False
+        self.last_terminal_tool_call: dict[str, Any] | None = None
 
         self._execution_lock = threading.Lock()
 
@@ -183,6 +184,7 @@ class WorkerSubagent(BaseAgentWithTools):
                         tool_resp = self.env.execute_tool(tool_call)
                         if self.submission_policy.is_terminal_tool(tool_name):
                             self._terminal_action_executed = True
+                            self.last_terminal_tool_call = dict(tool_call)
                 except Exception as e:
                     # Add error message to conversation state (consistent with single_agent.py)
                     error_msg = {
@@ -307,6 +309,7 @@ class WorkerSubagent(BaseAgentWithTools):
                 try:
                     fallback_msg = self.env.execute_tool(fallback_tool_call)  # type: ignore[arg-type]
                     self._terminal_action_executed = True
+                    self.last_terminal_tool_call = dict(fallback_tool_call)
                     converted_fallback = convert_to_openai_messages(fallback_msg)
                     messages.append(converted_fallback)  # type: ignore
                     self.conv_history.add_internal_message(

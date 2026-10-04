@@ -1,7 +1,7 @@
 import base64
 import hashlib
 import re
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 
 from langchain_core.messages import BaseMessage
 from pydantic import Field
@@ -66,6 +66,7 @@ class BrowseCompInstance(DatasetInstance):
 
 @register_dataset(DATASET_IDS)
 class BrowseCompDataset(Dataset):
+    output_type: Literal["free_text"] = "free_text"
     instances: List[BrowseCompInstance]
     dataset_id: str = "browsecomp"
     metadata: Dict[str, Any] = Field(default_factory=dict)
@@ -75,7 +76,7 @@ class BrowseCompDataset(Dataset):
     def get_instance_eval_output(
         self, instance_output: DatasetInstanceOutput[BrowseCompInstance]
     ) -> Dict[str, Any]:
-        llm_output = instance_output.agent_output
+        llm_output = instance_output.submission
         return {
             "answer": llm_output,
             "expected_output": instance_output.data_instance.expected_output,
@@ -89,7 +90,7 @@ class BrowseCompDataset(Dataset):
         instance = instance_output.data_instance
         prompt_message = self.eval_prompts["grader"].compile(
             question=instance.problem,
-            response=instance_output.agent_output,
+            response=instance_output.submission,
             correct_answer=instance.expected_output,
         )
 

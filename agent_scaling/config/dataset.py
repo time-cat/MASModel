@@ -1,5 +1,5 @@
 import os
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 from langfuse._client.datasets import DatasetClient
 from pydantic import BaseModel, Field, model_validator
@@ -15,6 +15,9 @@ from .prompts import Prompt
 
 class DatasetConfig(BaseModel):
     dataset_id: str
+    output_type: Literal[
+        "scalar_exact", "free_text", "executable_plan", "patch_or_state"
+    ]
     description: Optional[str] = None
     split: Optional[str] = None
     local_path: Optional[str] = None
@@ -56,6 +59,7 @@ class DatasetConfig(BaseModel):
             "eval_prompts": self.eval_prompts or {},
             "task_shared_prompts": task_shared_prompts,
         }
+        kwargs["output_type"] = self.output_type
         if self.from_langfuse:
             client = get_lf_client()
             if client is None:

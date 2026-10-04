@@ -1,4 +1,5 @@
 import random
+import re
 from copy import deepcopy
 from typing import Dict, Literal, Union
 
@@ -30,11 +31,13 @@ class PlancraftEnvironment(AgentEnvironmentTools):
         self.is_done = False
         self.success = False
         self.num_steps = 0
+        self.action_trace: list[dict] = []
         if self.dataset_instance is not None:
             self.init_environment()
 
     def init_environment(self):
         self.num_steps = 0
+        self.action_trace = []
         self.environment: PlancraftEnv = PlancraftEnv(
             inventory=deepcopy(self.dataset_instance.slotted_inventory),
             resolution=self.resolution,
@@ -78,13 +81,44 @@ class PlancraftEnvironment(AgentEnvironmentTools):
                 return True
         return False
 
+    @staticmethod
+    def _canonical_slot(slot: str) -> str:
+        """Validate the exact bracketed PlanCraft slot contract."""
+        value = str(slot).strip()
+        if not re.fullmatch(r"\[(?:0|[ABC][1-3]|I[1-9]|I[1-2][0-9]|I3[0-6])\]", value):
+            raise ValueError(
+                f"Invalid PlanCraft slot {slot!r}; use bracketed [0], [A1]-[C3], or [I1]-[I36]"
+            )
+        return value
+
+    def _record_action(self, name: str, args: dict, observation: str, success: bool) -> None:
+        self.action_trace.append(
+            {
+                "action": f"{name}({', '.join(f'{key}={value!r}' for key, value in args.items())})",
+                "observation": str(observation or ""),
+                "response": str(observation or ""),
+                "thought": "",
+                "tool": name,
+                "args": args,
+                "success": bool(success),
+                # AgentEnvironment increments num_steps immediately after the
+                # tool returns, so this call is the next externally visible step.
+                "step": self.num_steps + 1,
+            }
+        )
+
+    def get_action_trace(self) -> list[dict]:
+        return [dict(item) for item in self.action_trace]
+
     @cls_tool
     def search(self, recipe_name: str) -> str:
         """
         Search for recipes to craft a specific item.
         """
         random.seed(42)
-        return gold_search_recipe(recipe_name)
+        result = gold_search_recipe(recipe_name)
+        self._record_action("search", {"recipe_name": recipe_name}, result, False)
+        return result
 
     @cls_tool
     def move(self, slot_from: str, slot_to: str, quantity: int) -> str:
@@ -96,10 +130,12 @@ class PlancraftEnvironment(AgentEnvironmentTools):
         - move(slot_from="[I2]", slot_to="[A1]", quantity=3) to move 3 items from slot I2 to A1
         """
 
-        action = MoveAction(
-            **{"slot_from": slot_from, "slot_to": slot_to, "quantity": quantity}
-        )
+        slot_from = self._canonical_slot(slot_from)
+        slot_to = self._canonical_slot(slot_to)
+        args = {"slot_from": slot_from, "slot_to": slot_to, "quantity": quantity}
+        action = MoveAction(**args)
         observation, success = self._execute_action(action)
+        self._record_action("move", args, observation["message"], success)
         if success:
             self.is_done = True
         return observation["message"]
@@ -114,10 +150,12 @@ class PlancraftEnvironment(AgentEnvironmentTools):
         - smelt(slot_from="[I5]", slot_to="[I6]", quantity=1)
         """
 
-        action = SmeltAction(
-            **{"slot_from": slot_from, "slot_to": slot_to, "quantity": quantity}
-        )
+        slot_from = self._canonical_slot(slot_from)
+        slot_to = self._canonical_slot(slot_to)
+        args = {"slot_from": slot_from, "slot_to": slot_to, "quantity": quantity}
+        action = SmeltAction(**args)
         observation, success = self._execute_action(action)
+        self._record_action("smelt", args, observation["message"], success)
         if success:
             self.is_done = True
         return observation["message"]
@@ -131,5 +169,6 @@ class PlancraftEnvironment(AgentEnvironmentTools):
 
         action = StopAction(reason=reason)
         observation, _ = self._execute_action(action)
+        self._record_action("impossible", {"reason": reason}, observation["message"], self.success)
         self.is_done = True
         return observation["message"] or ""

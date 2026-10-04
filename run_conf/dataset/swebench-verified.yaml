@@ -1,4 +1,5 @@
 dataset_id: swebench-verified
+output_type: patch_or_state
 from_langfuse: false
 local_path: datasets/swebench-verified.json
 templates_local_path: prompts/dataset-shared/swebench.yaml

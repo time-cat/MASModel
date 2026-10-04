@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Optional, cast
+from typing import Any, Dict, List, Literal, Optional, cast
 
 from langchain_core.messages import AIMessage, BaseMessage
 
@@ -30,6 +30,7 @@ class SimpleQAInstance(DatasetInstance):
 
 @register_dataset(name=["simpleqa", "simpleqa_sampled"])
 class SimpleQADataset(Dataset):
+    output_type: Literal["free_text"] = "free_text"
 
     dataset_id: str = "simpleqa"
     instances: List[SimpleQAInstance]
@@ -39,7 +40,7 @@ class SimpleQADataset(Dataset):
     def get_instance_eval_output(
         self, instance_output: DatasetInstanceOutputWithTrajectory[SimpleQAInstance]
     ) -> Dict[str, Any]:
-        agent_output = instance_output.agent_output
+        agent_output = str(instance_output.submission)
         try:
             # Parse the SimpleQA format: Explanation, Exact Answer, Confidence
             lines = agent_output.strip().split('\n')

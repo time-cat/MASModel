@@ -23,6 +23,10 @@ from agent_scaling.budget import BudgetLedger
 from agent_scaling.verification import DeferredSubmissionPolicy
 
 from .registry import register_agent
+from .multiagent_utils.aggregation import AggregationRequest, CandidateRecord, aggregate
+from .multiagent_utils.result_selection import (
+    task_output_type,
+)
 
 
 @register_agent("single-agent")
@@ -51,6 +55,7 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
         self.submission_policy = DeferredSubmissionPolicy(
             enabled=use_remaining_budget_for_verification
         )
+        self.last_terminal_tool_call: dict | None = None
 
     def run_agent(
         self,
@@ -64,6 +69,7 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
         self.submission_policy = DeferredSubmissionPolicy(
             enabled=self.use_remaining_budget_for_verification
         )
+        self.last_terminal_tool_call = None
         max_steps = self.max_steps
         if max_steps is None:
             max_steps = self.budget.remaining_decision_calls
@@ -115,6 +121,8 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
                         )
                     else:
                         tool_resp = env.execute_tool(tool_call)
+                        if self.submission_policy.is_terminal_tool(tool_name):
+                            self.last_terminal_tool_call = dict(tool_call)
                     messages.append(convert_to_openai_messages(tool_resp))
                     is_done = (
                         not was_deferred
@@ -220,17 +228,37 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
                             "type": "tool_call",
                         }
                         tool_msg = env.execute_tool(tool_call)
+                        self.last_terminal_tool_call = dict(tool_call)
                         final_answer = str(tool_msg.content)
                     except Exception as e:
                         logger.warning(f"Auto-submit on budget exhaustion failed: {e}")
         final_env_output = env.env_status()
+        output_type = task_output_type(self)
+        aggregation_result = aggregate(
+            AggregationRequest(
+                output_type=output_type,
+                candidates=[CandidateRecord("single_agent", final_answer, agent=self, env=env)],
+                agents=(self,),
+                plan_strategy="successful",
+            )
+        )
+        canonical_submission = aggregation_result.canonical_submission
         if instance_dir is not None:
             out = {
                 "trajectory": [t.model_dump() for t in trajectory],
                 "final_answer": final_answer,
+                "canonical_submission": canonical_submission,
+                "output_type": output_type,
+                "evaluation_semantics": (
+                    "environment_state_execution"
+                    if output_type in {"executable_plan", "patch_or_state"}
+                    else "task_contract_submission"
+                ),
+                "environment_action_trace": getattr(env, "get_action_trace", lambda: [])(),
                 "budget": self.budget.snapshot() if self.budget else None,
                 "verification": self.submission_policy.snapshot(),
             }
+            out.update(aggregation_result.to_metadata())
             write_yaml(
                 out,
                 osp.join(instance_dir, "agent_output.yaml"),
@@ -239,6 +267,7 @@ class SingleAgent(AgentSystemWithTools[AgentEnvironment]):
         return DatasetInstanceOutputWithTrajectory(
             data_instance=instance,
             agent_output=final_answer,
+            canonical_submission=canonical_submission,
             trajectory=trajectory,
             final_env_output=final_env_output,
         )

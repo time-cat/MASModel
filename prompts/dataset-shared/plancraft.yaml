@@ -11,8 +11,11 @@ task_description_template: |-
   {{tools_description}}
 
   Example actions:
-    - `move: from [I2] to [A1] with quantity 3`
-    - `smelt: from [I5] to [I6] with quantity 1`
+    - `move(slot_from="[I2]", slot_to="[A1]", quantity=3)`
+    - `smelt(slot_from="[I5]", slot_to="[I6]", quantity=1)`
+    Slot arguments must use the exact bracketed form: `[I1]` to `[I36]`,
+    `[A1]` to `[C3]`, or `[0]`. Do not use bare `I2`/`A1` and do not rename
+    `slot_from` or `slot_to` to `from` or `to`.
 
   Constraints:
   - You cannot move or smelt items into [0]
@@ -30,8 +33,11 @@ task_description_with_tools_template: |-
   Inventory Slots: The remaining inventory slots (outside of the crafting grid) are used for storing items. These slots are labeled as [I1] to [I36]
       
   Example actions:
-    - `move: from [I2] to [A1] with quantity 3`
-    - `smelt: from [I5] to [I6] with quantity 1`
+    - `move(slot_from="[I2]", slot_to="[A1]", quantity=3)`
+    - `smelt(slot_from="[I5]", slot_to="[I6]", quantity=1)`
+    Slot arguments must use the exact bracketed form: `[I1]` to `[I36]`,
+    `[A1]` to `[C3]`, or `[0]`. Do not use bare `I2`/`A1` and do not rename
+    `slot_from` or `slot_to` to `from` or `to`.
 
   Constraints:
   - You cannot move or smelt items into [0]
@@ -49,23 +55,29 @@ task_output_template: |-
   - name: the name of the action
   - args: the arguments of the action
 
-  Return the list of actions as a JSON array of objects.
+  Return the list of actions as a JSON array of objects. The argument names
+  must be exactly `slot_from`, `slot_to`, and `quantity`. Slot values must
+  include brackets, for example `[I2]` and `[A1]`.
+  If the task is impossible, return instead:
+  ```json
+  {"action": "impossible", "reason": "explain why"}
+  ```
   Example output:
   ```json
   [
     {
       "name": "move",
       "args": {
-        "from": "[I2]",
-        "to": "[A1]",
+        "slot_from": "[I2]",
+        "slot_to": "[A1]",
         "quantity": 3
       }
     },
     {
       "name": "smelt",
       "args": {
-        "from": "[I5]",
-        "to": "[I6]",
+        "slot_from": "[I5]",
+        "slot_to": "[I6]",
         "quantity": 1
       }
     }
